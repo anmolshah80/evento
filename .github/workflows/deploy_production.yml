@@ -36,10 +36,24 @@ jobs:
         run: npm run build
       - name: Confirm Build Output
         run: ls -la .next
+      - name: Upload the .next folder contents
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          if-no-files-found: error
+          path: .next
+          retention-days: 1
 
   deploy-app:
     needs: build-app
     runs-on: ubuntu-latest
     steps:
+      - name: Download the .next folder contents
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: .next
+      - name: Confirm the contents of .next folder
+        run: tree
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prod --token=$VERCEL_ACCESS_TOKEN
