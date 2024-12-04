@@ -36,25 +36,13 @@ jobs:
         run: npm run build
       - name: Confirm Build Output
         run: tree -a -L 2 -I node_modules
-      - name: Upload the .next folder contents
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          include-hidden-files: true
-          if-no-files-found: error
-          path: .next
-          retention-days: 1
 
   deploy-app:
     needs: build-app
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Download the .next folder contents
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: .next
+      - name: Repository Checkout
+        uses: actions/checkout@v4
       - name: Confirm the contents of .next folder
         run: ls -la
       - name: Deploy Project Artifacts to Vercel
