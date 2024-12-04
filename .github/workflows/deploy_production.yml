@@ -35,7 +35,7 @@ jobs:
       - name: Build Project Artifacts
         run: npm run build
       - name: Confirm Build Output
-        run: ls -la .next
+        run: tree -I node_modules
       - name: Upload the .next folder contents
         uses: actions/upload-artifact@v4
         with:
