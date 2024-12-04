@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-app:
+  deploy-app:
     runs-on: ubuntu-latest
     steps:
       - name: Repository Checkout
@@ -34,26 +34,9 @@ jobs:
         run: vercel pull --yes --environment=production --token=$VERCEL_ACCESS_TOKEN
       - name: Build Project Artifacts
         run: vercel build --prod --token=$VERCEL_ACCESS_TOKEN
-      - name: Confirm Build Output
+      - name: View project files
         run: tree -I node_modules
-      - name: Upload the .next folder contents
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          if-no-files-found: error
-          path: .next
-          retention-days: 1
-
-  deploy-app:
-    needs: build-app
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download the .next folder contents
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: .next
       - name: Confirm the contents of .next folder
-        run: tree
+        run: ls -la .next
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prod --token=$VERCEL_ACCESS_TOKEN
