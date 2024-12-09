@@ -6,9 +6,9 @@ import { BASE_URL } from '@/lib/constants';
 import { TEventoEvent } from '@/lib/types';
 
 type EventsPageProps = {
-  params: {
+  params: Promise<{
     city: string;
-  };
+  }>;
 };
 
 const EventsPage = async ({ params }: EventsPageProps) => {
