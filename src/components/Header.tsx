@@ -12,8 +12,6 @@ import { cn } from '@/lib/utils';
 const Header = () => {
   const activePathname = usePathname();
 
-  console.log(activePathname);
-
   return (
     <header className="flex justify-between items-center border-b border-white/10 h-14 px-3 sm:px-9">
       <Logo />
