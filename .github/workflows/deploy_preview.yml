@@ -28,6 +28,6 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=$VERCEL_ACCESS_TOKEN
       - name: Confirm Build Output
-        run: tree -a -L 3 -I node_modules
+        run: tree -a -L 3 -I 'node_modules|.git'
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=$VERCEL_ACCESS_TOKEN
