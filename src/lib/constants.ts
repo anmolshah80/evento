@@ -20,7 +20,7 @@ const FOOTER_ROUTES = [
   },
 ];
 
-const BASE_URL =
+const API_BASE_URL =
   'https://bytegrad.com/course-assets/projects/evento/api/events';
 
-export { HEADER_ROUTES, FOOTER_ROUTES, BASE_URL };
+export { HEADER_ROUTES, FOOTER_ROUTES, API_BASE_URL };

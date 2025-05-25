@@ -2,7 +2,7 @@ import H1 from '@/components/H1';
 import EventsList from '@/components/EventsList';
 
 import { capitalize } from '@/lib/utils';
-import { BASE_URL } from '@/lib/constants';
+import { API_BASE_URL } from '@/lib/constants';
 import { TEventoEvent } from '@/lib/types';
 
 type EventsPageProps = {
@@ -16,7 +16,7 @@ const EventsPage = async ({ params }: EventsPageProps) => {
 
   const capitalizedCity = capitalize(city);
 
-  const cityUrl = `${BASE_URL}?city=${city}`;
+  const cityUrl = `${API_BASE_URL}?city=${city}`;
 
   const response = await fetch(cityUrl);
 
