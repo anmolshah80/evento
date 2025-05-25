@@ -5,6 +5,7 @@
 - Create a `cn` utitlity function in `lib/utils.ts` to merge conditional tailwind classes using `clsx` and `tailwind-merge` npm packages
 - Create a `types.ts` file in `lib` to export reusable `params` typescript types
 - Focus on the search input field by typing the `/` (forward slash) key
+- Create a custom class i.e., `state-effects` in `globals.css` to apply same animation effects to several different elements
 
 ## Notes
 

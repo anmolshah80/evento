@@ -5,7 +5,7 @@ export type TEventoEvent = {
   city: string;
   location: string;
   date: Date;
-  organizer: string;
+  organizerName: string;
   imageUrl: string;
   description: string;
 };

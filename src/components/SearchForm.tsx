@@ -62,6 +62,7 @@ const SearchForm = () => {
       </span>
 
       <input
+        id="searchText"
         type="text"
         placeholder="Search events in any city..."
         spellCheck={false}

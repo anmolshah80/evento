@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom class to apply the same animation effects to several different elements */
+.state-effects {
+  @apply hover:scale-105 focus:scale-105 active:scale-[1.02] transition;
+}
+
 /* Scrollbar styling */
 /* Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
