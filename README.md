@@ -11,3 +11,22 @@
 ## Notes
 
 - Downgrade `react` and `react-dom` version to **18.3.1** since npm package `framer-motion@10.16.4` requires `react@"^18.0.0"` as a peer dependency and does not support `react@"19.0.0-rc-66855b96-20241106"`, which is a release candidate for _React 19_
+
+- Resolve issues with tracking files in git
+
+  - `Don't do this` -> Never do the following since it will just unstage all your files
+
+    ```bash
+    git rm -r --cached .
+
+    # however, if you have managed to do it then you can undo that using the following command
+    # it will reset the state of your working directory and index to match the HEAD commit, discarding any uncommitted changes
+    # Source -> https://graphite.dev/guides/how-to-use-git-reset-hard-head#how-to-use-the-git-reset---hard-head-command
+    git reset --hard HEAD
+    ```
+
+  - `Do this`: Remove each cached file from Git index using the command where you see the issue
+    ```bash
+    git rm --cached src/components/Header.tsx
+    ```
+  - Rename those files to kebab case (previously it was in pascal case)
