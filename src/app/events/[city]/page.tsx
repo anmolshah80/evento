@@ -1,5 +1,5 @@
-import H1 from '@/components/H1';
-import EventsList from '@/components/EventsList';
+import H1 from '@/components/h1';
+import EventsList from '@/components/events-list';
 
 import { capitalize } from '@/lib/utils';
 import { API_BASE_URL } from '@/lib/constants';

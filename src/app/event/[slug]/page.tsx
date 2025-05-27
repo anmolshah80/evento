@@ -1,9 +1,14 @@
 import Image from 'next/image';
 
-import H1 from '@/components/H1';
+import H1 from '@/components/h1';
 
 import { API_BASE_URL } from '@/lib/constants';
 import { TEventoEvent } from '@/lib/types';
+
+type DetailsSectionProps = {
+  header: string;
+  content: string;
+};
 
 type EventPageProps = {
   params: Promise<{
@@ -11,14 +16,21 @@ type EventPageProps = {
   }>;
 };
 
+const DetailsSection = ({ header, content }: DetailsSectionProps) => (
+  <section className="mb-12">
+    <h2 className="text-2xl mb-5">{header}</h2>
+    <p className="max-w-4xl mx-auto text-lg leading-8 text-white/75">
+      {content}
+    </p>
+  </section>
+);
+
 const EventPage = async ({ params }: EventPageProps) => {
   const { slug } = await params;
 
   const response = await fetch(`${API_BASE_URL}/${slug}`);
 
   const eventData: TEventoEvent = await response.json();
-
-  console.log('eventData: ', eventData);
 
   const formattedDate = new Date(eventData.date).toLocaleDateString('en-US', {
     weekday: 'long',
@@ -67,7 +79,14 @@ const EventPage = async ({ params }: EventPageProps) => {
         </div>
       </section>
 
-      <div></div>
+      <div className="min-h-[75vh] text-center px-5 py-16">
+        <DetailsSection
+          header="About this event"
+          content={eventData.description}
+        />
+
+        <DetailsSection header="Location" content={eventData.location} />
+      </div>
     </main>
   );
 };

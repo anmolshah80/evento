@@ -1,4 +1,4 @@
-import EventCard from '@/components/EventCard';
+import EventCard from '@/components/event-card';
 
 import { TEventoEvent } from '@/lib/types';
 
