@@ -6,6 +6,7 @@
 - Create a `types.ts` file in `lib` to export reusable `params` typescript types
 - Focus on the search input field by typing the `/` (forward slash) key
 - Create a custom class i.e., `state-effects` in `globals.css` to apply same animation effects to several different elements
+- Create individual event page to view detailed info for the specific event
 
 ## Notes
 

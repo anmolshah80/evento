@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-import Logo from '@/components/Logo';
+import Logo from '@/components/logo';
 
 import { HEADER_ROUTES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
