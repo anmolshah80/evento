@@ -1,12 +1,13 @@
 # Evento
 
-- Create reusable `Header` and `Footer` components
-- Create an `EventsList` and `EventCard` components to render events for a particular search input
+- Create reusable `header` and `footer` components
+- Create an `events-list` and `event-card` components to render events for a particular search input
 - Create a `cn` utitlity function in `lib/utils.ts` to merge conditional tailwind classes using `clsx` and `tailwind-merge` npm packages
 - Create a `types.ts` file in `lib` to export reusable `params` typescript types
 - Focus on the search input field by typing the `/` (forward slash) key
 - Create a custom class i.e., `state-effects` in `globals.css` to apply same animation effects to several different elements
 - Create individual event page to view detailed info for the specific event
+- Create `skeleton.tsx` and `skeleton-card.tsx` components to render while the page is loading
 
 ## Notes
 
