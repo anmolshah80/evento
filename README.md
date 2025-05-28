@@ -14,7 +14,9 @@
 
 - Resolve issues with tracking files in git
 
-  - `Don't do this` -> Never do the following since it will just unstage all your files
+  - `The issue` -> There were files in the local project that weren't being pushed to GitHub (i.e., renamed files changes' were not reflected in remote), even though they were being committed locally and pushed. Basically, there was a discrepancy between the committed files in local and remote.
+
+  - `Don't do this` -> Never do the following since it will just unstage all your files in your current directory
 
     ```bash
     git rm -r --cached .
@@ -25,8 +27,10 @@
     git reset --hard HEAD
     ```
 
-  - `Do this`: Remove each cached file from Git index using the command where you see the issue
+  - `Do this` -> Remove each cached file (where you see the tracking issue) from Git index using the command
     ```bash
     git rm --cached src/components/Header.tsx
+    git rm --cached src/components/H1.tsx
+    git rm --cached src/components/Logo.tsx
     ```
-  - Rename those files to kebab case (previously it was in pascal case)
+  - Rename those files manually in kebab case format (previously it was in pascal case)
