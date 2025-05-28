@@ -45,5 +45,7 @@ jobs:
         uses: actions/checkout@v4
       - name: View Repository Files Structure
         run: tree -a -L 3 -I .git
+      - name: Install Vercel CLI Globally
+        run: npm install --global vercel@latest
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prod --token=$VERCEL_ACCESS_TOKEN
