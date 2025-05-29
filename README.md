@@ -35,3 +35,7 @@
     git rm --cached src/components/Logo.tsx
     ```
   - Rename those files manually in kebab case format (previously it was in pascal case)
+
+## To-dos
+
+- Add documentation for using `useScroll` and `useTransform` hooks from `framer-motion` in `event-card.tsx` component to animate the events scrolling in that page

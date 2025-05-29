@@ -1,5 +1,9 @@
+'use client';
+
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 import { TEventoEvent } from '@/lib/types';
 
@@ -7,7 +11,11 @@ type EventCardProps = {
   event: TEventoEvent;
 };
 
+const MotionLink = motion(Link);
+
 const EventCard = ({ event }: EventCardProps) => {
+  const linkRef = useRef(null);
+
   const { name, organizerName, imageUrl, location, date, slug } = event;
 
   const dateObj = new Date(date);
@@ -20,10 +28,30 @@ const EventCard = ({ event }: EventCardProps) => {
     month: 'short',
   });
 
+  const { scrollYProgress } = useScroll({
+    target: linkRef,
+    offset: ['0 1', '1.5 1'],
+  });
+
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
+
   return (
-    <Link
+    <MotionLink
+      ref={linkRef}
       href={`/event/${slug}`}
       className="flex-1 basis-80 h-[380px] max-w-[500px]"
+      style={{
+        // @ts-ignore
+        scale: scaleProgress,
+        // @ts-ignore
+        opacity: opacityProgress,
+      }}
+      initial={{
+        scale: 0.8,
+        opacity: 0,
+      }}
     >
       <section className="w-full h-full flex flex-col bg-white/[3%] rounded-xl overflow-hidden relative state-effects">
         <Image
@@ -45,7 +73,7 @@ const EventCard = ({ event }: EventCardProps) => {
           <p className="text-xs uppercase text-accent">{eventMonth}</p>
         </section>
       </section>
-    </Link>
+    </MotionLink>
   );
 };
 

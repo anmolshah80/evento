@@ -1,19 +1,33 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 import H1 from '@/components/h1';
 
 import { API_BASE_URL } from '@/lib/constants';
 import { TEventoEvent } from '@/lib/types';
+import { humanizeKebabCase } from '@/lib/utils';
 
 type DetailsSectionProps = {
   header: string;
   content: string;
 };
 
-type EventPageProps = {
+type Props = {
   params: Promise<{
     slug: string;
   }>;
+};
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const { slug } = await params;
+
+  const title = `${humanizeKebabCase(slug)} Event`;
+
+  return {
+    title,
+  };
 };
 
 const DetailsSection = ({ header, content }: DetailsSectionProps) => (
@@ -25,7 +39,7 @@ const DetailsSection = ({ header, content }: DetailsSectionProps) => (
   </section>
 );
 
-const EventPage = async ({ params }: EventPageProps) => {
+const EventPage = async ({ params }: Props) => {
   const { slug } = await params;
 
   const response = await fetch(`${API_BASE_URL}/${slug}`);
