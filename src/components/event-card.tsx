@@ -43,8 +43,10 @@ const EventCard = ({ event }: EventCardProps) => {
       href={`/event/${slug}`}
       className="flex-1 basis-80 h-[380px] max-w-[500px]"
       style={{
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         scale: scaleProgress,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         opacity: opacityProgress,
       }}
