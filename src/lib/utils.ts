@@ -9,4 +9,13 @@ const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export { capitalize, cn };
+// convert kebab case to space separated words
+const humanizeKebabCase = (text: string) => {
+  const splitTextArr = text.split('-');
+
+  const capitalizedTextArr = splitTextArr.map((word) => capitalize(word));
+
+  return capitalizedTextArr.join(' ');
+};
+
+export { capitalize, cn, humanizeKebabCase };
