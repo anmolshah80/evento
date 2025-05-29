@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { EventoEvent } from '@prisma/client';
 
 import H1 from '@/components/h1';
 
 import { API_BASE_URL } from '@/lib/constants';
-import { TEventoEvent } from '@/lib/types';
 import { humanizeKebabCase } from '@/lib/utils';
 
 type DetailsSectionProps = {
@@ -44,7 +44,7 @@ const EventPage = async ({ params }: Props) => {
 
   const response = await fetch(`${API_BASE_URL}/${slug}`);
 
-  const eventData: TEventoEvent = await response.json();
+  const eventData: EventoEvent = await response.json();
 
   const formattedDate = new Date(eventData.date).toLocaleDateString('en-US', {
     weekday: 'long',
