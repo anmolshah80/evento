@@ -1,15 +1,18 @@
 import { Metadata } from 'next';
-import { EventoEvent } from '@prisma/client';
 
 import H1 from '@/components/h1';
 import EventsList from '@/components/events-list';
 
-import { capitalize, getEvents } from '@/lib/utils';
+import { capitalize } from '@/lib/utils';
 
 type Props = {
   params: Promise<{
     city: string;
   }>;
+};
+
+type EventsPageProps = Props & {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export const generateMetadata = async ({
@@ -26,12 +29,13 @@ export const generateMetadata = async ({
   };
 };
 
-const EventsPage = async ({ params }: Props) => {
+const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
   const { city } = await params;
+  const { page } = await searchParams;
+
+  const currentPage = page || 1;
 
   const capitalizedCity = capitalize(city);
-
-  const events: EventoEvent[] = await getEvents(city);
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
@@ -40,7 +44,7 @@ const EventsPage = async ({ params }: Props) => {
         {city !== 'all' && `Events in ${capitalizedCity}`}
       </H1>
 
-      <EventsList events={events} />
+      <EventsList city={city} currentPage={+currentPage} />
     </main>
   );
 };
