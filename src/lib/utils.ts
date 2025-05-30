@@ -41,7 +41,7 @@ const getEvent = async (slug: string) => {
   return eventData;
 };
 
-const getEvents = async (city: string) => {
+const getEvents = async (city: string, currentPage = 1) => {
   // for api implementation
   // const response = await fetch(`${API_BASE_URL}?city=${city}`);
   // const events: EventoEvent[] = await response.json();
@@ -53,11 +53,32 @@ const getEvents = async (city: string) => {
     orderBy: {
       date: 'asc',
     },
+    take: 6,
+    skip: (currentPage - 1) * 6,
   });
 
   if (!events || events.length === 0) return notFound();
 
-  return events;
+  // Alternative way
+  // const totalRecordsCount = await prisma.eventoEvent.count({
+  //   where: {
+  //     city: city === 'all' ? undefined : capitalize(city),
+  //   },
+  // });
+
+  let totalRecordsCount;
+
+  if (city === 'all') {
+    totalRecordsCount = await prisma.eventoEvent.count();
+  } else {
+    totalRecordsCount = await prisma.eventoEvent.count({
+      where: {
+        city: capitalize(city),
+      },
+    });
+  }
+
+  return { events, totalRecordsCount };
 };
 
 export { capitalize, cn, humanizeKebabCase, getEvent, getEvents };
