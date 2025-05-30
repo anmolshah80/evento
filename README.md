@@ -8,6 +8,7 @@
 - Create a custom class i.e., `state-effects` in `globals.css` to apply same animation effects to several different elements
 - Create individual event page to view detailed info for the specific event
 - Create `skeleton.tsx` and `skeleton-card.tsx` components to render while the page is loading
+- Create `db.ts` under `lib` folder to use a single instantiation of PrismaClient throughout the entire app
 
 ## Notes
 
@@ -36,7 +37,7 @@
     ```
   - Rename those files manually in kebab case format (previously it was in pascal case)
 
-- Install and configure prisma
+- Install and Configure Prisma ORM
 
   ```bash
   # to install prisma
@@ -51,6 +52,9 @@
   # to execute the seed command defined under the prisma key in package.json
   # Source -> https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding#seeding-your-database-with-typescript-or-javascript
   npx prisma db seed
+
+  # to open prisma studio
+  npx prisma studio
   ```
 
 - Comment out `TEventoEvent` type from `lib/types.ts` to just have one source of truth and so is being imported from `@prisma/client` when `npx prisma db push` command was executed in terminal to create the `EventoEvent` table
@@ -59,3 +63,4 @@
 
 - Add documentation for using `useScroll` and `useTransform` hooks from `framer-motion` in `event-card.tsx` component to animate the events scrolling in that page
 - Add a script in `package.json` to migrate and seed data into the database
+- Upgrade to [Prisma ORM v6](https://www.prisma.io/docs/orm/more/upgrade-guides)

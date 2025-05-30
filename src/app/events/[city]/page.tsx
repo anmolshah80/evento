@@ -4,8 +4,7 @@ import { EventoEvent } from '@prisma/client';
 import H1 from '@/components/h1';
 import EventsList from '@/components/events-list';
 
-import { capitalize } from '@/lib/utils';
-import { API_BASE_URL } from '@/lib/constants';
+import { capitalize, getEvents } from '@/lib/utils';
 
 type Props = {
   params: Promise<{
@@ -32,11 +31,7 @@ const EventsPage = async ({ params }: Props) => {
 
   const capitalizedCity = capitalize(city);
 
-  const cityUrl = `${API_BASE_URL}?city=${city}`;
-
-  const response = await fetch(cityUrl);
-
-  const events: EventoEvent[] = await response.json();
+  const events: EventoEvent[] = await getEvents(city);
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
