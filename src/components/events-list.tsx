@@ -1,9 +1,9 @@
+import { EventoEvent } from '@prisma/client';
+
 import EventCard from '@/components/event-card';
 
-import { TEventoEvent } from '@/lib/types';
-
 type EventsListProps = {
-  events: TEventoEvent[];
+  events: EventoEvent[];
 };
 
 const EventsList = ({ events }: EventsListProps) => {
