@@ -137,6 +137,8 @@
 
 - Comment out `TEventoEvent` type from `lib/types.ts` to just have one source of truth and so is being imported from `@prisma/client` when `npx prisma db push` command was executed in terminal to create the `EventoEvent` table
 
+- To use one-off breakpoint where you need to apply a set width in an element until a specific breakpoint and change the width after that breakpoint (as done in `pagination-controls.tsx` component), follow this [stackoverflow post](https://stackoverflow.com/questions/72651058/tailwind-inline-custom-breakpoint)
+
 ## To-dos
 
 - Add documentation for using `useScroll` and `useTransform` hooks from `framer-motion` in `event-card.tsx` component to animate the events scrolling in that page
