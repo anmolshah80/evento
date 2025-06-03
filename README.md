@@ -9,6 +9,8 @@
 - Create individual event page to view detailed info for the specific event
 - Create `skeleton.tsx` and `skeleton-card.tsx` components to render while the page is loading
 - Create `db.ts` under `lib` folder to use a single instantiation of PrismaClient throughout the entire app
+- Add a `postinstall` lifecycle script to automatically generate `Prisma Client` after installing dependencies
+- Change the database provider from `SQLite` to `Postgres`
 
 ## Notes
 
@@ -30,32 +32,108 @@
     ```
 
   - `Do this` -> Remove each cached file (where you see the tracking issue) from Git index using the command
+
     ```bash
     git rm --cached src/components/Header.tsx
     git rm --cached src/components/H1.tsx
     git rm --cached src/components/Logo.tsx
     ```
+
   - Rename those files manually in kebab case format (previously it was in pascal case)
 
 - Install and Configure Prisma ORM
 
-  ```bash
-  # to install prisma
-  npm i prisma@5.6.0 --save-dev
+  - Install `prisma`, `ts-node` and `@prisma/client` npm packages
 
-  # to configure prisma with sqlite database
-  npx prisma init --datasource-provider sqlite
+    ```bash
+    npm install prisma@5.22.0 ts-node@10.9.1 --save-dev
+    npm install @prisma/client
+    ```
 
-  # to create your tables after defining your models in schema.prisma file
-  npx prisma db push
+  ## `SQLite`
 
-  # to execute the seed command defined under the prisma key in package.json
-  # Source -> https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding#seeding-your-database-with-typescript-or-javascript
-  npx prisma db seed
+  - Configure prisma with sqlite database
 
-  # to open prisma studio
-  npx prisma studio
-  ```
+    ```bash
+    npx prisma init --datasource-provider sqlite
+    ```
+
+  - Create tables after defining your models in `schema.prisma` file
+
+    ```bash
+    npx prisma db push
+    ```
+
+  ## `PostgreSQL`
+
+  - Configure prisma with default database i.e., postgres. It will create a `schema.prisma` file in the `prisma` folder.
+
+    ```bash
+    npx prisma init
+    ```
+
+  - Create tables after defining your models in `schema.prisma` file
+
+    ```bash
+    npx prisma db push
+    ```
+
+  - Edit the `DATABASE_URL` value in `.env` file for postgres
+
+    ```properties
+    DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
+    ```
+
+    | Key                     | Description                                  |
+    | ----------------------- | -------------------------------------------- |
+    | postgres_superuser_name | Usually it's `postgres` itself               |
+    | superuser_password      | Superuser's password set during installation |
+    | postgres_server_port    | Usually it's `5432` or `5433`                |
+    | database_name           | Your desired database name                   |
+
+    _Note: If you have multiple versions of postgres installed in your pc (let's say v14 and v17). To use the specific one, say v17 (the server where you would want to create your database), go to `C:\Program Files\PostgreSQL\17\installation_summary.log` (in Windows) and look for port info within the log._
+
+    _Note: Remove all angular brackets before saving the contents in `.env` file_
+
+  - Execute the seed command defined under the `prisma` key in `package.json`. [Source](https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding#seeding-your-database-with-typescript-or-javascript)
+
+    ```bash
+    npx prisma db seed
+    ```
+
+  - Open Prisma Studio to view the seeded data from the database
+
+    ```bash
+    npx prisma studio
+    ```
+
+  - Resources
+    - [How to Build a Fullstack App with Next.js, Prisma, and Postgres](https://vercel.com/guides/nextjs-prisma-postgres)
+    - [How to use Prisma ORM with Next.js](https://www.prisma.io/docs/guides/nextjs#introduction)
+
+- `5433` is the port for `PostgreSQL v17` meanwhile `5432` is the port for `PostgreSQL v14` (it's my personal local configuration)
+
+  - To confirm the port for `PostgreSQL v14`, read the log from `C:\Program Files\PostgreSQL\14\installation_summary.log`
+
+- Setup Prisma Postgres database in Vercel
+
+  - Create a [Prisma Postgres database in Vercel](https://vercel.com/dashboard/stores)
+
+  - Copy the `.env.local` contents of your newly created prisma postgres database, into your local `.env` file
+
+  - Create the tables in your newly created prisma postgres database, defined in your `schema.prisma` file using the following command (from your local bash terminal)
+
+    ```bash
+    npx prisma db push
+    ```
+
+  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `seed.ts` file in your `prisma` folder)
+
+    ```bash
+    npx prisma db seed
+    ```
+
+  - Visit [Prisma Console](https://console.prisma.io/) to view the data seeded into your prisma postgres database
 
 - Comment out `TEventoEvent` type from `lib/types.ts` to just have one source of truth and so is being imported from `@prisma/client` when `npx prisma db push` command was executed in terminal to create the `EventoEvent` table
 
