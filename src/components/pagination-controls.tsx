@@ -6,8 +6,9 @@ type PaginationControlsProps = {
   nextPagePath: string;
 };
 
+// For one-off breakpoint -> https://stackoverflow.com/questions/72651058/tailwind-inline-custom-breakpoint
 const anchorLinkStyles =
-  'text-white px-5 py-3 w-[130px] text-center h-auto flex items-center justify-center gap-x-2 bg-white/5 rounded-md opacity-75 hover:opacity-100 transition text-sm';
+  'text-white px-5 py-3 w-[100px] min-[375px]:w-[130px] text-center h-auto flex items-center justify-center gap-x-2 bg-white/5 rounded-md opacity-75 hover:opacity-100 transition text-sm';
 
 const PaginationControls = ({
   previousPagePath,
