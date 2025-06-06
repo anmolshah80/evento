@@ -11,6 +11,10 @@
 - Create `db.ts` under `lib` folder to use a single instantiation of PrismaClient throughout the entire app
 - Add a `postinstall` lifecycle script to automatically generate `Prisma Client` after installing dependencies
 - Change the database provider from `SQLite` to `Postgres`
+- Install `zod` to define schema to validate the incoming `page number` data
+- Create a `middleware.ts` file in `src` directory to redirect the users to `/events/all` route if the users try to navigate to `/events route`
+- Move `getEvent` and `getEvents` util functions to its own file i.e., `server-utils.ts` to indicate that those functions should only be used in server components and not in client components
+- Create an `opengraph-image.tsx` file to set Open Graph image for an individual event page (i.e., `event/[slug]` route) which can be used to place the images that appear on social networks and messaging apps when a user shares a link to that event
 
 ## Notes
 

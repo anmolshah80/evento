@@ -1,14 +1,14 @@
 import EventCard from '@/components/event-card';
 import PaginationControls from '@/components/pagination-controls';
 
-import { getEvents } from '@/lib/utils';
+import { getEvents } from '@/lib/server-utils';
 
 type EventsListProps = {
   city: string;
-  currentPage: number;
+  currentPage?: number;
 };
 
-const EventsList = async ({ city, currentPage }: EventsListProps) => {
+const EventsList = async ({ city, currentPage = 1 }: EventsListProps) => {
   const { events, totalRecordsCount } = await getEvents(city, +currentPage);
 
   const previousPagePath =
