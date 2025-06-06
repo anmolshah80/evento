@@ -4,7 +4,8 @@ import { EventoEvent } from '@prisma/client';
 
 import H1 from '@/components/h1';
 
-import { getEvent, humanizeKebabCase } from '@/lib/utils';
+import { humanizeKebabCase } from '@/lib/utils';
+import { getEvent } from '@/lib/server-utils';
 
 type DetailsSectionProps = {
   header: string;
@@ -27,6 +28,21 @@ export const generateMetadata = async ({
   return {
     title,
   };
+};
+
+export const generateStaticParams = async () => {
+  // prerender popular events page (the page HTML) at build time
+  return [
+    {
+      slug: 'dj-practice-session',
+    },
+    {
+      slug: 'digital-art-symposium',
+    },
+    {
+      slug: 'science-space-expo',
+    },
+  ];
 };
 
 const DetailsSection = ({ header, content }: DetailsSectionProps) => (

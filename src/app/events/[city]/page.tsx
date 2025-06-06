@@ -1,4 +1,9 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import { z } from 'zod';
+import { notFound } from 'next/navigation';
+
+import Loading from '@/app/events/[city]/loading';
 
 import H1 from '@/components/h1';
 import EventsList from '@/components/events-list';
@@ -29,11 +34,17 @@ export const generateMetadata = async ({
   };
 };
 
+const pageNumberSchema = z.coerce.number().int().positive().optional();
+
 const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
   const { city } = await params;
   const { page } = await searchParams;
 
-  const currentPage = page || 1;
+  const parsedPage = pageNumberSchema.safeParse(page);
+
+  if (!parsedPage.success) {
+    return notFound();
+  }
 
   const capitalizedCity = capitalize(city);
 
@@ -44,7 +55,9 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
         {city !== 'all' && `Events in ${capitalizedCity}`}
       </H1>
 
-      <EventsList city={city} currentPage={+currentPage} />
+      <Suspense key={city + parsedPage.data} fallback={<Loading />}>
+        <EventsList city={city} currentPage={parsedPage.data} />
+      </Suspense>
     </main>
   );
 };
