@@ -7,13 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:push": "npx prisma db push",
+    "db:seed": "npx prisma db seed",
+    "db:push-and-seed": "npm run db:push && npm run db:seed"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.9.0",
     "@radix-ui/react-icons": "^1.3.2",
     "clsx": "^2.1.1",
     "framer-motion": "^10.16.4",
@@ -31,7 +34,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
-    "prisma": "^5.22.0",
+    "prisma": "^6.9.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.1",
     "typescript": "^5",
