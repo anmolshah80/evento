@@ -9,7 +9,6 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   VERCEL_ACCESS_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 # Specify that if a workflow run is already in progress for the same Workflow and Git reference combination (group) then, it should be canceled when a new workflow run is triggered
 concurrency:
@@ -35,6 +34,8 @@ jobs:
         run: vercel pull --yes --environment=production --token=$VERCEL_ACCESS_TOKEN
       - name: Build Project Artifacts
         run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Confirm Build Output
         run: tree -a -L 3 -I 'node_modules|.git'
 
