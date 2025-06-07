@@ -49,16 +49,16 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
   const capitalizedCity = capitalize(city);
 
   return (
-    <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
-      <H1 className="mb-28">
-        {city === 'all' && 'All Events'}
-        {city !== 'all' && `Events in ${capitalizedCity}`}
-      </H1>
+    <Suspense key={city + parsedPage.data} fallback={<Loading />}>
+      <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
+        <H1 className="mb-28">
+          {city === 'all' && 'All Events'}
+          {city !== 'all' && `Events in ${capitalizedCity}`}
+        </H1>
 
-      <Suspense key={city + parsedPage.data} fallback={<Loading />}>
         <EventsList city={city} currentPage={parsedPage.data} />
-      </Suspense>
-    </main>
+      </main>
+    </Suspense>
   );
 };
 

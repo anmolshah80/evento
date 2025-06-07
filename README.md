@@ -15,6 +15,70 @@
 - Create a `middleware.ts` file in `src` directory to redirect the users to `/events/all` route if the users try to navigate to `/events route`
 - Move `getEvent` and `getEvents` util functions to its own file i.e., `server-utils.ts` to indicate that those functions should only be used in server components and not in client components
 - Create an `opengraph-image.tsx` file to set Open Graph image for an individual event page (i.e., `event/[slug]` route) which can be used to place the images that appear on social networks and messaging apps when a user shares a link to that event
+- Upgrade `prisma` and `prisma client` to `v6.9.0` from the existing `v5.22.0`
+- Add the scripts in `package.json` to create the postgres database table and populate seed data in that table
+- Add documentation to locally setup the evento project
+- Wrap the entire events page in `Suspense` to show the loading skeletons whenever the `page number` changes
+
+## Local Setup
+
+- Clone this [git repository](https://github.com/anmolshah80/evento.git)
+- Change directory to `evento` and install the npm packages
+
+  ```bash
+  cd evento
+
+  npm install
+  ```
+
+- Ensure you have Node.js `v20.17.0` installed
+
+  ```bash
+  node -v
+  ```
+
+  - If you have [node version manager (nvm)](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) installed, you can install Node.js `v20.17.0` directly
+
+    ```bash
+    nvm install 20.17.0
+
+    # to check the installed Node.js versions
+    nvm list
+
+    # to switch to use a specified Node.js version
+    nvm use 20.17.0
+
+    # if you need help with nvm's other usage options, type
+    nvm --help
+    ```
+
+- Create an `.env` file in the root directory inside `evento` folder with the following contents. Look for the detailed information on `DATABASE_URL` key contents below in the `PostgreSQL` section under `Notes` sub-heading
+
+  ```properties
+  DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
+  ```
+
+  _Note: Please ensure you have [PostgreSQL](https://www.postgresql.org/download/) installed in your local machine_
+
+- Create tables for the models defined in `schema.prisma` file under `prisma` folder and populate the seed data in your newly created local postgres database
+
+  ```bash
+  npm run db:push-and-seed
+  ```
+
+  _Note: Refer to `package.json` file for the script above_
+
+- Run your application
+
+  ```bash
+  npm run dev
+  ```
+
+- (Optional) Open Prisma Studio to view the populated data from your local database
+
+  ```bash
+  npx prisma studio
+  ```
 
 ## Notes
 
@@ -88,12 +152,12 @@
     DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
     ```
 
-    | Key                     | Description                                  |
-    | ----------------------- | -------------------------------------------- |
-    | postgres_superuser_name | Usually it's `postgres` itself               |
-    | superuser_password      | Superuser's password set during installation |
-    | postgres_server_port    | Usually it's `5432` or `5433`                |
-    | database_name           | Your desired database name                   |
+    | Key                     | Description                                            |
+    | ----------------------- | ------------------------------------------------------ |
+    | postgres_superuser_name | Usually it's `postgres` itself                         |
+    | superuser_password      | Superuser's password set during installation           |
+    | postgres_server_port    | Usually it's `5432` or `5433`                          |
+    | database_name           | Your desired database name (for e.g., `evento-db-dev`) |
 
     _Note: If you have multiple versions of postgres installed in your pc (let's say v14 and v17). To use the specific one, say v17 (the server where you would want to create your database), go to `C:\Program Files\PostgreSQL\17\installation_summary.log` (in Windows) and look for port info within the log._
 
@@ -146,5 +210,3 @@
 ## To-dos
 
 - Add documentation for using `useScroll` and `useTransform` hooks from `framer-motion` in `event-card.tsx` component to animate the events scrolling in that page
-- Add a script in `package.json` to migrate and seed data into the database
-- Upgrade to [Prisma ORM v6](https://www.prisma.io/docs/orm/more/upgrade-guides)
