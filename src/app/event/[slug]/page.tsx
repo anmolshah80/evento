@@ -1,6 +1,9 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { EventoEvent } from '@prisma/client';
+
+import Loading from '@/app/event/[slug]/loading';
 
 import H1 from '@/components/h1';
 
@@ -68,55 +71,57 @@ const EventPage = async ({ params }: Props) => {
   });
 
   return (
-    <main>
-      <section className="relative overflow-hidden flex justify-center items-center py-14 md:py-20">
-        <Image
-          src={eventData.imageUrl}
-          alt="Blurred background image of the event"
-          className="object-cover z-0 blur-3xl"
-          quality={50}
-          priority
-          fill
-          sizes="(max-width: 1280px) 100vw, 1280px"
-        />
-
-        <div className="z-1 flex flex-col gap-6 lg:gap-16 lg:flex-row relative">
+    <Suspense key={slug + formattedDate} fallback={<Loading />}>
+      <main>
+        <section className="relative overflow-hidden flex justify-center items-center py-14 md:py-20">
           <Image
             src={eventData.imageUrl}
-            alt={eventData.name}
-            width={300}
-            height={201}
-            className="rounded-xl border-2 border-white/50 object-cover"
+            alt="Blurred background image of the event"
+            className="object-cover z-0 blur-3xl"
+            quality={50}
+            priority
+            fill
+            sizes="(max-width: 1280px) 100vw, 1280px"
           />
 
-          <div className="flex flex-col">
-            <p className="text-white/75">{formattedDate}</p>
+          <div className="z-1 flex flex-col gap-6 lg:gap-16 lg:flex-row relative">
+            <Image
+              src={eventData.imageUrl}
+              alt={eventData.name}
+              width={300}
+              height={201}
+              className="rounded-xl border-2 border-white/50 object-cover"
+            />
 
-            <H1 className="mb-2 mt-1 whitespace-nowrap lg:text-5xl">
-              {eventData.name}
-            </H1>
+            <div className="flex flex-col">
+              <p className="text-white/75">{formattedDate}</p>
 
-            <p className="whitespace-nowrap text-xl text-white/75">
-              Organized by{' '}
-              <span className="italic">{eventData.organizerName}</span>
-            </p>
+              <H1 className="mb-2 mt-1 whitespace-nowrap lg:text-5xl">
+                {eventData.name}
+              </H1>
 
-            <button className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects">
-              Get tickets
-            </button>
+              <p className="whitespace-nowrap text-xl text-white/75">
+                Organized by{' '}
+                <span className="italic">{eventData.organizerName}</span>
+              </p>
+
+              <button className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects">
+                Get tickets
+              </button>
+            </div>
           </div>
+        </section>
+
+        <div className="min-h-[75vh] text-center px-5 py-16">
+          <DetailsSection
+            header="About this event"
+            content={eventData.description}
+          />
+
+          <DetailsSection header="Location" content={eventData.location} />
         </div>
-      </section>
-
-      <div className="min-h-[75vh] text-center px-5 py-16">
-        <DetailsSection
-          header="About this event"
-          content={eventData.description}
-        />
-
-        <DetailsSection header="Location" content={eventData.location} />
-      </div>
-    </main>
+      </main>
+    </Suspense>
   );
 };
 
