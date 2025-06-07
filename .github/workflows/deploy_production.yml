@@ -34,6 +34,8 @@ jobs:
         run: vercel pull --yes --environment=production --token=$VERCEL_ACCESS_TOKEN
       - name: Build Project Artifacts
         run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Confirm Build Output
         run: tree -a -L 3 -I 'node_modules|.git'
 
