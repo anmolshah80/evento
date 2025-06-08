@@ -30,3 +30,7 @@
   scrollbar-width: thin;
   scrollbar-color: #0f1015 rgba(255, 255, 255, 0.1);
 }
+
+img {
+  height: revert-layer;
+}

@@ -25,7 +25,7 @@ const events = [
     date: '2030-11-15T00:00:00.000Z',
     organizerName: 'Music Enthusiasts LLC',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/3801118/pexels-photo-3801118.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Harmony Festival is a celebration of all music genres, bringing together musicians, artists, and music enthusiasts from around the world. Experience a day filled with live performances, interactive workshops, and a vibrant atmosphere of creativity and harmony. Join us for an unforgettable musical journey!',
   },
@@ -38,7 +38,7 @@ const events = [
     date: '2030-12-08T00:00:00.000Z',
     organizerName: '3D Animators Inc.',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/19987744/pexels-photo-19987744/free-photo-of-black-device-on-table.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       "Dive into the captivating world of 3D animation at our exclusive 3D Animation Masterclass! Whether you're an aspiring animator, a student studying animation, or a professional looking to enhance your skills, this workshop offers a unique opportunity to learn from industry experts and elevate your animation prowess.",
   },
@@ -51,7 +51,7 @@ const events = [
     date: '2030-11-18T00:00:00.000Z',
     organizerName: 'Rock On Productions',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/6270262/pexels-photo-6270262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Get ready to rock out at Rock the City Concert! Experience electrifying performances by top rock bands, enjoy high-energy music, and immerse yourself in an unforgettable night of pure rock and roll.',
   },
@@ -64,7 +64,7 @@ const events = [
     date: '2030-12-01T00:00:00.000Z',
     organizerName: 'Craftsmanship Guild',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/17836853/pexels-photo-17836853/free-photo-of-wicker-baskets-on-a-stall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Discover unique handmade crafts and artworks at the Artisan Craft Fair. Meet talented artisans, shop for one-of-a-kind items, and support local craftsmanship. Join us for a day of creativity and craftsmanship.',
   },
@@ -77,7 +77,7 @@ const events = [
     date: '2030-11-29T00:00:00.000Z',
     organizerName: 'Groove Masters Productions',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/9419232/pexels-photo-9419232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Indulge in the smooth melodies and rhythmic beats of jazz fusion at Jazz Fusion Night. Experience world-class jazz performances, savor delicious cocktails, and immerse yourself in the soulful ambiance of live jazz music.',
   },
@@ -90,7 +90,7 @@ const events = [
     date: '2030-11-25T00:00:00.000Z',
     organizerName: 'Indie Vibes Records',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/11372430/pexels-photo-11372430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Discover the next big indie artists at the Indie Music Showcase. Experience live performances by emerging talents, support independent music, and be part of a vibrant community of music enthusiasts and artists.',
   },
@@ -103,7 +103,7 @@ const events = [
     date: '2030-10-30T00:00:00.000Z',
     organizerName: 'Foodie Ventures Inc.',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/18488304/pexels-photo-18488304/free-photo-of-panjiri.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Embark on a culinary journey around the world at the Global Food Festival. Delight your taste buds with international cuisines, cooking demonstrations, and food tastings. Experience the flavors of different cultures in one delicious event.',
   },
@@ -116,7 +116,7 @@ const events = [
     date: '2030-11-15T00:00:00.000Z',
     organizerName: 'InnovateTech Inc.',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/9001341/pexels-photo-9001341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'The Tech Innovators Summit is where visionaries, entrepreneurs, and tech enthusiasts converge. Explore the latest technological advancements, attend insightful keynotes from industry leaders, and participate in hands-on workshops. Connect with innovators, pitch your ideas, and be a part of shaping the future of technology.',
   },
@@ -129,7 +129,7 @@ const events = [
     date: '2030-12-02T00:00:00.000Z',
     organizerName: 'Cultural Garden Society',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/6779235/pexels-photo-6779235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Step into a world of wonder at the Enchanted Garden Gala, a magical evening of art, music, and fantasy. Explore enchanting garden installations, experience live performances by world-class musicians and dancers, and indulge in gourmet delicacies. Dress in your most glamorous attire and immerse yourself in a night of elegance and enchantment.',
   },
@@ -142,7 +142,7 @@ const events = [
     date: '2030-11-06T00:00:00.000Z',
     organizerName: 'Laugh Productions',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Prepare for a night of laughter with top comedians from around the world. Enjoy stand-up, improv, and sketches that will have you in stitches!',
   },
@@ -155,7 +155,7 @@ const events = [
     date: '2030-10-29T00:00:00.000Z',
     organizerName: 'Cosmic Explorers Society',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/32400899/pexels-photo-32400899/free-photo-of-spectacular-view-of-the-milky-way-galaxy.jpeg',
     description:
       'Explore the wonders of science and space at this interactive expo. Engage in hands-on experiments, meet scientists, and learn about the mysteries of the universe.',
   },
@@ -168,7 +168,7 @@ const events = [
     date: '2030-11-12T00:00:00.000Z',
     organizerName: 'Chic Trends Agency',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/7202906/pexels-photo-7202906.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Witness the latest trends on the runway. Top designers will showcase their collections, setting the stage for the future of fashion.',
   },
@@ -181,7 +181,7 @@ const events = [
     date: '2030-12-02T00:00:00.000Z',
     organizerName: 'Gourmet Chefs Society',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/29683253/pexels-photo-29683253/free-photo-of-elegant-pastry-display-with-gourmet-desserts.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Join renowned chefs for a culinary journey. Learn cooking techniques, taste exquisite dishes, and elevate your skills in the art of gastronomy.',
   },
@@ -194,7 +194,7 @@ const events = [
     date: '2030-11-08T00:00:00.000Z',
     organizerName: 'Cinema Society',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/30916053/pexels-photo-30916053/free-photo-of-empty-movie-theater-seats-with-popcorn-bucket.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'A gathering for film enthusiasts! Screen classic movies, engage in discussions with filmmakers, and gain insights into the world of cinema.',
   },
@@ -207,7 +207,7 @@ const events = [
     date: '2030-12-15T00:00:00.000Z',
     organizerName: 'Words Society',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/1907785/pexels-photo-1907785.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Celebrate the written word at this literary gathering. Listen to readings by acclaimed authors, participate in book discussions, and embrace the magic of storytelling.',
   },
@@ -220,7 +220,7 @@ const events = [
     date: '2030-11-30T00:00:00.000Z',
     organizerName: 'Wellness Warriors Inc.',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/30431320/pexels-photo-30431320/free-photo-of-ginger-lemon-tea-with-fresh-ingredients.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Immerse yourself in the world of fitness and well-being. Attend fitness classes, learn about nutrition, and explore holistic approaches to health.',
   },
@@ -233,7 +233,7 @@ const events = [
     date: '2030-11-01T00:00:00.000Z',
     organizerName: 'Tech Creatives Collective',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/19110325/pexels-photo-19110325/free-photo-of-abstract-pattern-with-spinning-light.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Discover the intersection of technology and art. Experience digital art installations, attend VR workshops, and meet digital artists pushing creative boundaries.',
   },
@@ -246,7 +246,7 @@ const events = [
     date: '2030-11-28T00:00:00.000Z',
     organizerName: 'Rhythm Revolution',
     imageUrl:
-      'https://images.unsplash.com/photo-1642178225043-f299072af862?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=100',
+      'https://images.pexels.com/photos/13377486/pexels-photo-13377486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description:
       'Experience a blend of dance styles from around the world. Participate in dance workshops, watch electrifying performances, and dance the night away.',
   },
