@@ -66,6 +66,8 @@
   npm run db:push-and-seed
   ```
 
+  _Note: Please go through this guide first to [choose between db push and prisma migrate](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#choosing-db-push-or-prisma-migrate)_
+
   _Note: Refer to `package.json` file for the script above_
 
 - Run your application
@@ -94,7 +96,7 @@
     git rm -r --cached .
 
     # however, if you have managed to do it then you can undo that using the following command
-    # it will reset the state of your working directory and index to match the HEAD commit, discarding any uncommitted changes
+    # this will reset the state of your working directory and index to match the HEAD commit, discarding any uncommitted changes
     # Source -> https://graphite.dev/guides/how-to-use-git-reset-hard-head#how-to-use-the-git-reset---hard-head-command
     git reset --hard HEAD
     ```
@@ -208,4 +210,26 @@
 - To use one-off breakpoint where you need to apply a set width in an element until a specific breakpoint and change the width after that breakpoint (as done in `pagination-controls.tsx` component), follow this [stackoverflow post](https://stackoverflow.com/questions/72651058/tailwind-inline-custom-breakpoint)
 
 - If your GitHub Actions workflow fails with the following error when using Prisma, then it can be resolved by following this [GitHub discussion](https://github.com/prisma/prisma/discussions/12170#discussioncomment-3856535)
+
   > Error validating datasource db: the URL must start with the protocol postgresql:// or postgres://
+
+- You can reset the database yourself to undo manual changes or `db push` experiments by running. This will reset all data in your database and re-apply migrations.
+
+  ```bash
+  npx prisma migrate reset
+  ```
+
+  _Note: This will drop all your tables and your existing data_
+
+  - Resources
+    - [Prototyping your schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema)
+    - [Development and production](https://www.prisma.io/docs/orm/prisma-migrate/workflows/development-and-production)
+    - [Deploying database changes with Prisma Migrate](https://www.prisma.io/docs/orm/prisma-client/deployment/deploy-database-changes-with-prisma-migrate)
+    - [Baselining a database](https://www.prisma.io/docs/orm/prisma-migrate/workflows/baselining)
+
+- To initialize a migration history after your database has been reset
+  ```bash
+  npx prisma migrate dev --name initial-state
+  ```
+  - Source
+    - [Prototyping a new schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#prototyping-a-new-schema)
