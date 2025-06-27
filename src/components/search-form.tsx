@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 
+import TooltipUI from '@/components/ui/tooltip-ui';
+
 const SearchForm = () => {
   const [searchText, setSearchText] = useState('');
   const [slashKeyClassName, setSlashKeyClassName] = useState('slash-key');
@@ -49,17 +51,23 @@ const SearchForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="w-full relative sm:w-[580px]">
-      <span
-        className={clsx(
-          'absolute bg-gray-800 pt-[0.3rem] pb-[0.4rem] px-[0.6rem] text-white right-8 top-3 border-none rounded-[4px] text-xl',
-          {
-            hidden: slashKeyClassName === 'slash-key-hide',
-          },
-        )}
-        title="Type / to start searching"
-      >
-        /
-      </span>
+      <TooltipUI
+        sourceElement={
+          <span
+            className={clsx(
+              'absolute bg-gray-800 pt-[0.3rem] pb-[0.4rem] px-[0.6rem] text-white right-8 top-3 border-none rounded-[4px] text-xl',
+              {
+                hidden: slashKeyClassName === 'slash-key-hide',
+              },
+            )}
+          >
+            /
+          </span>
+        }
+        tooltipContent={<p>Type / to start searching</p>}
+        tooltipContentClassName="absolute left-[27.5rem] -top-[4rem] w-max"
+        hideTooltip={slashKeyClassName === 'slash-key-hide'}
+      />
 
       <input
         id="searchText"

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sources -> 
+ *
+ * https://www.radix-ui.com/colors/docs/overview/usage
+ * https://www.radix-ui.com/colors/docs/palette-composition/scales
+ *
+ */
+@import '@radix-ui/colors/slate.css';
+
 /* Custom class to apply the same animation effects to several different elements */
 .state-effects {
   @apply hover:scale-105 focus:scale-105 active:scale-[1.02] transition;
@@ -33,4 +41,23 @@
 
 img {
   height: revert-layer;
+}
+
+/* Source -> https://www.radix-ui.com/primitives/docs/components/tooltip */
+.tooltip-arrow {
+  fill: white;
+}
+
+.tooltip-content {
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 15px;
+  line-height: 1;
+  /* Source -> https://www.radix-ui.com/colors/docs/palette-composition/scales */
+  color: var(--slate-12);
+  background-color: white;
+  user-select: none;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
