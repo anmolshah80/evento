@@ -26,7 +26,8 @@ type MapViewProps = {
 
 const MapView = ({ eventLocation }: MapViewProps) => {
   // add your API key
-  maptilerClient.config.apiKey = process.env.NEXT_PUBLIC_MAPTILER_API_KEY!;
+  maptilerClient.config.apiKey =
+    process.env.NEXT_PUBLIC_MAPTILER_PROTECTED_API_KEY!;
 
   useEffect(() => {
     const map = new Map({
