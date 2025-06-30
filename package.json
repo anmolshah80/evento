@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
-    "db:push-and-seed": "npm run db:push && npm run db:seed"
+    "db:push-and-seed": "npm run db:push && npm run db:seed",
+    "format": "prettier -c \"src/**/*.{js,ts,tsx}\""
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -38,6 +39,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
+    "prettier": "3.6.2",
     "prisma": "^6.9.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.1",
