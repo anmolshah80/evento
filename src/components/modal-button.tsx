@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-
 import GetTicketsModal from '@/components/get-tickets-modal';
 
 import { cn } from '@/lib/utils';
