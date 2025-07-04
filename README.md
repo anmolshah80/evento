@@ -233,3 +233,7 @@
   ```
   - Source
     - [Prototyping a new schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#prototyping-a-new-schema)
+
+## To-dos
+
+- Configure husky to lint and format your files before committing

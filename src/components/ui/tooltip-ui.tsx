@@ -1,3 +1,5 @@
+// Source -> https://www.radix-ui.com/primitives/docs/components/tooltip
+
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { ClassValue } from 'clsx';
 
@@ -10,7 +12,6 @@ type TooltipUIProps = {
   hideTooltip: boolean;
 };
 
-// Source -> https://www.radix-ui.com/primitives/docs/components/tooltip
 const TooltipUI = ({
   sourceElement,
   tooltipContent,

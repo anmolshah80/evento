@@ -6,6 +6,7 @@ import { EventoEvent } from '@prisma/client';
 import Loading from '@/app/event/[slug]/loading';
 
 import H1 from '@/components/h1';
+import ModalButton from '@/components/modal-button';
 
 import { humanizeKebabCase } from '@/lib/utils';
 import { getEvent } from '@/lib/server-utils';
@@ -105,9 +106,10 @@ const EventPage = async ({ params }: Props) => {
                 <span className="italic">{eventData.organizerName}</span>
               </p>
 
-              <button className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects">
-                Get tickets
-              </button>
+              <ModalButton
+                title="Get tickets"
+                className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects"
+              />
             </div>
           </div>
         </section>

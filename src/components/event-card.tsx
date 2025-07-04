@@ -71,7 +71,7 @@ const EventCard = ({ event }: EventCardProps) => {
 
         <section className="absolute flex flex-col justify-center items-center left-[12px] top-[12px] h-[45px] w-[45px] bg-black/30 rounded-md">
           <p className="text-xl font-bold -mb-[5px]">{eventDay}</p>
-          <p className="text-xs uppercase text-accent">{eventMonth}</p>
+          <p className="text-xs uppercase text-accent-green">{eventMonth}</p>
         </section>
       </section>
     </MotionLink>
