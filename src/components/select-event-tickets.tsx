@@ -10,12 +10,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const SelectScrollable = () => {
+const SelectEventTickets = ({ input }) => {
   return (
-    <Select>
+    <Select {...input}>
       <SelectTrigger
         className="w-52 text-black border border-input mb-1"
-        id="total-tickets"
+        id="totalTickets"
+        // {...input}
+        // name="totalTickets"
       >
         <SelectValue placeholder="Select your tickets" />
       </SelectTrigger>
@@ -38,4 +40,4 @@ const SelectScrollable = () => {
   );
 };
 
-export default SelectScrollable;
+export default SelectEventTickets;
