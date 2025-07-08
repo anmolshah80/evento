@@ -237,3 +237,8 @@
 ## To-dos
 
 - Configure husky to lint and format your files before committing
+
+## Temp Notes
+
+- Merge `features/configure-react-final-form` branch into `features/render-modal-to-book-event-tickets`
+- Merge `features/configure-react-hook-form` branch into `features/render-modal-to-book-event-tickets`
