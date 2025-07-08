@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { z } from 'zod';
+import * as z from 'zod/v4';
 import { notFound } from 'next/navigation';
 
 import Loading from '@/app/events/[city]/loading';
