@@ -13,7 +13,7 @@
     "db:push-and-seed": "npm run db:push && npm run db:seed"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

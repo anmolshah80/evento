@@ -8,15 +8,15 @@ import prisma from '@/lib/db';
 import { capitalize } from '@/lib/utils';
 
 // for api implementation
-// import { EventoEvent } from '@prisma/client';
+// import { Event } from '@prisma/client';
 // import { API_BASE_URL } from '@/lib/constants';
 
 const getEvent = unstable_cache(async (slug: string) => {
   // for api implementation
   // const response = await fetch(`${API_BASE_URL}/${slug}`);
-  // const eventData: EventoEvent = await response.json();
+  // const eventData: Event = await response.json();
 
-  const eventData = await prisma.eventoEvent.findUnique({
+  const eventData = await prisma.event.findUnique({
     where: {
       slug: slug,
     },
@@ -30,14 +30,14 @@ const getEvent = unstable_cache(async (slug: string) => {
 const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
   // for api implementation
   // const response = await fetch(`${API_BASE_URL}?city=${city}`);
-  // const events: EventoEvent[] = await response.json();
+  // const events: Event[] = await response.json();
 
-  const events = await prisma.eventoEvent.findMany({
+  const events = await prisma.event.findMany({
     where: {
       city: city === 'all' ? undefined : capitalize(city),
     },
     orderBy: {
-      date: 'asc',
+      startDateTime: 'asc',
     },
     take: 6,
     skip: (currentPage - 1) * 6,
@@ -46,7 +46,7 @@ const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
   if (!events || events.length === 0) return notFound();
 
   // Alternative way
-  // const totalRecordsCount = await prisma.eventoEvent.count({
+  // const totalRecordsCount = await prisma.event.count({
   //   where: {
   //     city: city === 'all' ? undefined : capitalize(city),
   //   },
@@ -55,9 +55,9 @@ const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
   let totalRecordsCount;
 
   if (city === 'all') {
-    totalRecordsCount = await prisma.eventoEvent.count();
+    totalRecordsCount = await prisma.event.count();
   } else {
-    totalRecordsCount = await prisma.eventoEvent.count({
+    totalRecordsCount = await prisma.event.count({
       where: {
         city: capitalize(city),
       },
