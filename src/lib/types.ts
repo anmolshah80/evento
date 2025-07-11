@@ -1,6 +1,6 @@
 // Read note in README on why this type is commented out
 
-// export type TEventoEvent = {
+// export type TEvent = {
 //   id: number;
 //   name: string;
 //   slug: string;
