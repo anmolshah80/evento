@@ -862,7 +862,7 @@ const EVENTS = [
     endDateTime: '2025-04-20T16:00:00.000Z',
     organizerName: 'Southern Horticultural Society',
     imageUrl:
-      'https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg',
+      'https://images.pexels.com/photos/9988851/pexels-photo-9988851.jpeg',
     description:
       'Private access to antebellum gardens with expert horticulturists.',
   },
@@ -876,7 +876,7 @@ const EVENTS = [
     endDateTime: '2025-06-22T15:00:00.000Z',
     organizerName: 'Marine Discovery Tours',
     imageUrl:
-      'https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg',
+      'https://images.pexels.com/photos/3831085/pexels-photo-3831085.jpeg',
     description:
       'View vibrant coral reefs and tropical fish without getting wet.',
   },
@@ -904,7 +904,7 @@ const EVENTS = [
     endDateTime: '2026-01-26T22:00:00.000Z',
     organizerName: 'Asian Cultural Association',
     imageUrl:
-      'https://images.pexels.com/photos/1387774/pexels-photo-1387774.jpeg',
+      'https://images.pexels.com/photos/24701047/pexels-photo-24701047.jpeg',
     description:
       'Dragon dances, lantern displays, and traditional food celebrating the Year of the Horse.',
   },
@@ -918,7 +918,7 @@ const EVENTS = [
     endDateTime: '2025-08-15T14:00:00.000Z',
     organizerName: 'Subterranean Adventures',
     imageUrl:
-      'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg',
+      'https://images.pexels.com/photos/16997736/pexels-photo-16997736.jpeg',
     description:
       'Guided descent into spectacular underground chambers with expert geologists.',
   },
@@ -932,7 +932,7 @@ const EVENTS = [
     endDateTime: '2025-10-31T23:00:00.000Z',
     organizerName: 'Southern Spirits Tours',
     imageUrl:
-      'https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg',
+      'https://images.pexels.com/photos/162389/lost-places-old-decay-ruin-162389.jpeg',
     description: 'Evening tour of haunted sites with costumed storytellers.',
   },
   {
@@ -945,7 +945,7 @@ const EVENTS = [
     endDateTime: '2025-06-12T12:00:00.000Z',
     organizerName: 'Mountain Flora Society',
     imageUrl:
-      'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg',
+      'https://images.pexels.com/photos/9567499/pexels-photo-9567499.jpeg',
     description:
       'Guided alpine wildflower identification in peak bloom season.',
   },
@@ -959,7 +959,7 @@ const EVENTS = [
     endDateTime: '2025-07-31T19:00:00.000Z',
     organizerName: 'Body Art Historical Society',
     imageUrl:
-      'https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg',
+      'https://images.pexels.com/photos/4577718/pexels-photo-4577718.jpeg',
     description:
       'Rare artifacts tracing 5,000 years of tattoo history worldwide.',
   },
@@ -973,7 +973,7 @@ const EVENTS = [
     endDateTime: '2025-05-24T16:00:00.000Z',
     organizerName: 'Southwest Clay Arts',
     imageUrl:
-      'https://images.pexels.com/photos/2660262/pexels-photo-2660262.jpeg',
+      'https://images.pexels.com/photos/4706134/pexels-photo-4706134.jpeg',
     description:
       'Traditional coil-building techniques taught by master Pueblo potters.',
   },
@@ -987,7 +987,7 @@ const EVENTS = [
     endDateTime: '2025-10-31T23:00:00.000Z',
     organizerName: 'Spiritualist Historical Society',
     imageUrl:
-      'https://images.pexels.com/photos/2479312/pexels-photo-2479312.jpeg',
+      'https://images.pexels.com/photos/7267079/pexels-photo-7267079.jpeg',
     description:
       'Authentic 19th century spiritualism demonstration in period setting.',
   },
@@ -1001,7 +1001,7 @@ const EVENTS = [
     endDateTime: '2025-08-16T10:00:00.000Z',
     organizerName: 'Great Lakes Lighthouse Keepers',
     imageUrl:
-      'https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg',
+      'https://images.pexels.com/photos/32947373/pexels-photo-32947373.jpeg',
     description:
       "Spend the night in a restored lighthouse keeper's quarters with guided tours.",
   },
@@ -1015,7 +1015,7 @@ const EVENTS = [
     endDateTime: '2025-04-07T17:00:00.000Z',
     organizerName: 'Cartographic Heritage Society',
     imageUrl:
-      'https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg',
+      'https://images.pexels.com/photos/2127869/pexels-photo-2127869.jpeg',
     description:
       'Rare maps from the 15th-19th centuries with expert appraisals available.',
   },
@@ -1029,7 +1029,7 @@ const EVENTS = [
     endDateTime: '2025-07-12T16:00:00.000Z',
     organizerName: 'Vintage Base Ball Association',
     imageUrl:
-      'https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg',
+      'https://images.pexels.com/photos/26890864/pexels-photo-26890864.jpeg',
     description:
       '1860s rules game played with reproduction equipment and uniforms.',
   },
@@ -1043,7 +1043,7 @@ const EVENTS = [
     endDateTime: '2025-10-26T17:00:00.000Z',
     organizerName: 'Frontier Days Society',
     imageUrl:
-      'https://images.pexels.com/photos/4384679/pexels-photo-4384679.jpeg',
+      'https://images.pexels.com/photos/10547072/pexels-photo-10547072.jpeg',
     description: 'Gunfight demonstrations and 1880s frontier life recreations.',
   },
   {
@@ -1056,7 +1056,7 @@ const EVENTS = [
     endDateTime: '2025-09-06T16:00:00.000Z',
     organizerName: 'Maritime Heritage Foundation',
     imageUrl:
-      'https://images.pexels.com/photos/534297/pexels-photo-534297.jpeg',
+      'https://images.pexels.com/photos/2178920/pexels-photo-2178920.jpeg',
     description:
       'Board the 1886 square-rigger Balclutha with costumed interpreters.',
   },
@@ -1070,7 +1070,7 @@ const EVENTS = [
     endDateTime: '2025-05-17T16:00:00.000Z',
     organizerName: 'Preservation Society of Newport',
     imageUrl:
-      'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg',
+      'https://images.pexels.com/photos/16160766/pexels-photo-16160766.jpeg',
     description:
       'Behind-the-scenes access to Vanderbilt summer cottage with conservators.',
   },
@@ -1084,7 +1084,7 @@ const EVENTS = [
     endDateTime: '2025-06-22T17:00:00.000Z',
     organizerName: 'Colonial Arts Society',
     imageUrl:
-      'https://images.pexels.com/photos/1109543/pexels-photo-1109543.jpeg',
+      'https://images.pexels.com/photos/16566150/pexels-photo-16566150.jpeg',
     description:
       '18th century printing press techniques using replica equipment.',
   },
@@ -1098,7 +1098,7 @@ const EVENTS = [
     endDateTime: '2025-02-16T16:00:00.000Z',
     organizerName: 'Freedom Trail Foundation',
     imageUrl:
-      'https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg',
+      'https://images.pexels.com/photos/1057858/pexels-photo-1057858.jpeg',
     description:
       'Interactive exhibits and guided tours of historic safe houses.',
   },
@@ -1112,7 +1112,7 @@ const EVENTS = [
     endDateTime: '2025-03-17T16:00:00.000Z',
     organizerName: 'Early American Clockmakers',
     imageUrl:
-      'https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg',
+      'https://images.pexels.com/photos/29268632/pexels-photo-29268632.jpeg',
     description:
       'Build a working reproduction of an 18th century tall case clock.',
   },
@@ -1126,7 +1126,7 @@ const EVENTS = [
     endDateTime: '2025-07-20T18:00:00.000Z',
     organizerName: 'Revolutionary Desserts Society',
     imageUrl:
-      'https://images.pexels.com/photos/1192036/pexels-photo-1192036.jpeg',
+      'https://images.pexels.com/photos/20683666/pexels-photo-20683666.jpeg',
     description:
       "Discover how ice cream was made in the 18th century using revolutionary-era techniques. Sample flavors like lavender-honey and spruce tip while learning about this frozen treat's surprising colonial origins. Costumed interpreters demonstrate period-correct churning methods.",
   },
@@ -1140,7 +1140,7 @@ const EVENTS = [
     endDateTime: '2025-05-10T16:00:00.000Z',
     organizerName: 'Historic Photographic Arts',
     imageUrl:
-      'https://images.pexels.com/photos/51363/photographer-camera-taking-picture-51363.jpeg',
+      'https://images.pexels.com/photos/4266487/pexels-photo-4266487.jpeg',
     description:
       'Have your portrait taken using 19th century wet plate collodion process.',
   },
@@ -1154,7 +1154,7 @@ const EVENTS = [
     endDateTime: '2025-07-20T16:00:00.000Z',
     organizerName: 'Maritime Crafts Guild',
     imageUrl:
-      'https://images.pexels.com/photos/534297/pexels-photo-534297.jpeg',
+      'https://images.pexels.com/photos/15369673/pexels-photo-15369673.jpeg',
     description:
       'Learn traditional wooden boat building techniques from master craftsmen.',
   },
@@ -1168,7 +1168,7 @@ const EVENTS = [
     endDateTime: '2025-09-07T18:00:00.000Z',
     organizerName: '49ers Historical Society',
     imageUrl:
-      'https://images.pexels.com/photos/4384679/pexels-photo-4384679.jpeg',
+      'https://images.pexels.com/photos/20637296/pexels-photo-20637296.jpeg',
     description: 'Living history encampments and gold panning demonstrations.',
   },
   {
@@ -1181,7 +1181,7 @@ const EVENTS = [
     endDateTime: '2025-06-14T16:00:00.000Z',
     organizerName: 'Industrial Heritage Foundation',
     imageUrl:
-      'https://images.pexels.com/photos/162568/germany-blacksmith-fire-iron-162568.jpeg',
+      'https://images.pexels.com/photos/15018559/pexels-photo-15018559.jpeg',
     description:
       'Working demonstrations of 19th century water-powered machinery.',
   },
@@ -1195,7 +1195,7 @@ const EVENTS = [
     endDateTime: '2025-04-12T16:00:00.000Z',
     organizerName: 'Historic Medical Society',
     imageUrl:
-      'https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg',
+      'https://images.pexels.com/photos/5480153/pexels-photo-5480153.jpeg',
     description:
       'Prepare 18th century remedies using period tools and ingredients.',
   },
@@ -1209,7 +1209,7 @@ const EVENTS = [
     endDateTime: '2025-08-10T16:00:00.000Z',
     organizerName: 'Coastal Beacons Society',
     imageUrl:
-      'https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg',
+      'https://images.pexels.com/photos/1077325/pexels-photo-1077325.jpeg',
     description: "Climb to the top of historic lighthouses with keeper's tour.",
   },
   {
@@ -1222,7 +1222,7 @@ const EVENTS = [
     endDateTime: '2025-05-24T17:00:00.000Z',
     organizerName: 'Gilded Age Society',
     imageUrl:
-      'https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg',
+      'https://images.pexels.com/photos/15935557/pexels-photo-15935557.jpeg',
     description:
       'Learn 19th century floral design techniques in historic mansion.',
   },
@@ -1236,7 +1236,7 @@ const EVENTS = [
     endDateTime: '2025-04-17T16:00:00.000Z',
     organizerName: 'Iron Heritage Guild',
     imageUrl:
-      'https://images.pexels.com/photos/162568/germany-blacksmith-fire-iron-162568.jpeg',
+      'https://images.pexels.com/photos/9811497/pexels-photo-9811497.jpeg',
     description:
       '18th century metalworking techniques using traditional forges.',
   },
@@ -1250,7 +1250,7 @@ const EVENTS = [
     endDateTime: '2025-03-31T17:00:00.000Z',
     organizerName: 'Textile Heritage Society',
     imageUrl:
-      'https://images.pexels.com/photos/1456733/pexels-photo-1456733.jpeg',
+      'https://images.pexels.com/photos/15501683/pexels-photo-15501683.jpeg',
     description:
       'Rare 18th-19th century quilts with conservation demonstrations.',
   },
@@ -1264,7 +1264,7 @@ const EVENTS = [
     endDateTime: '2025-05-10T16:00:00.000Z',
     organizerName: 'Early American Crafts',
     imageUrl:
-      'https://images.pexels.com/photos/162568/germany-blacksmith-fire-iron-162568.jpeg',
+      'https://images.pexels.com/photos/9786241/pexels-photo-9786241.jpeg',
     description:
       'Create reproduction tinware using 18th century tools and techniques.',
   },
@@ -1278,7 +1278,7 @@ const EVENTS = [
     endDateTime: '2025-11-17T16:00:00.000Z',
     organizerName: 'Colonial Culinary Arts',
     imageUrl:
-      'https://images.pexels.com/photos/5907778/pexels-photo-5907778.jpeg',
+      'https://images.pexels.com/photos/15484967/pexels-photo-15484967.jpeg',
     description: 'Prepare 17th century recipes in authentic hearth kitchen.',
   },
   {
@@ -1291,7 +1291,7 @@ const EVENTS = [
     endDateTime: '2025-06-07T16:00:00.000Z',
     organizerName: 'Gilded Age Society',
     imageUrl:
-      'https://images.pexels.com/photos/1456733/pexels-photo-1456733.jpeg',
+      'https://images.pexels.com/photos/2973392/pexels-photo-2973392.jpeg',
     description: 'Learn 19th century sewing techniques in historic mansion.',
   },
   {
@@ -1304,7 +1304,7 @@ const EVENTS = [
     endDateTime: '2025-04-20T16:00:00.000Z',
     organizerName: 'Early American Crafts',
     imageUrl:
-      'https://images.pexels.com/photos/162568/germany-blacksmith-fire-iron-162568.jpeg',
+      'https://images.pexels.com/photos/8241748/pexels-photo-8241748.jpeg',
     description: 'Traditional broom crafting using 18th century methods.',
   },
   {
@@ -1317,7 +1317,7 @@ const EVENTS = [
     endDateTime: '2025-03-22T16:00:00.000Z',
     organizerName: 'Horological Society',
     imageUrl:
-      'https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg',
+      'https://images.pexels.com/photos/8327717/pexels-photo-8327717.jpeg',
     description:
       'Learn to repair 18th-19th century clocks with master horologists.',
   },
@@ -1331,7 +1331,7 @@ const EVENTS = [
     endDateTime: '2025-12-07T16:00:00.000Z',
     organizerName: 'Colonial Crafts Society',
     imageUrl:
-      'https://images.pexels.com/photos/162568/germany-blacksmith-fire-iron-162568.jpeg',
+      'https://images.pexels.com/photos/7233963/pexels-photo-7233963.jpeg',
     description: '17th century tallow candle dipping and mold techniques.',
   },
   {
@@ -1344,7 +1344,7 @@ const EVENTS = [
     endDateTime: '2025-05-30T18:00:00.000Z',
     organizerName: 'Gilded Age Society',
     imageUrl:
-      'https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg',
+      'https://images.pexels.com/photos/30767475/pexels-photo-30767475.jpeg',
     description: 'Afternoon tea with proper 19th century manners instruction.',
   },
   {
@@ -1357,7 +1357,7 @@ const EVENTS = [
     endDateTime: '2025-07-12T16:00:00.000Z',
     organizerName: 'Early American Crafts',
     imageUrl:
-      'https://images.pexels.com/photos/1456733/pexels-photo-1456733.jpeg',
+      'https://images.pexels.com/photos/9552186/pexels-photo-9552186.jpeg',
     description:
       '18th century loom weaving techniques with reproduction equipment.',
   },
@@ -1371,7 +1371,7 @@ const EVENTS = [
     endDateTime: '2025-08-17T16:00:00.000Z',
     organizerName: 'Rural Heritage Society',
     imageUrl:
-      'https://images.pexels.com/photos/162568/germany-blacksmith-fire-iron-162568.jpeg',
+      'https://images.pexels.com/photos/27491014/pexels-photo-27491014.jpeg',
     description:
       '19th century farm and craft tools with working demonstrations.',
   },
@@ -1385,7 +1385,7 @@ const EVENTS = [
     endDateTime: '2025-09-14T16:00:00.000Z',
     organizerName: 'Colonial Crafts Society',
     imageUrl:
-      'https://images.pexels.com/photos/1456733/pexels-photo-1456733.jpeg',
+      'https://images.pexels.com/photos/26692157/pexels-photo-26692157.jpeg',
     description:
       'Traditional Native American and colonial basket weaving techniques.',
   },
@@ -1399,7 +1399,7 @@ const EVENTS = [
     endDateTime: '2025-10-31T22:00:00.000Z',
     organizerName: 'Historic Photographic Arts',
     imageUrl:
-      'https://images.pexels.com/photos/51363/photographer-camera-taking-picture-51363.jpeg',
+      'https://images.pexels.com/photos/16929597/pexels-photo-16929597.jpeg',
     description:
       '19th century optical entertainment with original projection devices.',
   },
@@ -1413,7 +1413,7 @@ const EVENTS = [
     endDateTime: '2026-10-31T23:00:00.000Z',
     organizerName: 'Southern Spirits Tours',
     imageUrl:
-      'https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg',
+      'https://images.pexels.com/photos/27818330/pexels-photo-27818330.jpeg',
     description:
       "Walk through Savannah's haunted history with expert guides. Hear chilling tales from the city's past.",
   },
