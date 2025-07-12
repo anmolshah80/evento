@@ -237,11 +237,19 @@
     - [Prototyping a new schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#prototyping-a-new-schema)
 
 - To ensure that your Prisma schema is in sync with your Database schema
+
   ```bash
   npx prisma migrate dev
   ```
+
   - Source
     - [prisma migrate dev](https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-dev)
+
+- To create the migration file and apply the changes (such as adding a new model or changing the existing column name) made to the `schema.prisma` file, to your database
+
+  ```bash
+  npx prisma migrate dev --name add_event_booking_model
+  ```
 
 ## To-dos
 
