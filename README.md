@@ -251,6 +251,17 @@
   npx prisma migrate dev --name add_event_booking_model
   ```
 
+- To apply the migration files to your production database and seed the data in your db
+
+  ```bash
+  npx prisma migrate deploy
+
+  # (Optional) if your data is deleted while applying the migrations (maybe while renaming the table name)
+  npm run db:seed
+  ```
+
+  _Note: Don't forget to change the `DATABASE_URL` environment variable's value to your remote database url_
+
 ## To-dos
 
 - Configure husky to lint and format your files before committing
