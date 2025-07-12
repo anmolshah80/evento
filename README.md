@@ -228,12 +228,25 @@
     - [Baselining a database](https://www.prisma.io/docs/orm/prisma-migrate/workflows/baselining)
 
 - To initialize a migration history after your database has been reset
+
   ```bash
   npx prisma migrate dev --name initial-state
   ```
+
   - Source
     - [Prototyping a new schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#prototyping-a-new-schema)
+
+- To ensure that your Prisma schema is in sync with your Database schema
+  ```bash
+  npx prisma migrate dev
+  ```
+  - Source
+    - [prisma migrate dev](https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-dev)
 
 ## To-dos
 
 - Configure husky to lint and format your files before committing
+- Title length in individual event page should not be more than perhaps 22 characters
+  - References
+    - http://localhost:3000/event/glass-bottom-boat-tour
+    - http://localhost:3000/event/mountain-photography-expedition
