@@ -14,9 +14,9 @@ datasource db {
 }
 
 model Event {
-  id            Int      @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   name          String
-  slug          String   @unique
+  slug          String         @unique
   city          String
   location      String
   startDateTime DateTime // First day of event and event's start time (e.g., 2025-07-10 10:30:00)
@@ -24,6 +24,28 @@ model Event {
   organizerName String
   imageUrl      String
   description   String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  bookings      EventBooking[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model EventBooking {
+  id                Int           @id @default(autoincrement())
+  attendeeFirstName String
+  attendeeLastName  String
+  email             String
+  phone             String?
+  bookedDateTime    DateTime // When attendee plans to visit
+  totalTickets      Int           @default(1)
+  bookingStatus     BookingStatus @default(PENDING)
+  eventId           Int
+  event             Event         @relation(fields: [eventId], references: [id])
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
 }
