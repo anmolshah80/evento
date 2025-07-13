@@ -96,7 +96,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
 
       <DialogContent
         className={
-          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll'
+          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
         }
         dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem] "
       >
