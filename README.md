@@ -262,6 +262,22 @@
 
   _Note: Don't forget to change the `DATABASE_URL` environment variable's value to your remote database url_
 
+- To validate [optional text inputs](https://github.com/colinhacks/zod/issues/310#issuecomment-794533682) using `zod`
+
+  ```tsx
+  // get-tickets-modal.tsx
+
+  const FormSchema = z.object({
+    // ...other validations
+    phone: z
+      .string()
+      .regex(PHONE_NUMBER_REGEX)
+      .max(17)
+      .optional()
+      .or(z.literal('')),
+  });
+  ```
+
 ## To-dos
 
 - Configure husky to lint and format your files before committing

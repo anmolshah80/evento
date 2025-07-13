@@ -1,8 +1,10 @@
-import { UseFormReturn } from 'react-hook-form';
+import { HTMLInputAutoCompleteAttribute } from 'react';
+import { FieldError, UseFormReturn } from 'react-hook-form';
 import { ClassValue } from 'clsx';
 
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,8 +20,36 @@ type TextFormFieldProps = {
   fieldName: string;
   fieldId: string;
   label: string;
+  maxLength?: number;
+  autoComplete?: HTMLInputAutoCompleteAttribute | undefined;
+  fieldHasErrors?: FieldError | undefined;
   placeholder?: string;
   fieldClassName?: ClassValue;
+  fieldDescription?: React.ReactNode;
+};
+
+type ShowFormMessageProps = {
+  fieldDescription: React.ReactNode;
+  fieldHasErrors: FieldError | undefined;
+};
+
+const ShowFormMessage = ({
+  fieldDescription,
+  fieldHasErrors,
+}: ShowFormMessageProps) => {
+  if (!fieldDescription) return <FormMessage />;
+
+  if (fieldDescription && fieldHasErrors) return <FormMessage />;
+
+  return (
+    <FormDescription
+      className={cn({
+        hidden: fieldDescription === undefined,
+      })}
+    >
+      {fieldDescription}
+    </FormDescription>
+  );
 };
 
 const TextFormField = ({
@@ -28,6 +58,10 @@ const TextFormField = ({
   fieldId,
   label,
   fieldClassName,
+  maxLength,
+  autoComplete,
+  fieldDescription,
+  fieldHasErrors,
   placeholder = 'Placeholder',
 }: TextFormFieldProps) => {
   return (
@@ -47,11 +81,16 @@ const TextFormField = ({
                 fieldClassName,
               )}
               placeholder={placeholder}
+              maxLength={maxLength}
+              autoComplete={autoComplete}
               {...field}
             />
           </FormControl>
 
-          <FormMessage />
+          <ShowFormMessage
+            fieldDescription={fieldDescription}
+            fieldHasErrors={fieldHasErrors}
+          />
         </FormItem>
       )}
     />
