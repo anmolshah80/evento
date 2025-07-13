@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { format, parseISO } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, Clock8Icon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -28,18 +28,22 @@ type DateTimePickerProps = {
     {
       firstName: string;
       lastName: string;
+      email: string;
       eventDate: string;
       eventTime: string;
       totalTickets: string;
+      phone?: string | undefined;
     },
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     any,
     {
       firstName: string;
       lastName: string;
+      email: string;
       eventDate: string;
       eventTime: string;
       totalTickets: string;
+      phone?: string | undefined;
     }
   >;
 };
@@ -47,8 +51,10 @@ type DateTimePickerProps = {
 const DateTimePicker = ({ form }: DateTimePickerProps) => {
   const [open, setOpen] = useState(false);
 
+  const eventTimeRef = useRef<HTMLInputElement | null>(null);
+
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col sm:flex-row gap-6">
       <FormField
         control={form.control}
         name="eventDate"
@@ -57,7 +63,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
           const dateValue = field.value ? parseISO(field.value) : undefined;
 
           return (
-            <FormItem className="flex flex-col">
+            <FormItem className="flex flex-col w-full">
               <FormLabel htmlFor="date-picker" className="text-black">
                 Event date
               </FormLabel>
@@ -68,7 +74,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
                       id="date-picker"
                       variant={'outline'}
                       className={cn(
-                        'w-52 justify-between font-normal text-black border-input border',
+                        'w-full justify-between font-normal text-black border-input border hover:bg-transparent',
                         !field.value && 'text-muted-foreground',
                       )}
                     >
@@ -110,7 +116,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
         control={form.control}
         name="eventTime"
         render={({ field }) => (
-          <FormItem className="flex flex-col">
+          <FormItem className="w-full flex flex-col relative">
             <FormLabel htmlFor="time-picker" className="text-black">
               Event time
             </FormLabel>
@@ -118,8 +124,13 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
               type="time"
               id="time-picker"
               step="1"
-              className="bg-transparent border border-input text-black appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+              className="bg-transparent border border-input text-black appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none px-2 relative"
               {...field}
+              ref={eventTimeRef}
+            />
+            <Clock8Icon
+              className="absolute right-3 top-[34px] h-4 w-4 text-mauve11 cursor-pointer"
+              onClick={() => eventTimeRef?.current?.focus()}
             />
 
             <FormMessage />
