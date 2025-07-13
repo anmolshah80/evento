@@ -1,11 +1,12 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { EventoEvent } from '@prisma/client';
+import { Event } from '@prisma/client';
 
 import Loading from '@/app/event/[slug]/loading';
 
 import H1 from '@/components/h1';
+import ModalButton from '@/components/modal-button';
 import MapView from '@/components/map-view';
 
 import { humanizeKebabCase } from '@/lib/utils';
@@ -61,15 +62,18 @@ const DetailsSection = ({ header, content }: DetailsSectionProps) => (
 const EventPage = async ({ params }: Props) => {
   const { slug } = await params;
 
-  const eventData: EventoEvent | null = await getEvent(slug);
+  const eventData: Event | null = await getEvent(slug);
 
   if (!eventData) return null;
 
-  const formattedDate = new Date(eventData.date).toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formattedDate = new Date(eventData.startDateTime).toLocaleDateString(
+    'en-US',
+    {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    },
+  );
 
   return (
     <Suspense key={slug + formattedDate} fallback={<Loading />}>
@@ -106,9 +110,10 @@ const EventPage = async ({ params }: Props) => {
                 <span className="italic">{eventData.organizerName}</span>
               </p>
 
-              <button className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects">
-                Get tickets
-              </button>
+              <ModalButton
+                title="Get tickets"
+                className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects"
+              />
             </div>
           </div>
         </section>

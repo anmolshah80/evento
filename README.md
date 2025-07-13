@@ -197,7 +197,7 @@
     npx prisma db push
     ```
 
-  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `seed.ts` file in your `prisma` folder)
+  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `seed.ts` file in your `prisma/seeders` folder)
 
     ```bash
     npx prisma db seed
@@ -205,7 +205,7 @@
 
   - Visit [Prisma Console](https://console.prisma.io/) to view the data seeded into your prisma postgres database
 
-- Comment out `TEventoEvent` type from `lib/types.ts` to just have one source of truth and so is being imported from `@prisma/client` when `npx prisma db push` command was executed in terminal to create the `EventoEvent` table
+- Comment out `TEvent` type from `lib/types.ts` to just have one source of truth and so is being imported from `@prisma/client` when `npx prisma db push` command was executed in terminal to create the `EventoEvent` table
 
 - To use one-off breakpoint where you need to apply a set width in an element until a specific breakpoint and change the width after that breakpoint (as done in `pagination-controls.tsx` component), follow this [stackoverflow post](https://stackoverflow.com/questions/72651058/tailwind-inline-custom-breakpoint)
 
@@ -228,14 +228,63 @@
     - [Baselining a database](https://www.prisma.io/docs/orm/prisma-migrate/workflows/baselining)
 
 - To initialize a migration history after your database has been reset
+
   ```bash
   npx prisma migrate dev --name initial-state
   ```
+
   - Source
     - [Prototyping a new schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#prototyping-a-new-schema)
 
+- To ensure that your Prisma schema is in sync with your Database schema
+
+  ```bash
+  npx prisma migrate dev
+  ```
+
+  - Source
+    - [prisma migrate dev](https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-dev)
+
+- To create the migration file and apply the changes (such as adding a new model or changing the existing column name) made to the `schema.prisma` file, to your database
+
+  ```bash
+  npx prisma migrate dev --name add_event_booking_model
+  ```
+
+- To apply the migration files to your production database and seed the data in your db
+
+  ```bash
+  npx prisma migrate deploy
+
+  # (Optional) if your data is deleted while applying the migrations (maybe while renaming the table name)
+  npm run db:seed
+  ```
+
+  _Note: Don't forget to change the `DATABASE_URL` environment variable's value to your remote database url_
+
+- To validate [optional text inputs](https://github.com/colinhacks/zod/issues/310#issuecomment-794533682) using `zod`
+
+  ```tsx
+  // get-tickets-modal.tsx
+
+  const FormSchema = z.object({
+    // ...other validations
+    phone: z
+      .string()
+      .regex(PHONE_NUMBER_REGEX)
+      .max(17)
+      .optional()
+      .or(z.literal('')),
+  });
+  ```
+
 ## To-dos
 
+- Configure husky to lint and format your files before committing
+- Title length in individual event page should not be more than perhaps 22 characters
+  - References
+    - http://localhost:3000/event/glass-bottom-boat-tour
+    - http://localhost:3000/event/mountain-photography-expedition
 - OpenLayers Resources
   - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
 - Maptiler Resources

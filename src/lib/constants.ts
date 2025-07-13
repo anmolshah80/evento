@@ -23,4 +23,7 @@ const FOOTER_ROUTES = [
 const API_BASE_URL =
   'https://bytegrad.com/course-assets/projects/evento/api/events';
 
-export { HEADER_ROUTES, FOOTER_ROUTES, API_BASE_URL };
+// Use something like `https://regex101.com/` to test the regular expressions
+const PHONE_NUMBER_REGEX = /^\+\d{1,3}\s\d{1,4}-\d{1,4}-\d{4}$/gm;
+
+export { HEADER_ROUTES, FOOTER_ROUTES, API_BASE_URL, PHONE_NUMBER_REGEX };

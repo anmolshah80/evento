@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { EventoEvent } from '@prisma/client';
+import { Event } from '@prisma/client';
 
 type EventCardProps = {
-  event: EventoEvent;
+  event: Event;
 };
 
 const MotionLink = motion(Link);
@@ -15,9 +15,10 @@ const MotionLink = motion(Link);
 const EventCard = ({ event }: EventCardProps) => {
   const linkRef = useRef(null);
 
-  const { name, organizerName, imageUrl, location, date, slug } = event;
+  const { name, organizerName, imageUrl, location, startDateTime, slug } =
+    event;
 
-  const dateObj = new Date(date);
+  const dateObj = new Date(startDateTime);
 
   const eventDay = dateObj.toLocaleDateString('en-US', {
     day: '2-digit',
@@ -71,7 +72,7 @@ const EventCard = ({ event }: EventCardProps) => {
 
         <section className="absolute flex flex-col justify-center items-center left-[12px] top-[12px] h-[45px] w-[45px] bg-black/30 rounded-md">
           <p className="text-xl font-bold -mb-[5px]">{eventDay}</p>
-          <p className="text-xs uppercase text-accent">{eventMonth}</p>
+          <p className="text-xs uppercase text-accent-green">{eventMonth}</p>
         </section>
       </section>
     </MotionLink>
