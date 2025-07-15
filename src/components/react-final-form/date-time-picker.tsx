@@ -1,95 +1,112 @@
 'use client';
 
-import * as React from 'react';
-import { ChevronDownIcon } from 'lucide-react';
+import { useRef, useState } from 'react';
 import { Field } from 'react-final-form';
+import { format, parseISO } from 'date-fns';
+import { CalendarIcon, Clock8Icon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 
+import { FormItem, FormLabel } from '@/components/react-final-form/form';
+
+import { cn } from '@/lib/utils';
+
 const DateTimePicker = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const eventTimeRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="flex gap-4">
-      <div className="flex flex-col gap-2">
-        <Field name="datePicker">
-          {({ input, meta }) => {
-            const date = input.value ? new Date(input.value) : undefined;
+    <div className="flex flex-col sm:flex-row gap-6">
+      <Field name="eventDate">
+        {({ input, meta }) => {
+          // Convert ISO string to Date object for the calendar
+          const dateValue = input.value ? parseISO(input.value) : undefined;
 
-            return (
-              <>
-                <Label htmlFor="datePicker" className="text-black">
-                  Event date
-                </Label>
-                <Popover open={open} onOpenChange={setOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      id="datePicker"
-                      className="w-52 justify-between font-normal text-mauve11 border-input border"
-                      name={input.name}
-                    >
-                      {date ? date.toLocaleDateString() : 'Select date'}
-                      <ChevronDownIcon />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="min-w-max p-0 bg-black text-white"
-                    align="start"
+          return (
+            <FormItem className="flex flex-col w-full">
+              <FormLabel htmlFor="date-picker" className="text-black">
+                Event date
+              </FormLabel>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    id="date-picker"
+                    variant={'outline'}
+                    className={cn(
+                      'w-full justify-between font-normal text-black border-input border hover:bg-transparent',
+                      !input.value && 'text-muted-foreground',
+                    )}
+                    name={input.name}
                   >
-                    <Calendar
-                      mode="single"
-                      selected={input.value}
-                      captionLayout="dropdown"
-                      onSelect={(date) => {
-                        input.onChange(date?.toISOString());
+                    {input.value ? (
+                      format(dateValue as Date, 'PPP')
+                    ) : (
+                      <span className="text-mauve11">Pick a date</span>
+                    )}
 
-                        setOpen(false);
-                      }}
-                      className="border-white w-full bg-white"
-                    />
-                  </PopoverContent>
-                </Popover>
+                    <CalendarIcon className="ml-auto h-4 w-4 text-mauve11" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="min-w-max max-h-[320px] p-0 bg-black text-white overflow-y-scroll"
+                  align="start"
+                >
+                  <Calendar
+                    mode="single"
+                    captionLayout="dropdown"
+                    selected={dateValue}
+                    onSelect={(date) => {
+                      input.onChange(date?.toISOString());
 
-                {meta.touched && meta.error && (
-                  <span className="text-red-600">{meta.error}</span>
-                )}
-              </>
-            );
-          }}
-        </Field>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <Field name="timePicker">
-          {({ input, meta }) => (
-            <>
-              <Label htmlFor="timePicker" className="text-black">
-                Event time
-              </Label>
-              <Input
-                type="time"
-                id="timePicker"
-                step="1"
-                className="bg-transparent border border-input text-black appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-                {...input}
-              />
+                      setOpen(false);
+                    }}
+                    disabled={(date) => date < new Date('1900-01-01')}
+                    className="border-white w-full bg-white"
+                  />
+                </PopoverContent>
+              </Popover>
 
               {meta.touched && meta.error && (
-                <span className="text-red-700">{meta.error}</span>
+                <span className="text-red-600">{meta.error}</span>
               )}
-            </>
-          )}
-        </Field>
-      </div>
+            </FormItem>
+          );
+        }}
+      </Field>
+
+      <Field name="eventTime">
+        {({ input, meta }) => (
+          <FormItem className="w-full flex flex-col relative">
+            <FormLabel htmlFor="time-picker" className="text-black">
+              Event time
+            </FormLabel>
+            <Input
+              type="time"
+              id="time-picker"
+              step="1"
+              className="bg-transparent border border-input text-black appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none px-2 relative"
+              {...input}
+              ref={eventTimeRef}
+            />
+            <Clock8Icon
+              className="absolute right-3 top-[34px] h-4 w-4 text-mauve11 cursor-pointer"
+              onClick={() => eventTimeRef?.current?.focus()}
+            />
+
+            {meta.touched && meta.error && (
+              <span className="text-red-700">{meta.error}</span>
+            )}
+          </FormItem>
+        )}
+      </Field>
     </div>
   );
 };

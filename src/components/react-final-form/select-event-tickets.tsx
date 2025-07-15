@@ -12,51 +12,105 @@ import {
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 
+import { FormItem } from '@/components/react-final-form/form';
+
 // React Final Form Implementation (Source) -> https://stackoverflow.com/questions/75815473/how-can-i-implement-react-hook-form-with-radix-ui-select
 
 const SelectEventTickets = () => {
   return (
-    <Field name="totalTickets">
-      {({ input, meta }) => (
-        <>
-          <Label htmlFor="totalTickets" className="text-black">
-            Choose your tickets
-          </Label>
+    <div className="flex flex-col sm:flex-row gap-6">
+      <Field name="totalTickets">
+        {({ input, meta }) => (
+          <FormItem className="flex flex-col w-full">
+            <Label htmlFor="total-tickets" className="text-black">
+              Choose your tickets
+            </Label>
 
-          <Select
-            name={input.name}
-            value={input.value}
-            onValueChange={input.onChange}
-          >
-            <SelectTrigger
-              className="w-52 text-black border border-input mb-1"
-              id="totalTickets"
+            <Select
+              name={input.name}
+              value={input.value}
+              onValueChange={input.onChange}
             >
-              <SelectValue placeholder="Select your tickets" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Pick your event tickets</SelectLabel>
-                <SelectItem value="1">1</SelectItem>
-                <SelectItem value="2">2</SelectItem>
-                <SelectItem value="3">3</SelectItem>
-                <SelectItem value="4">4</SelectItem>
-                <SelectItem value="5">5</SelectItem>
-                <SelectItem value="6">6</SelectItem>
-                <SelectItem value="7">7</SelectItem>
-                <SelectItem value="8">8</SelectItem>
-                <SelectItem value="9">9</SelectItem>
-                <SelectItem value="10">10</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+              <SelectTrigger
+                className="w-full sm:w-[13.25rem] text-black border border-input"
+                id="total-tickets"
+              >
+                <SelectValue placeholder="Select your tickets" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Pick your event tickets</SelectLabel>
+                  <SelectItem
+                    value="1"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    1
+                  </SelectItem>
+                  <SelectItem
+                    value="2"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    2
+                  </SelectItem>
+                  <SelectItem
+                    value="3"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    3
+                  </SelectItem>
+                  <SelectItem
+                    value="4"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    4
+                  </SelectItem>
+                  <SelectItem
+                    value="5"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    5
+                  </SelectItem>
+                  <SelectItem
+                    value="6"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    6
+                  </SelectItem>
+                  <SelectItem
+                    value="7"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    7
+                  </SelectItem>
+                  <SelectItem
+                    value="8"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    8
+                  </SelectItem>
+                  <SelectItem
+                    value="9"
+                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    9
+                  </SelectItem>
+                  <SelectItem
+                    value="10"
+                    className="outline-none px-5 mb-0.5 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  >
+                    10
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
 
-          {meta.touched && meta.error && (
-            <span className="text-red-700">{meta.error}</span>
-          )}
-        </>
-      )}
-    </Field>
+            {meta.touched && meta.error && (
+              <span className="text-red-700">{meta.error}</span>
+            )}
+          </FormItem>
+        )}
+      </Field>
+    </div>
   );
 };
 
