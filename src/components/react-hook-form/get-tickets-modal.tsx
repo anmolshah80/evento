@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Form } from '@/components/ui/form';
+import { Form } from '@/components/ui/react-hook-form/form';
 import { Button } from '@/components/ui/button';
 
 import DateTimePicker from '@/components/react-hook-form/date-time-picker';

@@ -1,6 +1,7 @@
 'use client';
 
-import { Form as ReactFinalForm, Field } from 'react-final-form';
+import * as z from 'zod/v4';
+import { Form as ReactFinalForm } from 'react-final-form';
 
 import {
   Dialog,
@@ -13,14 +14,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-import { FormItem, FormLabel } from '@/components/react-final-form/form';
 import DateTimePicker from '@/components/react-final-form/date-time-picker';
 import SelectEventTickets from '@/components/react-final-form/select-event-tickets';
+import TextFormField from '@/components/react-final-form/text-form-field';
 
-import { cn } from '@/lib/utils';
+import { PHONE_NUMBER_REGEX } from '@/lib/constants';
 
 type GetTicketsModalProps = {
   children: React.ReactNode;
@@ -36,21 +36,77 @@ type Values = {
   totalTickets: string;
 };
 
+const FormSchema = z.object({
+  firstName: z
+    .string({
+      error: 'First name cannot be empty',
+    })
+    .trim()
+    .min(2, {
+      error: 'Please enter your first name',
+    }),
+  lastName: z
+    .string({
+      error: 'Last name cannot be empty',
+    })
+    .trim()
+    .min(3, {
+      error: 'Please enter your last name',
+    }),
+  email: z.email('Please enter a valid email'),
+  // To validate optional text inputs -> https://github.com/colinhacks/zod/issues/310#issuecomment-794533682
+  phone: z
+    .string()
+    .regex(PHONE_NUMBER_REGEX, {
+      error: 'Please match the requested format. e.g., +1 123-456-7890',
+    })
+    .max(17)
+    .optional()
+    .or(z.literal('')),
+  eventDate: z.iso.datetime({
+    error: 'Please select an event date',
+  }),
+  eventTime: z.iso.time({
+    error: 'Invalid input',
+  }),
+  totalTickets: z.string({
+    error: 'Please select your event tickets',
+  }),
+});
+
+const validate = (values: Values) => {
+  const result = FormSchema.safeParse(values);
+
+  if (result.success) {
+    return {};
+  }
+
+  const fieldErrors: Record<string, string> = {};
+
+  for (const issue of result.error.issues) {
+    const path = issue.path[0];
+    const errorCode = issue.code;
+
+    if (path && typeof path === 'string' && !fieldErrors[path]) {
+      if (errorCode === 'invalid_union') {
+        // Handle invalid_union case
+        if (issue.errors && issue.errors[0] && issue.errors[0][0]) {
+          fieldErrors[path] = issue.errors[0][0].message;
+        }
+      } else {
+        // Handle regular cases
+        fieldErrors[path] = issue.message;
+      }
+    }
+  }
+
+  return fieldErrors;
+};
+
 const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
   const onSubmit = (values: Values) => {
     console.log('form values: ', values);
     window.alert(JSON.stringify(values, undefined, 2));
-  };
-
-  const validate = (values: Values) => {
-    const errors: Partial<Values> = {};
-
-    if (!values.firstName) errors.firstName = 'Required';
-    if (!values.totalTickets) errors.totalTickets = 'Required';
-    if (!values.eventDate) errors.eventDate = 'Required';
-    if (!values.eventTime) errors.eventTime = 'Required';
-
-    return errors;
   };
 
   return (
@@ -73,113 +129,54 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
 
         <ReactFinalForm
           onSubmit={onSubmit}
-          // validate={validate}
-          initialValues={{ eventTime: '10:30:00' }}
+          validate={validate}
+          initialValues={{
+            eventTime: '10:30:00',
+          }}
           render={({ handleSubmit, submitting, pristine, form }) => {
             return (
               <form onSubmit={handleSubmit} noValidate className="grid gap-8">
                 <div className="flex flex-col gap-6 md:gap-8">
                   <div className="flex flex-col sm:flex-row gap-6">
-                    <Field name="firstName">
-                      {({ input, meta }) => (
-                        <FormItem className="flex flex-col w-full">
-                          <FormLabel
-                            htmlFor="first-name"
-                            className="text-black"
-                          >
-                            First name
-                          </FormLabel>
-                          <Input
-                            id="first-name"
-                            className="outline-none text-black border border-input bg-transparent rounded h-9 px-3 placeholder-mauve11 placeholder:text-sm"
-                            placeholder="John"
-                            autoComplete="name"
-                            {...input}
-                          />
+                    <TextFormField
+                      fieldId="first-name"
+                      fieldName="firstName"
+                      label="First name"
+                      placeholder="John"
+                      autoComplete="name"
+                    />
 
-                          {meta.touched && meta.error && (
-                            <span className="text-red-700">{meta.error}</span>
-                          )}
-                        </FormItem>
-                      )}
-                    </Field>
-
-                    <Field name="lastName">
-                      {({ input, meta }) => (
-                        <FormItem className="flex flex-col w-full">
-                          <FormLabel htmlFor="last-name" className="text-black">
-                            Last name
-                          </FormLabel>
-                          <Input
-                            id="last-name"
-                            className="outline-none text-black border border-input bg-transparent rounded h-9 px-3 placeholder-mauve11 placeholder:text-sm"
-                            placeholder="Doe"
-                            autoComplete="family-name"
-                            {...input}
-                          />
-
-                          {meta.touched && meta.error && (
-                            <span className="text-red-700">{meta.error}</span>
-                          )}
-                        </FormItem>
-                      )}
-                    </Field>
+                    <TextFormField
+                      fieldId="last-name"
+                      fieldName="lastName"
+                      label="Last name"
+                      placeholder="Doe"
+                      autoComplete="family-name"
+                    />
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-6">
-                    <Field name="email">
-                      {({ input, meta }) => (
-                        <FormItem className="flex flex-col w-full">
-                          <FormLabel
-                            htmlFor="email-address"
-                            className="text-black"
-                          >
-                            Email address
-                          </FormLabel>
-                          <Input
-                            id="email-address"
-                            className="outline-none text-black border border-input bg-transparent rounded h-9 px-3 placeholder-mauve11 placeholder:text-sm"
-                            placeholder="johndoe@gmail.com"
-                            autoComplete="email"
-                            {...input}
-                          />
+                    <TextFormField
+                      fieldId="email-address"
+                      fieldName="email"
+                      label="Email address"
+                      placeholder="johndoe@gmail.com"
+                      autoComplete="email"
+                    />
 
-                          {meta.touched && meta.error && (
-                            <span className="text-red-700">{meta.error}</span>
-                          )}
-                        </FormItem>
-                      )}
-                    </Field>
-
-                    <Field name="phone">
-                      {({ input, meta }) => (
-                        <FormItem className="flex flex-col w-full">
-                          <FormLabel
-                            htmlFor="phone-number"
-                            className="text-black"
-                          >
-                            Phone number (opt.)
-                          </FormLabel>
-                          <Input
-                            id="phone-number"
-                            className="outline-none text-black border border-input bg-transparent rounded h-9 px-3 placeholder-mauve11 placeholder:text-sm"
-                            placeholder="e.g., +977 123-456-7890"
-                            autoComplete="mobile tel"
-                            maxLength={17}
-                            {...input}
-                          />
-                          <p
-                            data-slot="form-description"
-                            id={'phone-number-form-item-description'}
-                            className={cn('text-muted-foreground text-sm')}
-                          />
-
-                          {meta.touched && meta.error && (
-                            <span className="text-red-700">{meta.error}</span>
-                          )}
-                        </FormItem>
-                      )}
-                    </Field>
+                    <TextFormField
+                      fieldId="phone-number"
+                      fieldName="phone"
+                      label="Phone number (opt.)"
+                      placeholder="e.g., +977 123-456-7890"
+                      autoComplete="mobile tel"
+                      maxLength={17}
+                      fieldDescription={
+                        <span className="flex items-center text-xs text-mauve11">
+                          Include your country code for international numbers
+                        </span>
+                      }
+                    />
                   </div>
 
                   <DateTimePicker />
@@ -199,6 +196,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   </DialogClose>
                   <Button
                     type="submit"
+                    disabled={submitting || pristine}
                     className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
                   >
                     Submit

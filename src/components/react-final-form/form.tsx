@@ -8,6 +8,7 @@ import * as LabelPrimitive from '@radix-ui/react-label';
 import { Label } from '@/components/ui/label';
 
 import { cn } from '@/lib/utils';
+import { FieldMetaProps } from '@/lib/types';
 
 type FormItemContextValue = {
   id: string;
@@ -17,7 +18,7 @@ const FormItemContext = createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 );
 
-function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
+const FormItem = ({ className, ...props }: React.ComponentProps<'div'>) => {
   const id = useId();
 
   return (
@@ -29,7 +30,7 @@ function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
       />
     </FormItemContext.Provider>
   );
-}
+};
 
 const FormLabel = ({
   className,
@@ -45,19 +46,43 @@ const FormLabel = ({
   );
 };
 
-const FormFieldDescription = ({
+const FormDescription = ({
   className,
-  id,
+  fieldId,
   ...props
-}: ComponentProps<'p'>) => {
+}: ComponentProps<'p'> & {
+  fieldId: string;
+}) => {
   return (
     <p
       data-slot="form-description"
-      id={`${id}-form-item-description`}
+      id={`${fieldId}-form-item-description`}
       className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   );
 };
 
-export { FormItem, FormLabel, FormFieldDescription };
+const FormMessage = ({
+  className,
+  fieldId,
+  fieldMeta,
+  ...props
+}: ComponentProps<'p'> & { fieldId: string; fieldMeta: FieldMetaProps }) => {
+  if (fieldMeta.touched && fieldMeta.error) {
+    return (
+      <p
+        data-slot="form-message"
+        id={`${fieldId}-form-item-message`}
+        className={cn('text-destructive text-sm', className)}
+        {...props}
+      >
+        {fieldMeta.error}
+      </p>
+    );
+  }
+
+  return null;
+};
+
+export { FormItem, FormLabel, FormDescription, FormMessage };

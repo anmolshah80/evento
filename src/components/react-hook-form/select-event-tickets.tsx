@@ -17,7 +17,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/react-hook-form/form';
 
 type SelectEventTicketsProps = {
   form: UseFormReturn<

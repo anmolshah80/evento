@@ -14,7 +14,11 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-import { FormItem, FormLabel } from '@/components/react-final-form/form';
+import {
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/react-final-form/form';
 
 import { cn } from '@/lib/utils';
 
@@ -74,9 +78,7 @@ const DateTimePicker = () => {
                 </PopoverContent>
               </Popover>
 
-              {meta.touched && meta.error && (
-                <span className="text-red-600">{meta.error}</span>
-              )}
+              <FormMessage fieldId="date-picker" fieldMeta={meta} />
             </FormItem>
           );
         }}
@@ -101,9 +103,7 @@ const DateTimePicker = () => {
               onClick={() => eventTimeRef?.current?.focus()}
             />
 
-            {meta.touched && meta.error && (
-              <span className="text-red-700">{meta.error}</span>
-            )}
+            <FormMessage fieldId="time-picker" fieldMeta={meta} />
           </FormItem>
         )}
       </Field>

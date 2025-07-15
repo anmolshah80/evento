@@ -1,28 +1,25 @@
 import { HTMLInputAutoCompleteAttribute } from 'react';
-import { FieldError, UseFormReturn } from 'react-hook-form';
+import { Field } from 'react-final-form';
 import { ClassValue } from 'clsx';
 
+import { Input } from '@/components/ui/input';
+
 import {
-  FormControl,
   FormDescription,
-  FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/react-hook-form/form';
-import { Input } from '@/components/ui/input';
+} from '@/components/react-final-form/form';
 
 import { cn } from '@/lib/utils';
+import { FieldMetaProps } from '@/lib/types';
 
 type TextFormFieldProps = {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  form: UseFormReturn<any, any, any>;
   fieldName: string;
   fieldId: string;
   label: string;
   maxLength?: number;
   autoComplete?: HTMLInputAutoCompleteAttribute | undefined;
-  fieldHasErrors?: FieldError | undefined;
   placeholder?: string;
   fieldClassName?: ClassValue;
   fieldDescription?: React.ReactNode;
@@ -30,19 +27,24 @@ type TextFormFieldProps = {
 
 type ShowFormMessageProps = {
   fieldDescription: React.ReactNode;
-  fieldHasErrors: FieldError | undefined;
+  fieldId: string;
+  fieldMeta: FieldMetaProps;
 };
 
 const ShowFormMessage = ({
   fieldDescription,
-  fieldHasErrors,
+  fieldId,
+  fieldMeta,
 }: ShowFormMessageProps) => {
-  if (!fieldDescription) return <FormMessage />;
+  if (!fieldDescription)
+    return <FormMessage fieldId={fieldId} fieldMeta={fieldMeta} />;
 
-  if (fieldDescription && fieldHasErrors) return <FormMessage />;
+  if (fieldDescription && fieldMeta.error)
+    return <FormMessage fieldId={fieldId} fieldMeta={fieldMeta} />;
 
   return (
     <FormDescription
+      fieldId={fieldId}
       className={cn({
         hidden: fieldDescription === undefined,
       })}
@@ -53,7 +55,6 @@ const ShowFormMessage = ({
 };
 
 const TextFormField = ({
-  form,
   fieldName,
   fieldId,
   label,
@@ -61,19 +62,16 @@ const TextFormField = ({
   maxLength,
   autoComplete,
   fieldDescription,
-  fieldHasErrors,
   placeholder = 'Placeholder',
 }: TextFormFieldProps) => {
   return (
-    <FormField
-      control={form.control}
-      name={fieldName}
-      render={({ field }) => (
-        <FormItem className="flex flex-col w-full">
-          <FormLabel htmlFor={fieldId} className="text-black">
-            {label}
-          </FormLabel>
-          <FormControl>
+    <Field name={fieldName}>
+      {({ input, meta }) => {
+        return (
+          <FormItem className="flex flex-col w-full">
+            <FormLabel htmlFor={fieldId} className="text-black">
+              {label}
+            </FormLabel>
             <Input
               id={fieldId}
               className={cn(
@@ -83,17 +81,18 @@ const TextFormField = ({
               placeholder={placeholder}
               maxLength={maxLength}
               autoComplete={autoComplete}
-              {...field}
+              {...input}
             />
-          </FormControl>
 
-          <ShowFormMessage
-            fieldDescription={fieldDescription}
-            fieldHasErrors={fieldHasErrors}
-          />
-        </FormItem>
-      )}
-    />
+            <ShowFormMessage
+              fieldDescription={fieldDescription}
+              fieldId={fieldId}
+              fieldMeta={meta}
+            />
+          </FormItem>
+        );
+      }}
+    </Field>
   );
 };
 

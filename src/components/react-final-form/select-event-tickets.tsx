@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 
-import { FormItem } from '@/components/react-final-form/form';
+import { FormItem, FormMessage } from '@/components/react-final-form/form';
 
 // React Final Form Implementation (Source) -> https://stackoverflow.com/questions/75815473/how-can-i-implement-react-hook-form-with-radix-ui-select
 
@@ -104,9 +104,7 @@ const SelectEventTickets = () => {
               </SelectContent>
             </Select>
 
-            {meta.touched && meta.error && (
-              <span className="text-red-700">{meta.error}</span>
-            )}
+            <FormMessage fieldId="total-tickets" fieldMeta={meta} />
           </FormItem>
         )}
       </Field>
