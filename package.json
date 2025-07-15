@@ -13,9 +13,10 @@
     "db:push-and-seed": "npm run db:push && npm run db:seed"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "^6.9.0",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -35,10 +36,11 @@
     "react": "^18.3.1",
     "react-day-picker": "^9.7.0",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.60.0",
     "react-final-form": "^7.0.0",
     "server-only": "^0.0.1",
     "tailwind-merge": "^2.0.0",
-    "zod": "^3.22.4"
+    "zod": "^3.25.75"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { EventoEvent } from '@prisma/client';
+import { Event } from '@prisma/client';
 
 import Loading from '@/app/event/[slug]/loading';
 
@@ -61,15 +61,18 @@ const DetailsSection = ({ header, content }: DetailsSectionProps) => (
 const EventPage = async ({ params }: Props) => {
   const { slug } = await params;
 
-  const eventData: EventoEvent | null = await getEvent(slug);
+  const eventData: Event | null = await getEvent(slug);
 
   if (!eventData) return null;
 
-  const formattedDate = new Date(eventData.date).toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formattedDate = new Date(eventData.startDateTime).toLocaleDateString(
+    'en-US',
+    {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    },
+  );
 
   return (
     <Suspense key={slug + formattedDate} fallback={<Loading />}>

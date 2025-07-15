@@ -5,6 +5,7 @@
 import * as React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
+import { ClassValue } from 'clsx';
 
 import { cn } from '@/lib/utils';
 
@@ -51,10 +52,12 @@ function DialogOverlay({
 function DialogContent({
   className,
   children,
+  dialogCloseIconClassName,
   showCloseButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean;
+  dialogCloseIconClassName?: ClassValue;
 }) {
   return (
     <DialogPortal data-slot="dialog-portal">
@@ -71,7 +74,10 @@ function DialogContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground text-black absolute top-7 right-5 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-8"
+            className={cn(
+              "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground text-black absolute top-7 right-5 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-8",
+              dialogCloseIconClassName,
+            )}
           >
             <XIcon />
             <span className="sr-only">Close</span>

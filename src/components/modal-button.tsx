@@ -1,4 +1,4 @@
-import GetTicketsModal from '@/components/get-tickets-modal';
+import GetTicketsModal from '@/components/react-final-form/get-tickets-modal';
 
 import { cn } from '@/lib/utils';
 
