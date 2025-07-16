@@ -96,7 +96,20 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
                     captionLayout="dropdown"
                     selected={dateValue}
                     onSelect={(date) => {
-                      field.onChange(date?.toISOString());
+                      if (date) {
+                        // Get the date at midnight UTC
+                        const utcDate = new Date(
+                          Date.UTC(
+                            date.getFullYear(),
+                            date.getMonth(),
+                            date.getDate(),
+                          ),
+                        );
+
+                        field.onChange(utcDate.toISOString());
+                      } else {
+                        field.onChange(null);
+                      }
 
                       setOpen(false);
                     }}

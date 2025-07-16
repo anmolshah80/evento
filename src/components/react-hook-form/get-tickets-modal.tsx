@@ -81,10 +81,11 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     // console.log('Form errors:', form.formState.errors);
     console.log('onSubmit form data: ', data);
+    window.alert(JSON.stringify(data, undefined, 2));
   };
 
   const {
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = form;
 
   console.log('errors: ', errors);
@@ -174,6 +175,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
               <Button
                 type="submit"
                 className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
+                disabled={isSubmitting}
               >
                 Submit
               </Button>
