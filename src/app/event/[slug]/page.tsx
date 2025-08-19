@@ -88,7 +88,7 @@ const EventPage = async ({ params }: Props) => {
             sizes="(max-width: 1280px) 100vw, 1280px"
           />
 
-          <div className="z-1 flex flex-col gap-6 lg:gap-16 lg:flex-row relative">
+          <div className="z-1 flex flex-col gap-6 lg:gap-16 lg:flex-row relative px-8 sm:px-0">
             <Image
               src={eventData.imageUrl}
               alt={eventData.name}
@@ -100,11 +100,11 @@ const EventPage = async ({ params }: Props) => {
             <div className="flex flex-col">
               <p className="text-white/75">{formattedDate}</p>
 
-              <H1 className="mb-2 mt-1 whitespace-nowrap lg:text-5xl">
+              <H1 className="mb-2 mt-1 sm:whitespace-nowrap lg:text-5xl">
                 {eventData.name}
               </H1>
 
-              <p className="whitespace-nowrap text-xl text-white/75">
+              <p className="sm:whitespace-nowrap text-xl text-white/75">
                 Organized by{' '}
                 <span className="italic">{eventData.organizerName}</span>
               </p>
