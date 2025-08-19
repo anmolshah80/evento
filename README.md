@@ -281,3 +281,13 @@
 ## To-dos
 
 - Configure husky to lint and format your files before committing
+- OpenLayers Resources
+  - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
+- Maptiler Resources
+  - [Maptiler API keys](https://cloud.maptiler.com/account/keys/)
+  - [How to protect your map key](https://docs.maptiler.com/guides/maps-apis/maps-platform/how-to-protect-your-map-key/)
+  - [Maptiler API](https://docs.maptiler.com/cloud/api/)
+  - [Geocoding - API Client JS](https://docs.maptiler.com/client-js/geocoding/)
+  - [Coordinates - API Client JS](https://docs.maptiler.com/client-js/coordinates/)
+  - [https://epsg.io/](https://epsg.io/map#srs=4326&x=81.695151&y=16.762277&z=19&layer=streets)
+- Update the sample env file before merging to main
