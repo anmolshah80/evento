@@ -290,3 +290,4 @@
   - [Geocoding - API Client JS](https://docs.maptiler.com/client-js/geocoding/)
   - [Coordinates - API Client JS](https://docs.maptiler.com/client-js/coordinates/)
   - [https://epsg.io/](https://epsg.io/map#srs=4326&x=81.695151&y=16.762277&z=19&layer=streets)
+- Update the sample env file before merging to main
