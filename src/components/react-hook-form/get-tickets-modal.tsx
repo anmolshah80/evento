@@ -42,7 +42,7 @@ const FormSchema = z.object({
       error: 'Last name cannot be empty',
     })
     .trim()
-    .min(3, {
+    .min(2, {
       error: 'Please enter your last name',
     }),
   email: z.email('Please enter a valid email'),
