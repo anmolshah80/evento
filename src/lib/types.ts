@@ -19,3 +19,29 @@
 //   S extends `${infer P1}_${infer P2}${infer P3}`
 //     ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
 //     : Lowercase<S>;
+
+// react final form's field `meta` props
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type FieldMetaProps = {
+  active?: boolean;
+  data?: Record<string, any>;
+  dirty?: boolean;
+  dirtySinceLastSubmit?: boolean;
+  error?: any;
+  initial?: any;
+  invalid?: boolean;
+  length?: number;
+  modified?: boolean;
+  modifiedSinceLastSubmit?: boolean;
+  pristine?: boolean;
+  submitError?: any;
+  submitFailed?: boolean;
+  submitSucceeded?: boolean;
+  submitting?: boolean;
+  touched?: boolean;
+  valid?: boolean;
+  validating?: boolean;
+  visited?: boolean;
+};
+
+/* eslint-enable @typescript-eslint/no-explicit-any */

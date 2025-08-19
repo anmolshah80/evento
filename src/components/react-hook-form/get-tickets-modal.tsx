@@ -1,8 +1,8 @@
 'use client';
 
+import * as z from 'zod/v4';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod/v4';
 
 import {
   Dialog,
@@ -15,12 +15,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Form } from '@/components/ui/form';
+import { Form } from '@/components/ui/react-hook-form/form';
 import { Button } from '@/components/ui/button';
 
-import DateTimePicker from '@/components/date-time-picker';
-import SelectEventTickets from '@/components/select-event-tickets';
-import TextFormField from '@/components/text-form-field';
+import DateTimePicker from '@/components/react-hook-form/date-time-picker';
+import SelectEventTickets from '@/components/react-hook-form/select-event-tickets';
+import TextFormField from '@/components/react-hook-form/text-form-field';
 
 import { PHONE_NUMBER_REGEX } from '@/lib/constants';
 
@@ -42,7 +42,7 @@ const FormSchema = z.object({
       error: 'Last name cannot be empty',
     })
     .trim()
-    .min(3, {
+    .min(2, {
       error: 'Please enter your last name',
     }),
   email: z.email('Please enter a valid email'),
@@ -81,10 +81,11 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     // console.log('Form errors:', form.formState.errors);
     console.log('onSubmit form data: ', data);
+    window.alert(JSON.stringify(data, undefined, 2));
   };
 
   const {
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = form;
 
   console.log('errors: ', errors);
@@ -98,7 +99,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
         className={
           'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
         }
-        dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem] "
+        dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem]"
       >
         <DialogHeader className="gap-0 mb-9">
           <DialogTitle className="m-0 text-2xl text-left md:text-[1.7rem] font-medium text-mauve12">
@@ -135,7 +136,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   form={form}
                   fieldId="email-address"
                   fieldName="email"
-                  label="Email Address"
+                  label="Email address"
                   placeholder="johndoe@gmail.com"
                   autoComplete="email"
                 />
@@ -144,7 +145,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   form={form}
                   fieldId="phone-number"
                   fieldName="phone"
-                  label="Phone Number (Opt.)"
+                  label="Phone number (opt.)"
                   placeholder="e.g., +977 123-456-7890"
                   autoComplete="mobile tel"
                   maxLength={17}
@@ -174,6 +175,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
               <Button
                 type="submit"
                 className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
+                disabled={isSubmitting}
               >
                 Submit
               </Button>

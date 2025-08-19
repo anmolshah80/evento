@@ -281,10 +281,6 @@
 ## To-dos
 
 - Configure husky to lint and format your files before committing
-- Title length in individual event page should not be more than perhaps 22 characters
-  - References
-    - http://localhost:3000/event/glass-bottom-boat-tour
-    - http://localhost:3000/event/mountain-photography-expedition
 - OpenLayers Resources
   - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
 - Maptiler Resources
