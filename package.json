@@ -10,12 +10,14 @@
     "postinstall": "prisma generate",
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
-    "db:push-and-seed": "npm run db:push && npm run db:seed"
+    "db:push-and-seed": "npm run db:push && npm run db:seed",
+    "format": "prettier -c \"src/**/*.{js,ts,tsx}\""
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
   },
   "dependencies": {
+    "@maptiler/client": "^2.3.2",
     "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "^6.9.0",
     "@radix-ui/colors": "^3.0.0",
@@ -33,6 +35,7 @@
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.525.0",
     "next": "15.0.3",
+    "ol": "^10.6.1",
     "react": "^18.3.1",
     "react-day-picker": "^9.7.0",
     "react-dom": "^18.3.1",

@@ -7,6 +7,7 @@ import Loading from '@/app/event/[slug]/loading';
 
 import H1 from '@/components/h1';
 import ModalButton from '@/components/modal-button';
+import MapView from '@/components/map-view';
 
 import { humanizeKebabCase } from '@/lib/utils';
 import { getEvent } from '@/lib/server-utils';
@@ -124,6 +125,8 @@ const EventPage = async ({ params }: Props) => {
           />
 
           <DetailsSection header="Location" content={eventData.location} />
+
+          <MapView eventLocation={eventData.location} />
         </div>
       </main>
     </Suspense>
