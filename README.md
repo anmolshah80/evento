@@ -87,7 +87,6 @@
 - Downgrade `react` and `react-dom` version to **18.3.1** since npm package `framer-motion@10.16.4` requires `react@"^18.0.0"` as a peer dependency and does not support `react@"19.0.0-rc-66855b96-20241106"`, which is a release candidate for _React 19_
 
 - Resolve issues with tracking files in git
-
   - `The issue` -> There were files in the local project that weren't being pushed to GitHub (i.e., renamed files changes' were not reflected in remote), even though they were being committed locally and pushed. Basically, there was a discrepancy between the committed files in local and remote.
 
   - `Don't do this` -> Never do the following since it will just unstage all your files in your current directory
@@ -112,7 +111,6 @@
   - Rename those files manually in kebab case format (previously it was in pascal case)
 
 - Install and Configure Prisma ORM
-
   - Install `prisma`, `ts-node` and `@prisma/client` npm packages
 
     ```bash
@@ -121,7 +119,6 @@
     ```
 
   ## `SQLite`
-
   - Configure prisma with sqlite database
 
     ```bash
@@ -135,7 +132,6 @@
     ```
 
   ## `PostgreSQL`
-
   - Configure prisma with default database i.e., postgres. It will create a `schema.prisma` file in the `prisma` folder.
 
     ```bash
@@ -182,11 +178,9 @@
     - [How to use Prisma ORM with Next.js](https://www.prisma.io/docs/guides/nextjs#introduction)
 
 - `5433` is the port for `PostgreSQL v17` meanwhile `5432` is the port for `PostgreSQL v14` (it's my personal local configuration)
-
   - To confirm the port for `PostgreSQL v14`, read the log from `C:\Program Files\PostgreSQL\14\installation_summary.log`
 
 - Setup Prisma Postgres database in Vercel
-
   - Create a [Prisma Postgres database in Vercel](https://vercel.com/dashboard/stores)
 
   - Copy the `.env.local` contents of your newly created prisma postgres database, into your local `.env` file
@@ -220,7 +214,6 @@
   ```
 
   _Note: This will drop all your tables and your existing data_
-
   - Resources
     - [Prototyping your schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema)
     - [Development and production](https://www.prisma.io/docs/orm/prisma-migrate/workflows/development-and-production)
@@ -281,3 +274,4 @@
 ## To-dos
 
 - Configure husky to lint and format your files before committing
+- [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
