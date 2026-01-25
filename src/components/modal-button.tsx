@@ -4,17 +4,16 @@ import GetTicketsModal from '@/components/react-hook-form/get-tickets-modal';
 import { cn } from '@/lib/utils';
 
 type ModalButtonProps = {
+  eventId: number;
   className: string;
   title: string;
 };
 
-const ModalButton = ({ title, className }: ModalButtonProps) => {
+const ModalButton = ({ eventId, title, className }: ModalButtonProps) => {
   return (
-    <>
-      <GetTicketsModal>
-        <button className={cn(className, 'bg-white/20')}>{title}</button>
-      </GetTicketsModal>
-    </>
+    <GetTicketsModal eventId={eventId}>
+      <button className={cn(className, 'bg-white/20')}>{title}</button>
+    </GetTicketsModal>
   );
 };
 
