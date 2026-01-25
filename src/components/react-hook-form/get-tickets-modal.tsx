@@ -82,6 +82,7 @@ const FormSchema = z.object({
 
 const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -89,14 +90,16 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
       firstName: '',
       lastName: '',
       email: '',
+      phone: '',
       eventDate: '',
       eventTime: '10:30:00',
-      phone: undefined,
       totalTickets: undefined,
     },
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
+
     // console.log('Form errors:', form.formState.errors);
     console.log('onSubmit form data: ', data);
 
@@ -112,7 +115,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
         attendeeFirstName: data.firstName,
         attendeeLastName: data.lastName,
         email: data.email,
-        phone: data.phone ? data.phone : null,
+        phone: Boolean(data.phone) ? data.phone : null,
         totalTickets: Number(data.totalTickets),
       };
 
@@ -125,6 +128,10 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
         duration: 8000,
         description: formatToFriendlyDate(bookedDateTime.toISOString()),
       });
+
+      // reset form and close modal after successful submission
+      form.reset();
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error submitting booking: ', error);
 
@@ -135,14 +142,12 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
         },
       );
     } finally {
-      // reset form and close modal after submission
-      form.reset();
-      setIsModalOpen(false);
+      setIsLoading(false);
     }
   };
 
   const {
-    formState: { errors, isSubmitting, isSubmitted },
+    formState: { errors, isSubmitting },
   } = form;
 
   console.log('errors: ', errors);
@@ -233,11 +238,11 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
                 type="submit"
                 className={cn(
                   'inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-3 font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none',
-                  (isSubmitting || isSubmitted) && 'w-[120px]',
+                  (isSubmitting || isLoading) && 'w-[120px]',
                 )}
-                disabled={isSubmitting || isSubmitted}
+                disabled={isSubmitting || isLoading}
               >
-                {isSubmitting || isSubmitted ? (
+                {isSubmitting || isLoading ? (
                   <span className="flex items-center justify-center gap-4">
                     Submit{' '}
                     <LoaderCircle
