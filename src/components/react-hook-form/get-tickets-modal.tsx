@@ -100,32 +100,45 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
     // console.log('Form errors:', form.formState.errors);
     console.log('onSubmit form data: ', data);
 
-    const bookedDateTime = combineDateTime(data.eventDate, data.eventTime);
+    try {
+      const bookedDateTime = combineDateTime(data.eventDate, data.eventTime);
 
-    const formattedFormData: Prisma.EventBookingCreateInput = {
-      event: {
-        // Prisma expects relation connection
-        connect: { id: eventId },
-      },
-      bookedDateTime,
-      attendeeFirstName: data.firstName,
-      attendeeLastName: data.lastName,
-      email: data.email,
-      phone: data.phone ? data.phone : null,
-      totalTickets: Number(data.totalTickets),
-    };
+      const formattedFormData: Prisma.EventBookingCreateInput = {
+        event: {
+          // Prisma expects relation connection
+          connect: { id: eventId },
+        },
+        bookedDateTime,
+        attendeeFirstName: data.firstName,
+        attendeeLastName: data.lastName,
+        email: data.email,
+        phone: data.phone ? data.phone : null,
+        totalTickets: Number(data.totalTickets),
+      };
 
-    await createBooking(formattedFormData);
+      const response = await createBooking(formattedFormData);
 
-    // show success toast
-    toast.success(`Your booking was successful, ${data.firstName}!`, {
-      duration: 8000,
-      description: formatToFriendlyDate(bookedDateTime.toISOString()),
-    });
+      console.log('Booking response: ', response);
 
-    // reset form and close modal after successful submission
-    form.reset();
-    setIsModalOpen(false);
+      // show success toast
+      toast.success(`Your booking was successful, ${data.firstName}!`, {
+        duration: 8000,
+        description: formatToFriendlyDate(bookedDateTime.toISOString()),
+      });
+    } catch (error) {
+      console.error('Error submitting booking: ', error);
+
+      toast.error(
+        'There was an error submitting your booking. Please try again later.',
+        {
+          duration: 8000,
+        },
+      );
+    } finally {
+      // reset form and close modal after submission
+      form.reset();
+      setIsModalOpen(false);
+    }
   };
 
   const {

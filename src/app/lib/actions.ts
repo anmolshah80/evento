@@ -17,7 +17,7 @@ const createBooking = async (formData: Prisma.EventBookingCreateInput) => {
     },
   });
 
-  // revalidatePath('/event/[slug]');
+  revalidatePath('/event/[slug]');
 
   return response;
 };
