@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 import { Calendar } from '@/components/ui/calendar';
+import EventInfoCard from '@/components/event-info-card';
 
 const BookingsSidebar = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
@@ -14,7 +15,7 @@ const BookingsSidebar = () => {
   // const dateValue = input.value ? parseISO(input.value) : undefined;
 
   return (
-    <section>
+    <section className="px-4 md:px-6">
       <p className="text-lg font-bold mb-4">
         {selectedDate
           ? selectedDate.toLocaleDateString('en-US', {
@@ -54,12 +55,18 @@ const BookingsSidebar = () => {
           </span>
         </p>
 
-        <div>
+        <div className="flex flex-col gap-4">
           <p className="text-3xl text-gray-300">Previous</p>
+
+          <EventInfoCard />
         </div>
 
-        <div>
+        <div className="flex flex-col gap-4">
           <p className="text-3xl text-gray-300">Upcoming</p>
+
+          {[1, 2, 3, 4, 5].map((_, index) => (
+            <EventInfoCard key={index} />
+          ))}
         </div>
       </div>
     </section>
