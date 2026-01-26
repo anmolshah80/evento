@@ -271,6 +271,8 @@
   });
   ```
 
+- [Server Actions in Next.js](https://nextjs.org/learn/dashboard-app/mutating-data)
+
 ## To-dos
 
 - Configure husky to lint and format your files before committing
