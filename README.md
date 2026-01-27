@@ -271,6 +271,8 @@
   });
   ```
 
+- [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
+
 ## To-dos
 
 - Configure husky to lint and format your files before committing
