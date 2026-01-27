@@ -277,3 +277,7 @@
 
 - Configure husky to lint and format your files before committing
 - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
+
+## Resources
+
+- [Bookings UI](https://dribbble.com/shots/21370684-Bookings-list-view)
