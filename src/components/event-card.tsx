@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Event } from '@prisma/client';
+import { Event } from 'prisma/client';
 
 type EventCardProps = {
   event: Event;
