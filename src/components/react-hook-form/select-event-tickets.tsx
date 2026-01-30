@@ -62,7 +62,7 @@ const SelectEventTickets = ({ form }: SelectEventTicketsProps) => {
               name="total-tickets"
             >
               <FormControl>
-                <SelectTrigger className="w-full sm:w-[13.25rem] text-black border border-input">
+                <SelectTrigger className="w-full sm:w-53 text-black border border-input">
                   <SelectValue placeholder="Select your tickets" />
                 </SelectTrigger>
               </FormControl>

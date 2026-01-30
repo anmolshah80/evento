@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config "../../tailwind.config.ts";
 
 /* Sources -> 
  *
@@ -8,7 +8,7 @@
  * https://www.radix-ui.com/colors/docs/palette-composition/scales
  *
  */
-@import '@radix-ui/colors/slate.css';
+@import '@radix-ui/colors/slate.css' layer(utilities);
 
 /* Custom class to apply the same animation effects to several different elements */
 .state-effects {

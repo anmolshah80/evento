@@ -94,7 +94,7 @@ const EventPage = async ({ params }: Props) => {
               alt={eventData.name}
               width={300}
               height={201}
-              className="h-dvw rounded-xl border-2 border-white/50 object-cover"
+              className="rounded-xl border-2 border-white/50 object-cover w-75 h-50.25"
             />
 
             <div className="flex flex-col">
