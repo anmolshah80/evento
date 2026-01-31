@@ -116,7 +116,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
 
       <DialogContent
         className={
-          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
+          'sm:max-w-125 fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-120.5 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-6.25 shadow-(--shadow-6) focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
         }
         dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem]"
       >
@@ -188,7 +188,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   <DialogClose asChild>
                     <Button
                       type="button"
-                      className="w-[100px] h-[35px] text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
+                      className="w-25 h-8.75 text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
                       onClick={() => form.reset()}
                     >
                       Cancel
@@ -197,7 +197,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   <Button
                     type="submit"
                     disabled={submitting || pristine}
-                    className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
+                    className="inline-flex w-25 h-8.75 items-center text-base justify-center rounded bg-black px-3.75 font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/80 focus-visible:outline-2 select-none"
                   >
                     Submit
                   </Button>

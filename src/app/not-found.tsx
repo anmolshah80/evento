@@ -23,7 +23,7 @@ const NotFound = () => {
         <div className="mt-12 flex items-center justify-center gap-x-6">
           <Link
             href={'/'}
-            className="flex gap-x-2 text-xl text-white/80 hover:underline hover:text-white/100 focus:text-white/100 focus:underline outline-none"
+            className="flex gap-x-2 text-xl text-white/80 hover:underline hover:text-white focus:text-white focus:underline outline-none"
           >
             <ArrowTopLeftIcon width={20} height={20} />
             Go back home

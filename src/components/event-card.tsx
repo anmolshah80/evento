@@ -41,7 +41,7 @@ const EventCard = ({ event }: EventCardProps) => {
     <MotionLink
       ref={linkRef}
       href={`/event/${slug}`}
-      className="flex-1 basis-80 h-[380px] max-w-[500px]"
+      className="flex-1 basis-80 h-95 max-w-125"
       style={{
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -55,7 +55,7 @@ const EventCard = ({ event }: EventCardProps) => {
         opacity: 0,
       }}
     >
-      <section className="w-full h-full flex flex-col bg-white/[3%] rounded-xl overflow-hidden relative state-effects">
+      <section className="w-full h-full flex flex-col bg-white/3 rounded-xl overflow-hidden relative state-effects">
         <Image
           src={imageUrl}
           alt={name}
@@ -70,8 +70,8 @@ const EventCard = ({ event }: EventCardProps) => {
           <p className="text-sm text-whit/50 mt-4">{location}</p>
         </div>
 
-        <section className="absolute flex flex-col justify-center items-center left-[12px] top-[12px] h-[45px] w-[45px] bg-black/30 rounded-md">
-          <p className="text-xl font-bold -mb-[5px]">{eventDay}</p>
+        <section className="absolute flex flex-col justify-center items-center left-3 top-3 h-11.25 w-11.25 bg-black/30 rounded-md">
+          <p className="text-xl font-bold -mb-1.25">{eventDay}</p>
           <p className="text-xs uppercase text-accent-green">{eventMonth}</p>
         </section>
       </section>

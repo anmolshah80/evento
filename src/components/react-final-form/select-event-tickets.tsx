@@ -32,7 +32,7 @@ const SelectEventTickets = () => {
               onValueChange={input.onChange}
             >
               <SelectTrigger
-                className="w-full sm:w-[13.25rem] text-black border border-input"
+                className="w-full sm:w-53 text-black border border-input"
                 id="total-tickets"
               >
                 <SelectValue placeholder="Select your tickets" />

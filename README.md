@@ -273,6 +273,8 @@
 
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
 
+- [How to use Prisma ORM and Prisma Postgres with Next.js](https://www.prisma.io/docs/guides/nextjs)
+
 ## To-dos
 
 - Configure husky to lint and format your files before committing
