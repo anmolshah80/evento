@@ -14,7 +14,7 @@ export default defineConfig({
   datasource: {
     // type safe env() helper
     // does not replace the need for dotenv
-    url: env('DATABASE_URL'),
+    url: env('EVENTO_DATABASE_URL'),
     // Source -> https://www.prisma.io/docs/orm/prisma-migrate/understanding-prisma-migrate/shadow-database
     // shadowDatabaseUrl: env('SHADOW_DATABASE_URL'),
   },
