@@ -35,7 +35,7 @@ jobs:
       - name: Build Project Artifacts
         run: npm run build
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          EVENTO_DATABASE_URL: ${{ secrets.EVENTO_DATABASE_URL }}
       - name: Confirm Build Output
         run: tree -a -L 3 -I 'node_modules|.git'
 

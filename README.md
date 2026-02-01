@@ -52,10 +52,10 @@
     nvm --help
     ```
 
-- Create an `.env` file in the root directory inside `evento` folder with the following contents. Look for the detailed information on `DATABASE_URL` key contents below in the `PostgreSQL` section under `Notes` sub-heading
+- Create an `.env` file in the root directory inside `evento` folder with the following contents. Look for the detailed information on `EVENTO_DATABASE_URL` key contents below in the `PostgreSQL` section under `Notes` sub-heading
 
   ```properties
-  DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
+  EVENTO_DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
   ```
 
   _Note: Please ensure you have [PostgreSQL](https://www.postgresql.org/download/) installed in your local machine_
@@ -144,10 +144,10 @@
     npx prisma db push
     ```
 
-  - Edit the `DATABASE_URL` value in `.env` file for postgres
+  - Edit the `EVENTO_DATABASE_URL` value in `.env` file for postgres
 
     ```properties
-    DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
+    EVENTO_DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
     ```
 
     | Key                     | Description                                            |
@@ -253,7 +253,7 @@
   npm run db:seed
   ```
 
-  _Note: Don't forget to change the `DATABASE_URL` environment variable's value to your remote database url_
+  _Note: Don't forget to change the `EVENTO_DATABASE_URL` environment variable's value to your remote database url_
 
 - To validate [optional text inputs](https://github.com/colinhacks/zod/issues/310#issuecomment-794533682) using `zod`
 
