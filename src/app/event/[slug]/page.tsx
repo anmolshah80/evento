@@ -98,13 +98,7 @@ const EventPage = async ({ params }: Props) => {
             />
 
             <div className="flex flex-col">
-              <div className="flex justify-between items-center">
-                <p className="text-white/75">{formattedDate}</p>
-
-                <button className="bg-slate-700/20 text-base capitalize bg-blur rounded-md border-white/10 border-2 px-4 py-1 state-effects">
-                  Bookings
-                </button>
-              </div>
+              <p className="text-white/75">{formattedDate}</p>
 
               <H1 className="mb-2 mt-1 sm:whitespace-nowrap lg:text-5xl">
                 {eventData.name}
