@@ -101,7 +101,6 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
     setIsLoading(true);
 
     // console.log('Form errors:', form.formState.errors);
-    console.log('onSubmit form data: ', data);
 
     try {
       const bookedDateTime = combineDateTime(data.eventDate, data.eventTime);
@@ -119,9 +118,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
         totalTickets: Number(data.totalTickets),
       };
 
-      const response = await createBooking(formattedFormData);
-
-      console.log('Booking response: ', response);
+      await createBooking(formattedFormData);
 
       // show success toast
       toast.success(`Your booking was successful, ${data.firstName}!`, {
@@ -149,8 +146,6 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
   const {
     formState: { errors, isSubmitting },
   } = form;
-
-  console.log('errors: ', errors);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
