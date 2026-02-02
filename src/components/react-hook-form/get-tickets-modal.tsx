@@ -3,6 +3,10 @@
 import * as z from 'zod/v4';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { Prisma } from '@prisma/client';
+import { toast } from 'sonner';
+import { LoaderCircle } from 'lucide-react';
 
 import {
   Dialog,
@@ -22,9 +26,12 @@ import DateTimePicker from '@/components/react-hook-form/date-time-picker';
 import SelectEventTickets from '@/components/react-hook-form/select-event-tickets';
 import TextFormField from '@/components/react-hook-form/text-form-field';
 
+import { createBooking } from '@/app/lib/actions';
+import { cn, combineDateTime, formatToFriendlyDate } from '@/lib/utils';
 import { PHONE_NUMBER_REGEX } from '@/lib/constants';
 
 type GetTicketsModalProps = {
+  eventId: number;
   children: React.ReactNode;
 };
 
@@ -36,6 +43,9 @@ const FormSchema = z.object({
     .trim()
     .min(2, {
       error: 'Please enter your first name',
+    })
+    .max(35, {
+      error: 'First name cannot exceed 35 characters',
     }),
   lastName: z
     .string({
@@ -44,6 +54,9 @@ const FormSchema = z.object({
     .trim()
     .min(2, {
       error: 'Please enter your last name',
+    })
+    .max(35, {
+      error: 'Last name cannot exceed 35 characters',
     }),
   email: z.email('Please enter a valid email'),
   // To validate optional text inputs -> https://github.com/colinhacks/zod/issues/310#issuecomment-794533682
@@ -66,32 +79,75 @@ const FormSchema = z.object({
   }),
 });
 
-const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
+const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      firstName: undefined,
-      lastName: undefined,
-      eventDate: undefined,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      eventDate: '',
       eventTime: '10:30:00',
       totalTickets: undefined,
     },
   });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
+
     // console.log('Form errors:', form.formState.errors);
-    console.log('onSubmit form data: ', data);
-    window.alert(JSON.stringify(data, undefined, 2));
+
+    try {
+      const bookedDateTime = combineDateTime(data.eventDate, data.eventTime);
+
+      const formattedFormData: Prisma.EventBookingCreateInput = {
+        event: {
+          // Prisma expects relation connection
+          connect: { id: eventId },
+        },
+        bookedDateTime,
+        attendeeFirstName: data.firstName,
+        attendeeLastName: data.lastName,
+        email: data.email,
+        phone: Boolean(data.phone) ? data.phone : null,
+        totalTickets: Number(data.totalTickets),
+      };
+
+      await createBooking(formattedFormData);
+
+      // show success toast
+      toast.success(`Your booking was successful, ${data.firstName}!`, {
+        duration: 8000,
+        description: formatToFriendlyDate(bookedDateTime.toISOString()),
+      });
+
+      // reset form and close modal after successful submission
+      form.reset();
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error submitting booking: ', error);
+
+      toast.error(
+        'There was an error submitting your booking. Please try again later.',
+        {
+          duration: 8000,
+        },
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const {
     formState: { errors, isSubmitting },
   } = form;
 
-  console.log('errors: ', errors);
-
   return (
-    <Dialog>
+    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogOverlay className="fixed inset-0 bg-blackA6 data-[state=open]:animate-overlayShow" />
 
@@ -174,10 +230,23 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
               </DialogClose>
               <Button
                 type="submit"
-                className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
-                disabled={isSubmitting}
+                className={cn(
+                  'inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-3 font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none',
+                  (isSubmitting || isLoading) && 'w-[120px]',
+                )}
+                disabled={isSubmitting || isLoading}
               >
-                Submit
+                {isSubmitting || isLoading ? (
+                  <span className="flex items-center justify-center gap-4">
+                    Submit{' '}
+                    <LoaderCircle
+                      size={16}
+                      className="text-white btn-spinner"
+                    />
+                  </span>
+                ) : (
+                  <span>Submit</span>
+                )}
               </Button>
             </DialogFooter>
           </form>

@@ -67,4 +67,26 @@ const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
   return { events, totalRecordsCount };
 });
 
-export { getEvent, getEvents };
+const getEventBookings = unstable_cache(async (slug: string) => {
+  const bookings = await prisma.eventBooking.findMany({
+    where: {
+      event: {
+        slug: slug,
+      },
+    },
+    orderBy: {
+      bookedDateTime: 'asc',
+    },
+  });
+
+  if (!bookings || bookings.length === 0) {
+    return {
+      bookings: [],
+      message: 'No bookings found for this event.',
+    };
+  }
+
+  return { bookings, totalRecordsCount: bookings.length };
+});
+
+export { getEvent, getEvents, getEventBookings };
