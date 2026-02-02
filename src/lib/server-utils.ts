@@ -8,7 +8,7 @@ import prisma from '@/lib/db';
 import { capitalize } from '@/lib/utils';
 
 // for api implementation
-// import { Event } from 'prisma/client';
+// import { Event } from '@prisma/client';
 // import { API_BASE_URL } from '@/lib/constants';
 
 const getEvent = unstable_cache(async (slug: string) => {
