@@ -27,6 +27,8 @@ jobs:
         run: vercel pull --yes --environment=preview --token=$VERCEL_ACCESS_TOKEN
       - name: Build Project Artifacts
         run: vercel build --token=$VERCEL_ACCESS_TOKEN
+        env:
+          EVENTO_DATABASE_URL: ${{ secrets.EVENTO_DATABASE_URL }}
       - name: Confirm Build Output
         run: tree -a -L 3 -I 'node_modules|.git'
       - name: Deploy Project Artifacts to Vercel
