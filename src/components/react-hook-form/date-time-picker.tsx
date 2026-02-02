@@ -113,7 +113,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
 
                       setOpen(false);
                     }}
-                    disabled={(date) => date < new Date('1900-01-01')}
+                    disabled={(date) => date < new Date('2020-01-01')}
                     className="border-white w-full bg-white"
                   />
                 </PopoverContent>

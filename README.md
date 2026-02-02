@@ -273,7 +273,13 @@
 
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
 
+- [Server Actions in Next.js](https://nextjs.org/learn/dashboard-app/mutating-data)
+
 ## To-dos
 
 - Configure husky to lint and format your files before committing
 - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
+
+## Resources
+
+- [Bookings UI](https://dribbble.com/shots/21370684-Bookings-list-view)
