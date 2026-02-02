@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Event } from 'prisma/client';
+import { Event } from '@prisma/client';
 
 import Loading from '@/app/event/[slug]/loading';
 

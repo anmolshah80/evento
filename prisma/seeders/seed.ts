@@ -1,22 +1,8 @@
-import { PrismaClient } from '../generated/prisma/client';
-import { withAccelerate } from '@prisma/extension-accelerate';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '@prisma/client';
 
 import { EVENTS } from './data.js';
 
-let prisma;
-
-if (process.env.NODE_ENV === 'development') {
-  const adapter = new PrismaPg({
-    connectionString: process.env.EVENTO_DATABASE_URL!,
-  });
-
-  prisma = new PrismaClient({ adapter });
-} else {
-  prisma = new PrismaClient({
-    accelerateUrl: process.env.EVENTO_DATABASE_URL!,
-  }).$extends(withAccelerate());
-}
+const prisma = new PrismaClient();
 
 const main = async () => {
   console.log('\nStart seeding records into database...\n');
