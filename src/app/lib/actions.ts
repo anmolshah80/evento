@@ -9,8 +9,6 @@ import { Prisma } from '@prisma/client';
 import prisma from '@/lib/db';
 
 const createBooking = async (formData: Prisma.EventBookingCreateInput) => {
-  console.log('Creating booking with data: ', formData);
-
   const response = await prisma.eventBooking.create({
     data: {
       ...formData,
