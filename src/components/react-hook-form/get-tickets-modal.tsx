@@ -4,6 +4,7 @@ import * as z from 'zod/v4';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { Prisma } from '@prisma/client';
 import { toast } from 'sonner';
 import { LoaderCircle } from 'lucide-react';
 
@@ -24,8 +25,6 @@ import { Button } from '@/components/ui/button';
 import DateTimePicker from '@/components/react-hook-form/date-time-picker';
 import SelectEventTickets from '@/components/react-hook-form/select-event-tickets';
 import TextFormField from '@/components/react-hook-form/text-form-field';
-
-import { Prisma } from '@prisma/client';
 
 import { createBooking } from '@/app/lib/actions';
 import { cn, combineDateTime, formatToFriendlyDate } from '@/lib/utils';
