@@ -279,6 +279,7 @@
 
 - Configure husky to lint and format your files before committing
 - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
+- [Upgrade setup-node github actions](https://github.com/actions/setup-node)
 
 ## Resources
 
