@@ -115,7 +115,7 @@
 
     ```bash
     npm install prisma@5.22.0 ts-node@10.9.1 --save-dev
-    npm install @prisma/client
+    npm install @prisma/client@5.22.0
     ```
 
   ## `SQLite`
