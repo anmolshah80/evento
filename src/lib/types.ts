@@ -1,3 +1,5 @@
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
+
 // Read note in README on why this type is commented out
 
 // export type TEvent = {
@@ -45,3 +47,11 @@ export type FieldMetaProps = {
 };
 
 /* eslint-enable @typescript-eslint/no-explicit-any */
+
+export type EventBookingFormResponseDataProps = {
+  status: number;
+  success: boolean;
+  message: string;
+  data?: SMTPTransport.SentMessageInfo;
+  error?: unknown;
+};

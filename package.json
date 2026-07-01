@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
-    "db:push-and-seed": "npm run db:push && npm run db:seed"
+    "db:push-and-seed": "npm run db:push && npm run db:seed",
+    "preview:emails": "email dev --dir src/emails"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
@@ -26,6 +27,7 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@react-email/ui": "^6.6.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -34,9 +36,11 @@
     "lucide-react": "^0.525.0",
     "next": "15.0.7",
     "next-themes": "^0.4.6",
+    "nodemailer": "^9.0.3",
     "react": "^18.3.1",
     "react-day-picker": "^9.7.0",
     "react-dom": "^18.3.1",
+    "react-email": "^6.6.5",
     "react-final-form": "^7.0.0",
     "react-hook-form": "^7.60.0",
     "server-only": "^0.0.1",
@@ -46,6 +50,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
