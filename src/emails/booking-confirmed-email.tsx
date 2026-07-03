@@ -21,7 +21,7 @@ type BookingConfirmedEmailProps = {
   venueName: string;
   venueAddress: string;
   city: string;
-  ticketCount: number;
+  totalTickets: number;
   orderNumber: string;
   totalAmount?: string;
   eventUrl?: string;
@@ -36,7 +36,7 @@ const BookingConfirmedEmail = ({
   venueName,
   venueAddress,
   city,
-  ticketCount,
+  totalTickets,
   orderNumber,
   totalAmount,
   eventUrl,
@@ -72,7 +72,7 @@ const BookingConfirmedEmail = ({
             },
           }}
         >
-          <Section className="bg-slate-50 min-h-screen py-10 px-6 text-slate-900">
+          <Section className="bg-slate-50 min-h-screen py-10 px-5 text-slate-900">
             <Section className="max-w-[680px] mx-auto bg-white rounded-[24px] p-8 shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
               <Text className="text-sm uppercase tracking-[0.35em] text-slate-500 m-0">
                 Booking confirmed
@@ -111,7 +111,7 @@ const BookingConfirmedEmail = ({
                   <DetailRow label="City" value={city} />
                   <DetailRow
                     label="Tickets"
-                    value={`${ticketCount} ticket${ticketCount === 1 ? '' : 's'}`}
+                    value={`${totalTickets} ticket${totalTickets === 1 ? '' : 's'}`}
                   />
                   {totalAmount ? (
                     <DetailRow label="Total paid" value={totalAmount} />
@@ -170,7 +170,7 @@ const BookingConfirmedEmail = ({
 };
 
 const DetailRow = ({ label, value }: { label: string; value: string }) => (
-  <Section className="flex justify-between items-start w-full gap-4 rounded-[14px] bg-white p-4 border border-slate-200">
+  <Section className="flex justify-between items-start max-w-[500px] mb-4 rounded-[14px] bg-white p-4 border border-slate-200">
     <Text className="text-sm text-slate-500 m-0">{label}</Text>
     <Text className="text-sm font-medium text-slate-900 m-0">{value}</Text>
   </Section>

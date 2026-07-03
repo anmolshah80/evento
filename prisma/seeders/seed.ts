@@ -9,7 +9,7 @@ const main = async () => {
 
   for (const event of EVENTS) {
     const result = await prisma.event.upsert({
-      where: { id: event.id },
+      where: { slug: event.slug },
       update: {},
       create: event,
     });

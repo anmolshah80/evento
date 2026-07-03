@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Event {
-  id            Int            @id @default(autoincrement())
+  id            String         @id @default(uuid(7)) @db.Uuid
   name          String
   slug          String         @unique
   city          String
@@ -22,15 +22,15 @@ model Event {
   startDateTime DateTime // First day of event and event's start time (e.g., 2025-07-10 10:30:00)
   endDateTime   DateTime // Last day of event and event's end time (e.g., 2025-07-10 17:30:00)
   organizerName String
+  venueName     String
   imageUrl      String
   description   String
   bookings      EventBooking[]
-  createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
 
 model EventBooking {
-  id                Int           @id @default(autoincrement())
+  id                String        @id @default(uuid(7)) @db.Uuid
   attendeeFirstName String
   attendeeLastName  String
   email             String
@@ -38,9 +38,8 @@ model EventBooking {
   bookedDateTime    DateTime // When attendee plans to visit
   totalTickets      Int           @default(1)
   bookingStatus     BookingStatus @default(PENDING)
-  eventId           Int
+  eventId           String        @db.Uuid
   event             Event         @relation(fields: [eventId], references: [id])
-  createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 }
 
