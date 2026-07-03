@@ -11,7 +11,8 @@
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
     "db:push-and-seed": "npm run db:push && npm run db:seed",
-    "preview:emails": "email dev --dir src/emails"
+    "preview:emails": "email dev --dir src/emails",
+    "prisma:studio": "prisma studio"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
