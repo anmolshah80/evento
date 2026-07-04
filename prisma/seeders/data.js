@@ -785,7 +785,7 @@ const EVENTS = [
   {
     name: 'Blacksmithing Workshop',
     slug: 'blacksmithing-workshop',
-    city: 'Colonial Williamsburg',
+    city: 'Williamsburg',
     location: '101 Visitor Center Dr, Williamsburg, VA 23185',
     venueName: 'Colonial Williamsburg',
     startDateTime: '2026-04-12T09:00:00.000Z',
@@ -841,7 +841,7 @@ const EVENTS = [
   {
     name: 'Mountain Photography Expedition',
     slug: 'mountain-photography-expedition',
-    city: 'Jackson Hole',
+    city: 'Jackson',
     location: '532 N Cache St, Jackson, WY 83001',
     venueName: 'Jackson Hole Historical Society',
     startDateTime: '2026-07-08T05:00:00.000Z',
@@ -883,7 +883,7 @@ const EVENTS = [
   {
     name: 'Historic Chocolate Making',
     slug: 'historic-chocolate-making',
-    city: 'Colonial Williamsburg',
+    city: 'Williamsburg',
     location: '326 W Duke of Gloucester St, Williamsburg, VA 23185',
     venueName: 'Raleigh Tavern',
     startDateTime: '2026-02-14T11:00:00.000Z',
@@ -1229,7 +1229,7 @@ const EVENTS = [
   {
     name: 'Historic Blacksmithing',
     slug: 'historic-blacksmithing',
-    city: 'Colonial Williamsburg',
+    city: 'Williamsburg',
     location: '101 Visitor Center Dr, Williamsburg, VA 23185',
     venueName: 'Colonial Williamsburg',
     startDateTime: '2026-04-15T10:00:00.000Z',
@@ -1257,7 +1257,7 @@ const EVENTS = [
   {
     name: 'Historic Tinsmithing',
     slug: 'historic-tinsmithing',
-    city: 'Colonial Williamsburg',
+    city: 'Williamsburg',
     location: '101 Visitor Center Dr, Williamsburg, VA 23185',
     venueName: 'Colonial Williamsburg',
     startDateTime: '2026-05-08T10:00:00.000Z',
@@ -1297,7 +1297,7 @@ const EVENTS = [
   {
     name: 'Historic Broom Making',
     slug: 'historic-broom-making',
-    city: 'Colonial Williamsburg',
+    city: 'Williamsburg',
     location: '101 Visitor Center Dr, Williamsburg, VA 23185',
     venueName: 'Colonial Williamsburg',
     startDateTime: '2026-04-18T10:00:00.000Z',

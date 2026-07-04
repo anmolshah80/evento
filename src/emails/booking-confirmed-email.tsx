@@ -12,37 +12,33 @@ import {
   Text,
 } from 'react-email';
 
+import { currentYear } from '@/lib/utils';
+
 type BookingConfirmedEmailProps = {
-  email: string;
-  firstName: string;
+  attendeeFirstName: string;
+  totalTickets: number;
   eventName: string;
-  eventDate: string;
-  eventTime: string;
+  eventDateTime: string;
   venueName: string;
   venueAddress: string;
   city: string;
-  totalTickets: number;
   orderNumber: string;
+  eventUrl: string;
   totalAmount?: string;
-  eventUrl?: string;
 };
 
 const BookingConfirmedEmail = ({
-  email,
-  firstName,
+  attendeeFirstName,
+  totalTickets,
   eventName,
-  eventDate,
-  eventTime,
+  eventDateTime,
   venueName,
   venueAddress,
   city,
-  totalTickets,
   orderNumber,
-  totalAmount,
   eventUrl,
+  totalAmount,
 }: BookingConfirmedEmailProps) => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <Html lang="en">
       <Head>
@@ -87,8 +83,9 @@ const BookingConfirmedEmail = ({
               </Heading>
 
               <Text className="text-lg text-slate-700 mb-6">
-                Hi {firstName}, your booking for <strong>{eventName}</strong> is
-                complete. We can&apos;t wait to see you there.
+                Hi {attendeeFirstName}, your booking for{' '}
+                <strong>{eventName}</strong> is complete. We can&apos;t wait to
+                see you there.
               </Text>
 
               <Section className="rounded-[20px] border border-slate-200 bg-slate-50 p-6">
@@ -97,13 +94,9 @@ const BookingConfirmedEmail = ({
                 </Text>
 
                 <Section className="flex justify-center items-center flex-col gap-3">
-                  <DetailRow
-                    label="Order number"
-                    value={orderNumber ?? '3qi251k2b60bqkwbt1i62b6k'}
-                  />
+                  <DetailRow label="Order number" value={orderNumber} />
                   <DetailRow label="Event" value={eventName} />
-                  <DetailRow label="Date" value={eventDate} />
-                  <DetailRow label="Time" value={eventTime} />
+                  <DetailRow label="Date" value={eventDateTime} />
                   <DetailRow
                     label="Venue"
                     value={`${venueName}, ${venueAddress}`}
@@ -129,7 +122,7 @@ const BookingConfirmedEmail = ({
                 </Text>
 
                 <Link
-                  href={eventUrl ?? '#'}
+                  href={eventUrl}
                   className="inline-block rounded-full bg-accent px-6 py-3 text-base font-semibold text-white no-underline"
                 >
                   View event details
@@ -141,18 +134,15 @@ const BookingConfirmedEmail = ({
                   Note: This is not an actual booking for a real event. This
                   email template is a demonstration of how a booking
                   confirmation email could look. It was created via{' '}
-                  <Link
-                    href="https://evento-ten-psi.vercel.app/event/tropical-butterfly-exhibit"
-                    rel="noopener noreferrer"
-                  >
+                  <Link href={eventUrl} rel="noopener noreferrer">
                     Evento App
                   </Link>
                   .
                 </Text>
 
                 <Text className="m-0">
-                  This booking was made using this email address: {email}. You
-                  can ignore this email if you did not make a booking.
+                  This booking was made with your email address. You can ignore
+                  this email if you did not make a booking.
                 </Text>
               </Section>
             </Section>
