@@ -4,39 +4,27 @@ import { NextResponse } from 'next/server';
 
 import BookingConfirmedEmail from '@/emails/booking-confirmed-email';
 
-import { EventBookingFormResponseDataProps } from '@/lib/types';
+import { BASE_URL } from '@/lib/constants';
+import {
+  EventBookingFormResponseDataProps,
+  EventBookingWithEvent,
+} from '@/lib/types';
 
-type EmailRequest = {
-  email: string;
-  firstName: string;
-  eventName: string;
-  eventDate: string;
-  eventTime: string;
-  venueName: string;
-  venueAddress: string;
-  city: string;
-  ticketCount: number;
-  orderNumber: string;
-  totalAmount?: string;
-  eventUrl?: string;
-};
+type BookingConfirmedEmailData = Omit<
+  EventBookingWithEvent,
+  'bookedDateTime'
+> & { bookedDateTime: string };
 
 export async function POST(request: Request) {
   try {
     const {
       email,
-      firstName,
-      eventName,
-      eventDate,
-      eventTime,
-      venueName,
-      venueAddress,
-      city,
-      ticketCount,
-      orderNumber,
-      totalAmount,
-      eventUrl,
-    }: EmailRequest = await request.json();
+      attendeeFirstName,
+      bookedDateTime,
+      totalTickets,
+      id,
+      event,
+    }: BookingConfirmedEmailData = await request.json();
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_SERVER_HOST,
@@ -50,25 +38,22 @@ export async function POST(request: Request) {
     // Source -> https://react.email/docs/integrations/nodemailer#3-convert-to-html-and-send-email
     const emailHtml = await render(
       BookingConfirmedEmail({
-        email,
-        firstName,
-        eventName,
-        eventDate,
-        eventTime,
-        venueName,
-        venueAddress,
-        city,
-        ticketCount,
-        orderNumber,
-        totalAmount,
-        eventUrl,
+        attendeeFirstName,
+        totalTickets,
+        eventName: event.name,
+        eventDateTime: bookedDateTime,
+        venueName: event.venueName,
+        venueAddress: event.location,
+        city: event.city,
+        orderNumber: id,
+        eventUrl: `${BASE_URL}/event/${event.slug}`,
       }),
     );
 
     const data = await transporter.sendMail({
       from: process.env.SENDER_EMAIL_ADDRESS!,
-      to: process.env.RECIPIENT_EMAIL_ADDRESS!,
-      subject: `Booking Confirmation for ${eventName}`,
+      to: email,
+      subject: `Booking Confirmation for ${event.name}`,
       replyTo: process.env.SENDER_EMAIL_ADDRESS!,
       html: emailHtml,
     });
@@ -91,6 +76,9 @@ export async function POST(request: Request) {
       error: error,
     };
 
-    return NextResponse.json(response);
+    return NextResponse.json(response, {
+      status: 500,
+      statusText: 'Internal Server Error',
+    });
   }
 }

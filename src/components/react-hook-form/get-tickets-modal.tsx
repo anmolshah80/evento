@@ -29,9 +29,13 @@ import TextFormField from '@/components/react-hook-form/text-form-field';
 import { createBooking } from '@/app/lib/actions';
 import { cn, combineDateTime, formatToFriendlyDate } from '@/lib/utils';
 import { PHONE_NUMBER_REGEX } from '@/lib/constants';
+import {
+  EventBookingFormResponseDataProps,
+  EventBookingWithEvent,
+} from '@/lib/types';
 
 type GetTicketsModalProps = {
-  eventId: number;
+  eventId: string;
   children: React.ReactNode;
 };
 
@@ -117,13 +121,44 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
         totalTickets: Number(data.totalTickets),
       };
 
-      await createBooking(formattedFormData);
+      const bookingResponse: EventBookingWithEvent =
+        await createBooking(formattedFormData);
+
+      const formattedBookedDateTime = formatToFriendlyDate(
+        bookedDateTime.toISOString(),
+      );
 
       // show success toast
       toast.success(`Your booking was successful, ${data.firstName}!`, {
         duration: 8000,
-        description: formatToFriendlyDate(bookedDateTime.toISOString()),
+        description: formattedBookedDateTime,
       });
+
+      const emailResponse = await fetch('/api/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...bookingResponse,
+          bookedDateTime: formattedBookedDateTime,
+        }),
+      });
+
+      const emailResponseData: EventBookingFormResponseDataProps =
+        await emailResponse.json();
+
+      if (!emailResponseData.success)
+        throw new Error('Failed to send confirmation email');
+
+      toast.success(
+        `A confirmation email has been sent to you at ${data.email}. Check your inbox (or spam folder) for details.`,
+        {
+          duration: 10000,
+          position: 'bottom-right',
+          closeButton: true,
+        },
+      );
 
       // reset form and close modal after successful submission
       form.reset();

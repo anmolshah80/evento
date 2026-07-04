@@ -1,5 +1,7 @@
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
+import { Prisma } from '@prisma/client';
+
 // Read note in README on why this type is commented out
 
 // export type TEvent = {
@@ -55,3 +57,7 @@ export type EventBookingFormResponseDataProps = {
   data?: SMTPTransport.SentMessageInfo;
   error?: unknown;
 };
+
+export type EventBookingWithEvent = Prisma.EventBookingGetPayload<{
+  include: { event: true };
+}>;
