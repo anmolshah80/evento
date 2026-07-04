@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import { Toaster } from '@/components/ui/sonner';
+
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import Container from '@/components/container';
@@ -34,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-gray-950 text-white overflow-y-scroll`}
       >
+        <Toaster position="bottom-right" richColors />
         <Container>
           <Header />
           {children}

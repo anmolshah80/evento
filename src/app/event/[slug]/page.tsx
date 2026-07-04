@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Event } from 'prisma/client';
+import { Event } from '@prisma/client';
 
 import Loading from '@/app/event/[slug]/loading';
 
@@ -110,6 +110,7 @@ const EventPage = async ({ params }: Props) => {
               </p>
 
               <ModalButton
+                eventId={eventData.id}
                 title="Get tickets"
                 className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects"
               />

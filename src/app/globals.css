@@ -66,3 +66,26 @@ img {
 .text-destructive {
   @apply text-red-500 font-semibold;
 }
+
+.spinner {
+  position: absolute;
+  animation: spinner 1s infinite linear;
+  left: 52%;
+  top: 40%;
+  width: 100px;
+  height: 100px;
+}
+
+.btn-spinner {
+  animation: spinner 1s infinite linear;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}

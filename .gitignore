@@ -44,4 +44,6 @@ next-env.d.ts
 *.db
 *.db-journal
 /prisma/*.db
+
+# if I ever were to upgrade to Prisma v7
 /prisma/generated/*

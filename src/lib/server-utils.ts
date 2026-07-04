@@ -7,15 +7,7 @@ import { unstable_cache } from 'next/cache';
 import prisma from '@/lib/db';
 import { capitalize } from '@/lib/utils';
 
-// for api implementation
-// import { Event } from 'prisma/client';
-// import { API_BASE_URL } from '@/lib/constants';
-
 const getEvent = unstable_cache(async (slug: string) => {
-  // for api implementation
-  // const response = await fetch(`${API_BASE_URL}/${slug}`);
-  // const eventData: Event = await response.json();
-
   const eventData = await prisma.event.findUnique({
     where: {
       slug: slug,
@@ -28,10 +20,6 @@ const getEvent = unstable_cache(async (slug: string) => {
 });
 
 const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
-  // for api implementation
-  // const response = await fetch(`${API_BASE_URL}?city=${city}`);
-  // const events: Event[] = await response.json();
-
   const events = await prisma.event.findMany({
     where: {
       city: city === 'all' ? undefined : capitalize(city),
@@ -67,4 +55,26 @@ const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
   return { events, totalRecordsCount };
 });
 
-export { getEvent, getEvents };
+const getEventBookings = unstable_cache(async (slug: string) => {
+  const bookings = await prisma.eventBooking.findMany({
+    where: {
+      event: {
+        slug: slug,
+      },
+    },
+    orderBy: {
+      bookedDateTime: 'asc',
+    },
+  });
+
+  if (!bookings || bookings.length === 0) {
+    return {
+      bookings: [],
+      message: 'No bookings found for this event.',
+    };
+  }
+
+  return { bookings, totalRecordsCount: bookings.length };
+});
+
+export { getEvent, getEvents, getEventBookings };
