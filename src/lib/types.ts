@@ -1,6 +1,6 @@
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
-import { Prisma } from '@prisma/client';
+import { Prisma } from 'prisma/client';
 
 // Read note in README on why this type is commented out
 

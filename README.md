@@ -111,11 +111,11 @@
   - Rename those files manually in kebab case format (previously it was in pascal case)
 
 - Install and Configure Prisma ORM
-  - Install `prisma`, `ts-node` and `@prisma/client` npm packages
+  - Install `@prisma/adapter-pg`, `@prisma/client`, `tsx`, and `dotenv` npm packages
 
     ```bash
-    npm install prisma@5.22.0 ts-node@10.9.1 --save-dev
-    npm install @prisma/client
+    npm install prisma --save-dev
+    npm install @prisma/client @prisma/adapter-pg tsx dotenv
     ```
 
   ## `SQLite`
@@ -191,7 +191,7 @@
     npx prisma db push
     ```
 
-  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `seed.ts` file in your `prisma/seeders` folder)
+  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `prisma/seeders/seed.ts` file)
 
     ```bash
     npx prisma db seed
@@ -272,10 +272,10 @@
   ```
 
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
+  - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 
 - [Updating React Email](https://react.email/docs/getting-started/updating-react-email)
 
 ## To-dos
 
 - Configure husky to lint and format your files before committing
-- [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
