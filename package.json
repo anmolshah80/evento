@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate --no-engine && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
@@ -12,14 +12,13 @@
     "db:seed": "npx prisma db seed",
     "db:push-and-seed": "npm run db:push && npm run db:seed",
     "preview:emails": "email dev --dir src/emails --port 3001",
-    "prisma:studio": "prisma studio"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seeders/seed.ts"
+    "prisma:studio": "prisma studio",
+    "prisma:prod-migrations-deploy": "prisma migrate deploy --schema=./prisma/schema.prisma"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
-    "@prisma/client": "^6.19.2",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-icons": "^1.3.2",
@@ -33,6 +32,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.4.2",
     "final-form": "^5.0.0",
     "framer-motion": "^12.29.2",
     "lucide-react": "^0.525.0",
@@ -48,6 +48,7 @@
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^2.0.0",
+    "tsx": "^4.23.0",
     "zod": "^3.25.75"
   },
   "devDependencies": {
@@ -59,9 +60,8 @@
     "eslint-config-next": "15.0.3",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
-    "prisma": "^6.19.2",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4.1.18",
-    "ts-node": "^10.9.1",
     "typescript": "^5",
     "vercel": "^39.1.2"
   }
