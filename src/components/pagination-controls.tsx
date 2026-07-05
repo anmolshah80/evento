@@ -15,7 +15,7 @@ const PaginationControls = ({
   nextPagePath,
 }: PaginationControlsProps) => {
   return (
-    <section className="flex justify-between w-full">
+    <section className="flex w-full justify-between">
       {previousPagePath ? (
         <Link href={previousPagePath} className={anchorLinkStyles}>
           <ArrowLeftIcon /> Previous

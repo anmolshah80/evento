@@ -3,7 +3,7 @@
 import * as z from 'zod/v4';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { LoaderCircle } from 'lucide-react';
 
@@ -86,11 +86,6 @@ const FormSchema = z.object({
 const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -186,23 +181,19 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
     formState: { errors, isSubmitting },
   } = form;
 
-  if (!mounted) {
-    return <div>{children}</div>;
-  }
-
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogOverlay className="fixed inset-0 bg-blackA6 data-[state=open]:animate-overlayShow" />
+      <DialogOverlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
 
       <DialogContent
         className={
-          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
+          'bg-gray1 data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 max-h-[96vh] min-h-[calc(100dvh-8rem)] w-[90vw] max-w-120.5 -translate-x-1/2 -translate-y-1/2 gap-0 overflow-y-scroll rounded-md p-6.25 shadow-(--shadow-6) focus:outline-none sm:max-w-125 sm:overflow-y-auto'
         }
-        dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem]"
+        dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-5 top-[1.65rem] cursor-pointer hover:bg-gray-100 hover:shadow-sm"
       >
-        <DialogHeader className="gap-0 mb-9">
-          <DialogTitle className="m-0 text-2xl text-left md:text-[1.7rem] font-medium text-mauve12">
+        <DialogHeader className="mb-9 gap-0">
+          <DialogTitle className="text-mauve12 m-0 text-left text-2xl font-medium md:text-[1.7rem]">
             Book your tickets
           </DialogTitle>
           <DialogDescription></DialogDescription>
@@ -211,7 +202,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-8">
             <div className="flex flex-col gap-6 md:gap-8">
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col gap-6 sm:flex-row">
                 <TextFormField
                   form={form}
                   fieldId="first-name"
@@ -231,7 +222,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
                 />
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col gap-6 sm:flex-row">
                 <TextFormField
                   form={form}
                   fieldId="email-address"
@@ -251,7 +242,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
                   maxLength={17}
                   fieldHasErrors={errors.phone}
                   fieldDescription={
-                    <span className="flex items-center text-xs text-mauve11">
+                    <span className="text-mauve11 flex items-center text-xs">
                       Include your country code for international numbers
                     </span>
                   }
@@ -263,10 +254,10 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
               <SelectEventTickets form={form} />
             </div>
 
-            <DialogFooter className="flex-row gap-3 justify-between">
+            <DialogFooter className="flex-row items-end justify-between gap-3">
               <DialogClose asChild>
                 <Button
-                  className="w-[100px] h-[35px] text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
+                  className="h-8.75 w-25 rounded border border-slate-800 bg-transparent text-base text-black outline-none select-none hover:bg-gray-100"
                   onClick={() => form.reset()}
                 >
                   Cancel
@@ -275,8 +266,8 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
               <Button
                 type="submit"
                 className={cn(
-                  'inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-3 font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none',
-                  (isSubmitting || isLoading) && 'w-[120px]',
+                  'inline-flex h-8.75 w-25 items-center justify-center rounded bg-black px-3 text-base leading-none font-medium text-white outline-offset-1 outline-none select-none hover:bg-black/80 focus-visible:outline-2',
+                  (isSubmitting || isLoading) && 'w-30',
                 )}
                 disabled={isSubmitting || isLoading}
               >
@@ -285,7 +276,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
                     Submit{' '}
                     <LoaderCircle
                       size={16}
-                      className="text-white btn-spinner"
+                      className="btn-spinner text-white"
                     />
                   </span>
                 ) : (

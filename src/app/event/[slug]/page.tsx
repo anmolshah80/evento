@@ -52,8 +52,8 @@ export const generateStaticParams = async () => {
 
 const DetailsSection = ({ header, content }: DetailsSectionProps) => (
   <section className="mb-12">
-    <h2 className="text-2xl mb-5">{header}</h2>
-    <p className="max-w-4xl mx-auto text-lg leading-8 text-white/75">
+    <h2 className="mb-5 text-2xl">{header}</h2>
+    <p className="mx-auto max-w-4xl text-lg leading-8 text-white/75">
       {content}
     </p>
   </section>
@@ -78,34 +78,34 @@ const EventPage = async ({ params }: Props) => {
   return (
     <Suspense key={slug + formattedDate} fallback={<Loading />}>
       <main>
-        <section className="relative overflow-hidden flex justify-center items-center py-14 md:py-20">
+        <section className="relative flex items-center justify-center overflow-hidden py-14 md:py-20">
           <Image
             src={eventData.imageUrl}
             alt="Blurred background image of the event"
-            className="object-cover z-0 blur-3xl"
+            className="z-0 object-cover blur-3xl"
             quality={50}
             priority
             fill
             sizes="(max-width: 1280px) 100vw, 1280px"
           />
 
-          <div className="z-1 flex flex-col gap-6 lg:gap-16 lg:flex-row relative px-8 sm:px-0">
+          <div className="relative z-1 flex flex-col gap-6 px-8 sm:px-0 lg:flex-row lg:gap-16">
             <Image
               src={eventData.imageUrl}
               alt={eventData.name}
               width={300}
               height={201}
-              className="rounded-xl border-2 border-white/50 object-cover w-75 h-50.25"
+              className="h-50.25 w-75 rounded-xl border-2 border-white/50 object-cover"
             />
 
             <div className="flex flex-col">
               <p className="text-white/75">{formattedDate}</p>
 
-              <H1 className="mb-2 mt-1 sm:whitespace-nowrap lg:text-5xl">
+              <H1 className="mt-1 mb-2 sm:whitespace-nowrap lg:text-5xl">
                 {eventData.name}
               </H1>
 
-              <p className="sm:whitespace-nowrap text-xl text-white/75">
+              <p className="text-xl text-white/75 sm:whitespace-nowrap">
                 Organized by{' '}
                 <span className="italic">{eventData.organizerName}</span>
               </p>
@@ -113,13 +113,13 @@ const EventPage = async ({ params }: Props) => {
               <ModalButton
                 eventId={eventData.id}
                 title="Get tickets"
-                className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 sm:w-full py-2 state-effects"
+                className="bg-blur state-effects mt-5 rounded-md border-2 border-white/10 bg-white/20 py-2 text-lg capitalize sm:w-full lg:mt-auto"
               />
             </div>
           </div>
         </section>
 
-        <div className="min-h-[75vh] text-center px-5 py-16">
+        <div className="min-h-[75vh] px-5 py-16 text-center">
           <DetailsSection
             header="About this event"
             content={eventData.description}

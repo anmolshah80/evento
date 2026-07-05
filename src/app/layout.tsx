@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-gray-950 text-white overflow-y-scroll`}
+        className={`${geistSans.variable} ${geistMono.variable} overflow-y-scroll bg-gray-950 text-white`}
       >
         <Toaster position="bottom-right" richColors />
         <Container>

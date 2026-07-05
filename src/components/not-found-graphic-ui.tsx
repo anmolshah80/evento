@@ -6,7 +6,7 @@ import {
 
 const NotFoundGraphicUI = () => {
   return (
-    <div className="flex flex-col justify-center items-center mx-auto">
+    <div className="mx-auto flex flex-col items-center justify-center">
       <div className="relative flex items-center">
         <FileTextIcon width={150} height={150} />
 

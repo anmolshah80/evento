@@ -9,7 +9,7 @@ type SkeletonProps = {
 const Skeleton = ({ className }: SkeletonProps) => (
   <div
     className={cn(
-      'animate-pulse h-4 w-[550px] rounded-md bg-white/5',
+      'h-4 w-[550px] animate-pulse rounded-md bg-white/5',
       className,
     )}
   ></div>

@@ -54,7 +54,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
   const eventTimeRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="flex flex-col sm:flex-row gap-6">
+    <div className="flex flex-col gap-6 sm:flex-row">
       <FormField
         control={form.control}
         name="eventDate"
@@ -63,18 +63,18 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
           const dateValue = field.value ? parseISO(field.value) : undefined;
 
           return (
-            <FormItem className="flex flex-col w-full">
+            <FormItem className="flex w-full flex-col">
               <FormLabel htmlFor="date-picker" className="text-black">
                 Event date
               </FormLabel>
               <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
+                <PopoverTrigger asChild className="bg-transparent">
                   <FormControl>
                     <Button
                       id="date-picker"
                       variant={'outline'}
                       className={cn(
-                        'w-full justify-between font-normal text-black border-input border hover:bg-transparent',
+                        'border-input w-full justify-between rounded border font-normal text-black hover:bg-transparent',
                         !field.value && 'text-muted-foreground',
                       )}
                     >
@@ -83,12 +83,12 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
                       ) : (
                         <span className="text-mauve11">Pick a date</span>
                       )}
-                      <CalendarIcon className="ml-auto h-4 w-4 text-mauve11" />
+                      <CalendarIcon className="text-mauve11 ml-auto h-4 w-4" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="min-w-max max-h-[320px] p-0 bg-black text-white overflow-y-scroll"
+                  className="max-h-80 min-w-max overflow-y-scroll bg-black p-0 text-white"
                   align="start"
                 >
                   <Calendar
@@ -114,7 +114,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
                       setOpen(false);
                     }}
                     disabled={(date) => date < new Date('1900-01-01')}
-                    className="border-white w-full bg-white"
+                    className="w-full border-white bg-white"
                   />
                 </PopoverContent>
               </Popover>
@@ -129,7 +129,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
         control={form.control}
         name="eventTime"
         render={({ field }) => (
-          <FormItem className="w-full flex flex-col relative">
+          <FormItem className="relative flex w-full flex-col">
             <FormLabel htmlFor="time-picker" className="text-black">
               Event time
             </FormLabel>
@@ -137,12 +137,12 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
               type="time"
               id="time-picker"
               step="1"
-              className="bg-transparent border border-input text-black appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none px-2 relative"
+              className="border-input relative appearance-none rounded border bg-transparent px-2 text-black [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
               {...field}
               ref={eventTimeRef}
             />
             <Clock8Icon
-              className="absolute right-3 top-[34px] h-4 w-4 text-mauve11 cursor-pointer"
+              className="text-mauve11 absolute top-8.5 right-3 h-4 w-4 cursor-pointer"
               onClick={() => eventTimeRef?.current?.focus()}
             />
 

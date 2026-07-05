@@ -2,32 +2,32 @@ import Skeleton from '@/components/skeleton';
 
 const Loading = () => (
   <div>
-    <div className="relative overflow-hidden flex justify-center items-center py-14 md:py-20">
-      <div className="h-[500px] w-[1275px] lg:h-[361px] bg-gray-700/40 z-0 absolute"></div>
+    <div className="relative flex items-center justify-center overflow-hidden py-14 md:py-20">
+      <div className="absolute z-0 h-125 w-318.75 bg-gray-700/40 lg:h-90.25"></div>
 
-      <div className="z-1 flex flex-col gap-6 lg:gap-16 lg:flex-row relative">
-        <Skeleton className="h-[198px] w-[297px]" />
+      <div className="relative z-1 flex flex-col gap-6 lg:flex-row lg:gap-16">
+        <Skeleton className="h-49.5 w-74.25" />
 
         <div className="flex flex-col">
-          <Skeleton className="h-6 w-[200px]" />
-          <Skeleton className="h-8 w-[280px] md:w-[406px] my-3" />
-          <Skeleton className="h-7 w-[250px]" />
-          <Skeleton className="h-12 w-[305px] md:w-[403px] mt-6 lg:mt-auto" />
+          <Skeleton className="h-6 w-50" />
+          <Skeleton className="my-3 h-8 w-70 md:w-101.5" />
+          <Skeleton className="h-7 w-62.5" />
+          <Skeleton className="mt-6 h-12 w-76.25 md:w-100.75 lg:mt-auto" />
         </div>
       </div>
     </div>
 
-    <div className="min-h-[75vh] flex flex-col items-center px-5 py-16">
+    <div className="flex min-h-[75vh] flex-col items-center px-5 py-16">
       <div className="mb-12">
-        <Skeleton className="mb-5 mx-auto h-6 w-[175px] md:w-[250px]" />
-        <Skeleton className="mb-5 mx-auto h-4 w-[300px] md:w-[750px]" />
-        <Skeleton className="mb-5 mx-auto h-4 w-[225px] md:w-[650px]" />
-        <Skeleton className="mb-5 mx-auto h-4 w-[175px] md:w-[550px]" />
+        <Skeleton className="mx-auto mb-5 h-6 w-43.75 md:w-62.5" />
+        <Skeleton className="mx-auto mb-5 h-4 w-75 md:w-187.5" />
+        <Skeleton className="mx-auto mb-5 h-4 w-56.25 md:w-162.5" />
+        <Skeleton className="mx-auto mb-5 h-4 w-43.75 md:w-137.5" />
       </div>
 
       <div className="mb-12">
-        <Skeleton className="mb-5 mx-auto h-6 w-[125px] md:w-[150px]" />
-        <Skeleton className="mb-5 mx-auto h-4 w-[250px] md:w-[300px]" />
+        <Skeleton className="mx-auto mb-5 h-6 w-31.25 md:w-37.5" />
+        <Skeleton className="mx-auto mb-5 h-4 w-62.5 md:w-75" />
       </div>
     </div>
   </div>

@@ -50,12 +50,12 @@ const SearchForm = () => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="w-full relative sm:w-145">
+    <form onSubmit={handleSubmit} className="relative w-full sm:w-145">
       <TooltipUI
         sourceElement={
           <span
             className={clsx(
-              'absolute bg-gray-800 pt-[0.3rem] pb-[0.4rem] px-[0.6rem] text-white right-8 top-3 border-none rounded-sm text-xl',
+              'absolute top-3 right-8 rounded-sm border-none bg-gray-800 px-[0.6rem] pt-[0.3rem] pb-[0.4rem] text-xl text-white',
               {
                 hidden: slashKeyClassName === 'slash-key-hide',
               },
@@ -74,7 +74,7 @@ const SearchForm = () => {
         type="text"
         placeholder="Search events in any city..."
         spellCheck={false}
-        className="w-full h-16 rounded-lg bg-white/7 px-6 outline-none ring-accent-green/50 transition focus:ring-2 focus:bg-white/10"
+        className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none focus:bg-white/10 focus:ring-2"
         value={searchText}
         ref={searchInputRef}
         onChange={(event) => setSearchText(event.target.value)}

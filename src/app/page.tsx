@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center px-3 pt-24 sm:pt-36">
       <H1>Find events around you</H1>
-      <p className="mb-12 mt-7 text-2xl lg:text-3xl opacity-75">
+      <p className="mt-7 mb-12 text-2xl opacity-75 lg:text-3xl">
         Browse more than{' '}
-        <span className="font-bold italic underline text-accent-green">
+        <span className="text-accent-green font-bold italic underline">
           10,000 events
         </span>{' '}
         around you

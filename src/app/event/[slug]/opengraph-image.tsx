@@ -20,13 +20,11 @@ const Image = async ({ params }: ImageProps) => {
   const { slug } = await params;
 
   return new ImageResponse(
-    (
-      // ImageResponse JSX element
-      <section>
-        <h1>{slug}</h1>
-        <p>Evento — Browse events around you</p>
-      </section>
-    ),
+    // ImageResponse JSX element
+    <section>
+      <h1>{slug}</h1>
+      <p>Evento — Browse events around you</p>
+    </section>,
     // ImageResponse options
     {
       ...size,
