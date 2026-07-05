@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '../../src/lib/db';
 
 import { EVENTS } from './data.js';
-
-const prisma = new PrismaClient();
 
 const main = async () => {
   console.log('\nStart seeding records into database...\n');
