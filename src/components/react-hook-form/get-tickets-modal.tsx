@@ -3,7 +3,7 @@
 import * as z from 'zod/v4';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { LoaderCircle } from 'lucide-react';
 
@@ -86,6 +86,11 @@ const FormSchema = z.object({
 const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -181,6 +186,10 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
     formState: { errors, isSubmitting },
   } = form;
 
+  if (!mounted) {
+    return <div>{children}</div>;
+  }
+
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -188,7 +197,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
 
       <DialogContent
         className={
-          'sm:max-w-125 fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-120.5 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-6.25 shadow-(--shadow-6) focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
+          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
         }
         dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem]"
       >
@@ -257,7 +266,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
             <DialogFooter className="flex-row gap-3 justify-between">
               <DialogClose asChild>
                 <Button
-                  className="w-25 h-8.75 text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
+                  className="w-[100px] h-[35px] text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
                   onClick={() => form.reset()}
                 >
                   Cancel

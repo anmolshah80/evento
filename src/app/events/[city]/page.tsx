@@ -50,7 +50,7 @@ const EventsPage = async ({ params, searchParams }: EventsPageProps) => {
 
   return (
     <Suspense key={city + parsedPage.data} fallback={<Loading />}>
-      <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
+      <main className="flex flex-col items-center py-24 px-5 min-h-[110vh]">
         <H1 className="mb-28">
           {city === 'all' && 'All Events'}
           {city !== 'all' && `Events in ${capitalizedCity}`}

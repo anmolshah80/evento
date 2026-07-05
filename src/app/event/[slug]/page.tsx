@@ -113,7 +113,7 @@ const EventPage = async ({ params }: Props) => {
               <ModalButton
                 eventId={eventData.id}
                 title="Get tickets"
-                className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 w-[95vw] sm:w-full py-2 state-effects"
+                className="bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto rounded-md border-white/10 border-2 sm:w-full py-2 state-effects"
               />
             </div>
           </div>
