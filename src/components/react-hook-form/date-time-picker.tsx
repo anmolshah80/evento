@@ -115,6 +115,14 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
                     }}
                     disabled={(date) => date < new Date('1900-01-01')}
                     className="w-full border-white bg-white"
+                    additionalClassNames={{
+                      button_next: 'px-5! text-white hover:text-white rounded',
+                      button_previous:
+                        'px-5! text-white hover:text-white rounded',
+                      today: 'rounded dark:hover:text-white hover:text-white',
+                      dropdowns: 'text-white dark:text-white',
+                      weekday: 'text-white dark:text-white',
+                    }}
                   />
                 </PopoverContent>
               </Popover>

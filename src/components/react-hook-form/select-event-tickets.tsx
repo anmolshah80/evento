@@ -66,9 +66,11 @@ const SelectEventTickets = ({ form }: SelectEventTicketsProps) => {
                   <SelectValue placeholder="Select your tickets" />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Pick your event tickets</SelectLabel>
+              <SelectContent className="rounded">
+                <SelectGroup className="rounded">
+                  <SelectLabel className="text-white">
+                    Pick your event tickets
+                  </SelectLabel>
                   <SelectItem
                     value="1"
                     className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"

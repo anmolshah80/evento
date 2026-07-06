@@ -278,6 +278,4 @@
 
 - [Updating React Email](https://react.email/docs/getting-started/updating-react-email)
 
-## To-dos
-
-- Configure husky to lint and format your files before committing
+- [Configuring ESLint Plugin in Next.js](https://nextjs.org/docs/app/api-reference/config/eslint)

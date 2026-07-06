@@ -154,7 +154,7 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
       toast.success(
         `A confirmation email has been sent to you at ${data.email}. Check your inbox (or spam folder) for details.`,
         {
-          duration: 10000,
+          duration: 8000,
           position: 'bottom-right',
           closeButton: true,
         },
