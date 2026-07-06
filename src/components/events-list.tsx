@@ -22,7 +22,7 @@ const EventsList = async ({ city, currentPage = 1 }: EventsListProps) => {
   if (!events || events.length === 0) return null;
 
   return (
-    <section className="max-w-[1100px] flex flex-wrap gap-10 justify-center sm:px-[20px]">
+    <section className="flex max-w-275 flex-wrap justify-center gap-10 sm:px-5">
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}

@@ -12,7 +12,9 @@ type ModalButtonProps = {
 const ModalButton = ({ eventId, title, className }: ModalButtonProps) => {
   return (
     <GetTicketsModal eventId={eventId}>
-      <button className={cn(className, 'bg-white/20')}>{title}</button>
+      <span className={cn(className, 'cursor-pointer bg-white/20 text-center')}>
+        {title}
+      </span>
     </GetTicketsModal>
   );
 };

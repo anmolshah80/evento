@@ -112,16 +112,16 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogOverlay className="fixed inset-0 bg-blackA6 data-[state=open]:animate-overlayShow" />
+      <DialogOverlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
 
       <DialogContent
         className={
-          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
+          'bg-gray1 data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 max-h-[96vh] w-[90vw] max-w-120.5 -translate-x-1/2 -translate-y-1/2 gap-0 overflow-y-scroll rounded-md p-6.25 shadow-(--shadow-6) focus:outline-none sm:max-w-125 sm:overflow-y-auto'
         }
         dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem]"
       >
-        <DialogHeader className="gap-0 mb-9">
-          <DialogTitle className="m-0 text-2xl text-left md:text-[1.7rem] font-medium text-mauve12">
+        <DialogHeader className="mb-9 gap-0">
+          <DialogTitle className="text-mauve12 m-0 text-left text-2xl font-medium md:text-[1.7rem]">
             Book your tickets
           </DialogTitle>
           <DialogDescription></DialogDescription>
@@ -137,7 +137,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
             return (
               <form onSubmit={handleSubmit} noValidate className="grid gap-8">
                 <div className="flex flex-col gap-6 md:gap-8">
-                  <div className="flex flex-col sm:flex-row gap-6">
+                  <div className="flex flex-col gap-6 sm:flex-row">
                     <TextFormField
                       fieldId="first-name"
                       fieldName="firstName"
@@ -155,7 +155,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                     />
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-6">
+                  <div className="flex flex-col gap-6 sm:flex-row">
                     <TextFormField
                       fieldId="email-address"
                       fieldName="email"
@@ -172,7 +172,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                       autoComplete="mobile tel"
                       maxLength={17}
                       fieldDescription={
-                        <span className="flex items-center text-xs text-mauve11">
+                        <span className="text-mauve11 flex items-center text-xs">
                           Include your country code for international numbers
                         </span>
                       }
@@ -184,11 +184,11 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   <SelectEventTickets />
                 </div>
 
-                <DialogFooter className="flex-row gap-3 justify-between">
+                <DialogFooter className="flex-row justify-between gap-3">
                   <DialogClose asChild>
                     <Button
                       type="button"
-                      className="w-[100px] h-[35px] text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
+                      className="h-8.75 w-25 rounded border border-slate-800 text-base text-black outline-none select-none hover:bg-gray-100"
                       onClick={() => form.reset()}
                     >
                       Cancel
@@ -197,7 +197,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   <Button
                     type="submit"
                     disabled={submitting || pristine}
-                    className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
+                    className="inline-flex h-8.75 w-25 items-center justify-center rounded bg-black px-3.75 text-base leading-none font-medium text-white outline-offset-1 outline-none select-none hover:bg-black/80 focus-visible:outline-2"
                   >
                     Submit
                   </Button>

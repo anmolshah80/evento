@@ -274,8 +274,8 @@
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
   - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 
+- [How to use Prisma ORM and Prisma Postgres with Next.js](https://www.prisma.io/docs/guides/nextjs)
+
 - [Updating React Email](https://react.email/docs/getting-started/updating-react-email)
 
-## To-dos
-
-- Configure husky to lint and format your files before committing
+- [Configuring ESLint Plugin in Next.js](https://nextjs.org/docs/app/api-reference/config/eslint)

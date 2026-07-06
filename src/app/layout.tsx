@@ -22,6 +22,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+  ),
   title: 'Evento — Find events happening around you',
   description: 'Explore more than 10,000 events worldwide',
 };
@@ -34,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-gray-950 text-white overflow-y-scroll`}
+        className={`${geistSans.variable} ${geistMono.variable} overflow-y-scroll bg-gray-950 text-white`}
       >
         <Toaster position="bottom-right" richColors />
         <Container>

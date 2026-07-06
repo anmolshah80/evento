@@ -68,32 +68,32 @@ const BookingConfirmedEmail = ({
             },
           }}
         >
-          <Section className="bg-slate-50 min-h-screen py-10 px-5 text-slate-900">
-            <Section className="max-w-[680px] mx-auto bg-white rounded-[24px] p-8 shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
-              <Text className="text-sm uppercase tracking-[0.35em] text-slate-500 m-0">
+          <Section className="min-h-screen bg-slate-50 px-5 py-10 text-slate-900">
+            <Section className="mx-auto max-w-[680px] rounded-[24px] bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
+              <Text className="m-0 text-sm tracking-[0.35em] text-slate-500 uppercase">
                 Booking confirmed
               </Text>
 
               <Heading
                 as="h1"
-                className="text-[2.5rem] leading-tight font-extrabold mt-4 mb-3 text-brand"
+                className="text-brand mt-4 mb-3 text-[2.5rem] leading-tight font-extrabold"
                 style={textGradient}
               >
                 Your tickets are confirmed
               </Heading>
 
-              <Text className="text-lg text-slate-700 mb-6">
+              <Text className="mb-6 text-lg text-slate-700">
                 Hi {attendeeFirstName}, your booking for{' '}
                 <strong>{eventName}</strong> is complete. We can&apos;t wait to
                 see you there.
               </Text>
 
               <Section className="rounded-[20px] border border-slate-200 bg-slate-50 p-6">
-                <Text className="text-base font-semibold text-slate-900 mb-4">
+                <Text className="mb-4 text-base font-semibold text-slate-900">
                   Booking summary
                 </Text>
 
-                <Section className="flex justify-center items-center flex-col gap-3">
+                <Section className="flex flex-col items-center justify-center gap-3">
                   <DetailRow label="Order number" value={orderNumber} />
                   <DetailRow label="Event" value={eventName} />
                   <DetailRow label="Date" value={eventDateTime} />
@@ -112,24 +112,24 @@ const BookingConfirmedEmail = ({
                 </Section>
               </Section>
 
-              <Section className="bg-slate-900 rounded-[20px] p-6 text-center mt-6">
-                <Text className="text-xl font-semibold text-white mb-3">
+              <Section className="mt-6 rounded-[20px] bg-slate-900 p-6 text-center">
+                <Text className="mb-3 text-xl font-semibold text-white">
                   Save the date
                 </Text>
 
-                <Text className="text-sm text-slate-300 mb-5">
+                <Text className="mb-5 text-sm text-slate-300">
                   Tap below for event details, directions, and updates.
                 </Text>
 
                 <Link
                   href={eventUrl}
-                  className="inline-block rounded-full bg-accent px-6 py-3 text-base font-semibold text-white no-underline"
+                  className="bg-accent inline-block rounded-full px-6 py-3 text-base font-semibold text-white no-underline"
                 >
                   View event details
                 </Link>
               </Section>
 
-              <Section className="mt-8 text-sm text-slate-600 leading-relaxed">
+              <Section className="mt-8 text-sm leading-relaxed text-slate-600">
                 <Text className="m-0 mb-3">
                   Note: This is not an actual booking for a real event. This
                   email template is a demonstration of how a booking
@@ -147,7 +147,7 @@ const BookingConfirmedEmail = ({
               </Section>
             </Section>
 
-            <Section className="text-center mt-6 text-sm text-slate-500">
+            <Section className="mt-6 text-center text-sm text-slate-500">
               <Text className="m-0">
                 &copy; {currentYear} Evento. All rights reserved.
               </Text>
@@ -160,9 +160,9 @@ const BookingConfirmedEmail = ({
 };
 
 const DetailRow = ({ label, value }: { label: string; value: string }) => (
-  <Section className="flex justify-between items-start max-w-[500px] mb-4 rounded-[14px] bg-white p-4 border border-slate-200">
-    <Text className="text-sm text-slate-500 m-0">{label}</Text>
-    <Text className="text-sm font-medium text-slate-900 m-0">{value}</Text>
+  <Section className="mb-4 flex max-w-[500px] items-start justify-between rounded-[14px] border border-slate-200 bg-white p-4">
+    <Text className="m-0 text-sm text-slate-500">{label}</Text>
+    <Text className="m-0 text-sm font-medium text-slate-900">{value}</Text>
   </Section>
 );
 

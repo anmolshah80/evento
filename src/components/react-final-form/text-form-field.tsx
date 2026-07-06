@@ -68,14 +68,14 @@ const TextFormField = ({
     <Field name={fieldName}>
       {({ input, meta }) => {
         return (
-          <FormItem className="flex flex-col w-full">
+          <FormItem className="flex w-full flex-col">
             <FormLabel htmlFor={fieldId} className="text-black">
               {label}
             </FormLabel>
             <Input
               id={fieldId}
               className={cn(
-                'outline-none text-black border border-input bg-transparent rounded h-9 px-3 placeholder-mauve11 placeholder:text-sm',
+                'border-input placeholder-mauve11 h-9 rounded border bg-transparent px-3 text-black outline-none placeholder:text-sm',
                 fieldClassName,
               )}
               placeholder={placeholder}
