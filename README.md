@@ -70,6 +70,33 @@
 
   _Note: Refer to `package.json` file for the script above_
 
+  > The issue with prisma trying to create a new migration, when you run `npx prisma migrate dev`, is that Prisma sees the GIN index that we've created with raw SQL as "unmanaged drift." Because it is not declared in `schema.prisma`, Prisma keeps trying to reconcile it and may generate a follow-up migration that drops it.
+
+  > What to do in practice:
+
+  > - For normal indexes, declare them in `schema.prisma`, for example:
+  >   - `@@index([city])`
+  >   - `@@index([city, startDateTime])`
+
+  > - For the PostgreSQL full-text GIN index on `searchVector`, treat it as a manual SQL migration concern.
+  >   - Keep it in one migration file.
+  >   - Do not rely on `prisma migrate dev` to keep it "clean" forever.
+
+  > Recommended workflow:
+
+  > 1. Development
+  >    - Use `npx prisma migrate dev` only when you are ready to create a permanent migration.
+  >    - If you are just iterating and Prisma keeps creating extra drop migrations, switch to: - `npx prisma db push`
+  >    - This is fine for local development, especially with custom SQL features.
+
+  > 2. Team/fresh machine setup
+  >    - Use `npx prisma migrate deploy` to only apply the committed migrations and not create new ones.
+
+  > So the short answer is:
+  >
+  > - In development, use `db push` for this kind of custom Postgres index work.
+  > - On another pc, use `migrate deploy`, not `migrate dev`.
+
 - Run your application
 
   ```bash
