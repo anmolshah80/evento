@@ -19,7 +19,9 @@ const SearchForm = () => {
 
     if (searchText.trim() === '') return;
 
-    router.push(`events/${searchText}`);
+    // Navigate to search results page with the search query
+    const encodedQuery = encodeURIComponent(searchText.trim());
+    router.push(`/search?q=${encodedQuery}`);
   };
 
   // focus search input field on hot key press
@@ -72,7 +74,7 @@ const SearchForm = () => {
       <input
         id="searchText"
         type="text"
-        placeholder="Search events in any city..."
+        placeholder="Search events by name, city, venue..."
         spellCheck={false}
         className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none focus:bg-white/10 focus:ring-2"
         value={searchText}
