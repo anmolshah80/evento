@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { Prisma } from 'prisma/client';
 import prisma from '@/lib/db';
 import { EventBookingWithEvent } from '@/lib/types';
+import { searchEvents } from '@/lib/server-utils';
 
 const createBooking = async (
   formData: Prisma.EventBookingCreateInput,
@@ -25,4 +26,25 @@ const createBooking = async (
   return response;
 };
 
-export { createBooking };
+interface SearchFilters {
+  query: string;
+  startDate?: Date;
+  endDate?: Date;
+}
+
+const performEventSearch = async (
+  filters: SearchFilters,
+  currentPage: number = 1,
+) => {
+  try {
+    const result = await searchEvents(filters, currentPage);
+
+    return result;
+  } catch (error) {
+    console.error('Search action error:', error);
+
+    return { events: [], totalRecordsCount: 0 };
+  }
+};
+
+export { createBooking, performEventSearch };

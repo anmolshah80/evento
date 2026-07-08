@@ -69,7 +69,7 @@ const BookingConfirmedEmail = ({
           }}
         >
           <Section className="min-h-screen bg-slate-50 px-5 py-10 text-slate-900">
-            <Section className="mx-auto max-w-[680px] rounded-[24px] bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
+            <Section className="mx-auto max-w-170 rounded-[24px] bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
               <Text className="m-0 text-sm tracking-[0.35em] text-slate-500 uppercase">
                 Booking confirmed
               </Text>
@@ -84,8 +84,8 @@ const BookingConfirmedEmail = ({
 
               <Text className="mb-6 text-lg text-slate-700">
                 Hi {attendeeFirstName}, your booking for{' '}
-                <strong>{eventName}</strong> is complete. We can&apos;t wait to
-                see you there.
+                <strong>{eventName}</strong>{' '}
+                <span>is complete. We can&apos;t wait to see you there.</span>
               </Text>
 
               <Section className="rounded-[20px] border border-slate-200 bg-slate-50 p-6">
@@ -160,7 +160,7 @@ const BookingConfirmedEmail = ({
 };
 
 const DetailRow = ({ label, value }: { label: string; value: string }) => (
-  <Section className="mb-4 flex max-w-[500px] items-start justify-between rounded-[14px] border border-slate-200 bg-white p-4">
+  <Section className="mb-4 flex max-w-125 items-start justify-between rounded-[14px] border border-slate-200 bg-white p-4">
     <Text className="m-0 text-sm text-slate-500">{label}</Text>
     <Text className="m-0 text-sm font-medium text-slate-900">{value}</Text>
   </Section>

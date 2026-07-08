@@ -8,7 +8,7 @@ type H1Props = {
 const H1 = ({ children, className }: H1Props) => {
   return (
     <h1
-      className={cn('text-3xl font-bold tracking-tight lg:text-6xl', className)}
+      className={cn('text-3xl font-bold tracking-tight lg:text-5xl', className)}
     >
       {children}
     </h1>
