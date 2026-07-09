@@ -31,22 +31,22 @@
   npm install
   ```
 
-- Ensure you have Node.js `v20.17.0` installed
+- Ensure you have Node.js `v22.19.0` installed
 
   ```bash
   node -v
   ```
 
-  - If you have [node version manager (nvm)](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) installed, you can install Node.js `v20.17.0` directly
+  - If you have [node version manager (nvm)](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) installed, you can install Node.js `v22.19.0` directly
 
     ```bash
-    nvm install 20.17.0
+    nvm install 22.19.0
 
     # to check the installed Node.js versions
     nvm list
 
     # to switch to use a specified Node.js version
-    nvm use 20.17.0
+    nvm use 22.19.0
 
     # if you need help with nvm's other usage options, type
     nvm --help
@@ -70,6 +70,33 @@
 
   _Note: Refer to `package.json` file for the script above_
 
+  > The issue with prisma trying to create a new migration, when you run `npx prisma migrate dev`, is that Prisma sees the GIN index that we've created with raw SQL as "unmanaged drift." Because it is not declared in `schema.prisma`, Prisma keeps trying to reconcile it and may generate a follow-up migration that drops it.
+
+  > What to do in practice:
+
+  > - For normal indexes, declare them in `schema.prisma`, for example:
+  >   - `@@index([city])`
+  >   - `@@index([city, startDateTime])`
+
+  > - For the PostgreSQL full-text GIN index on `searchVector`, treat it as a manual SQL migration concern.
+  >   - Keep it in one migration file.
+  >   - Do not rely on `prisma migrate dev` to keep it "clean" forever.
+
+  > Recommended workflow:
+
+  > 1. Development
+  >    - Use `npx prisma migrate dev` only when you are ready to create a permanent migration.
+  >    - If you are just iterating and Prisma keeps creating extra drop migrations, switch to: - `npx prisma db push`
+  >    - This is fine for local development, especially with custom SQL features.
+
+  > 2. Team/fresh machine setup
+  >    - Use `npx prisma migrate deploy` to only apply the committed migrations and not create new ones.
+
+  > So the short answer is:
+  >
+  > - In development, use `db push` for this kind of custom Postgres index work.
+  > - On another pc, use `migrate deploy`, not `migrate dev`.
+
 - Run your application
 
   ```bash
@@ -87,7 +114,6 @@
 - Downgrade `react` and `react-dom` version to **18.3.1** since npm package `framer-motion@10.16.4` requires `react@"^18.0.0"` as a peer dependency and does not support `react@"19.0.0-rc-66855b96-20241106"`, which is a release candidate for _React 19_
 
 - Resolve issues with tracking files in git
-
   - `The issue` -> There were files in the local project that weren't being pushed to GitHub (i.e., renamed files changes' were not reflected in remote), even though they were being committed locally and pushed. Basically, there was a discrepancy between the committed files in local and remote.
 
   - `Don't do this` -> Never do the following since it will just unstage all your files in your current directory
@@ -112,16 +138,14 @@
   - Rename those files manually in kebab case format (previously it was in pascal case)
 
 - Install and Configure Prisma ORM
-
-  - Install `prisma`, `ts-node` and `@prisma/client` npm packages
+  - Install `@prisma/adapter-pg`, `@prisma/client`, `tsx`, and `dotenv` npm packages
 
     ```bash
-    npm install prisma@5.22.0 ts-node@10.9.1 --save-dev
-    npm install @prisma/client
+    npm install prisma --save-dev
+    npm install @prisma/client @prisma/adapter-pg tsx dotenv
     ```
 
   ## `SQLite`
-
   - Configure prisma with sqlite database
 
     ```bash
@@ -135,7 +159,6 @@
     ```
 
   ## `PostgreSQL`
-
   - Configure prisma with default database i.e., postgres. It will create a `schema.prisma` file in the `prisma` folder.
 
     ```bash
@@ -182,11 +205,9 @@
     - [How to use Prisma ORM with Next.js](https://www.prisma.io/docs/guides/nextjs#introduction)
 
 - `5433` is the port for `PostgreSQL v17` meanwhile `5432` is the port for `PostgreSQL v14` (it's my personal local configuration)
-
   - To confirm the port for `PostgreSQL v14`, read the log from `C:\Program Files\PostgreSQL\14\installation_summary.log`
 
 - Setup Prisma Postgres database in Vercel
-
   - Create a [Prisma Postgres database in Vercel](https://vercel.com/dashboard/stores)
 
   - Copy the `.env.local` contents of your newly created prisma postgres database, into your local `.env` file
@@ -197,7 +218,7 @@
     npx prisma db push
     ```
 
-  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `seed.ts` file in your `prisma/seeders` folder)
+  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `prisma/seeders/seed.ts` file)
 
     ```bash
     npx prisma db seed
@@ -220,7 +241,6 @@
   ```
 
   _Note: This will drop all your tables and your existing data_
-
   - Resources
     - [Prototyping your schema](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema)
     - [Development and production](https://www.prisma.io/docs/orm/prisma-migrate/workflows/development-and-production)
@@ -278,9 +298,14 @@
   });
   ```
 
-## To-dos
+- [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
+  - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 
-- Configure husky to lint and format your files before committing
+- [How to use Prisma ORM and Prisma Postgres with Next.js](https://www.prisma.io/docs/guides/nextjs)
+
+- [Updating React Email](https://react.email/docs/getting-started/updating-react-email)
+
+- [Configuring ESLint Plugin in Next.js](https://nextjs.org/docs/app/api-reference/config/eslint)
 - OpenLayers Resources
   - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
 - Maptiler Resources

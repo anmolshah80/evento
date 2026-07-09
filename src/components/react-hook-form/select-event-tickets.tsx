@@ -46,12 +46,12 @@ type SelectEventTicketsProps = {
 
 const SelectEventTickets = ({ form }: SelectEventTicketsProps) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-6">
+    <div className="flex flex-col gap-6 sm:flex-row">
       <FormField
         control={form.control}
         name="totalTickets"
         render={({ field }) => (
-          <FormItem className="flex flex-col w-full">
+          <FormItem className="flex w-full flex-col">
             <FormLabel id="total-tickets" className="text-black">
               Choose your tickets
             </FormLabel>
@@ -62,70 +62,72 @@ const SelectEventTickets = ({ form }: SelectEventTicketsProps) => {
               name="total-tickets"
             >
               <FormControl>
-                <SelectTrigger className="w-full sm:w-[13.25rem] text-black border border-input">
+                <SelectTrigger className="border-input w-full rounded border text-black sm:w-53">
                   <SelectValue placeholder="Select your tickets" />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Pick your event tickets</SelectLabel>
+              <SelectContent className="rounded">
+                <SelectGroup className="rounded">
+                  <SelectLabel className="text-white">
+                    Pick your event tickets
+                  </SelectLabel>
                   <SelectItem
                     value="1"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     1
                   </SelectItem>
                   <SelectItem
                     value="2"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     2
                   </SelectItem>
                   <SelectItem
                     value="3"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     3
                   </SelectItem>
                   <SelectItem
                     value="4"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     4
                   </SelectItem>
                   <SelectItem
                     value="5"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     5
                   </SelectItem>
                   <SelectItem
                     value="6"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     6
                   </SelectItem>
                   <SelectItem
                     value="7"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     7
                   </SelectItem>
                   <SelectItem
                     value="8"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     8
                   </SelectItem>
                   <SelectItem
                     value="9"
-                    className="outline-none px-5 mb-1 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-1 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     9
                   </SelectItem>
                   <SelectItem
                     value="10"
-                    className="outline-none px-5 mb-0.5 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="focus-visible:border-ring focus-visible:ring-ring/50 mb-0.5 px-5 outline-none focus-visible:ring-[3px]"
                   >
                     10
                   </SelectItem>

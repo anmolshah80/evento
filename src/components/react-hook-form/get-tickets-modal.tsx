@@ -3,6 +3,9 @@
 import * as z from 'zod/v4';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { LoaderCircle } from 'lucide-react';
 
 import {
   Dialog,
@@ -22,9 +25,17 @@ import DateTimePicker from '@/components/react-hook-form/date-time-picker';
 import SelectEventTickets from '@/components/react-hook-form/select-event-tickets';
 import TextFormField from '@/components/react-hook-form/text-form-field';
 
+import { Prisma } from 'prisma/client';
+import { createBooking } from '@/app/lib/actions';
+import { cn, combineDateTime, formatToFriendlyDate } from '@/lib/utils';
 import { PHONE_NUMBER_REGEX } from '@/lib/constants';
+import {
+  EventBookingFormResponseDataProps,
+  EventBookingWithEvent,
+} from '@/lib/types';
 
 type GetTicketsModalProps = {
+  eventId: string;
   children: React.ReactNode;
 };
 
@@ -36,6 +47,9 @@ const FormSchema = z.object({
     .trim()
     .min(2, {
       error: 'Please enter your first name',
+    })
+    .max(35, {
+      error: 'First name cannot exceed 35 characters',
     }),
   lastName: z
     .string({
@@ -44,6 +58,9 @@ const FormSchema = z.object({
     .trim()
     .min(2, {
       error: 'Please enter your last name',
+    })
+    .max(35, {
+      error: 'Last name cannot exceed 35 characters',
     }),
   email: z.email('Please enter a valid email'),
   // To validate optional text inputs -> https://github.com/colinhacks/zod/issues/310#issuecomment-794533682
@@ -66,43 +83,117 @@ const FormSchema = z.object({
   }),
 });
 
-const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
+const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      firstName: undefined,
-      lastName: undefined,
-      eventDate: undefined,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      eventDate: '',
       eventTime: '10:30:00',
       totalTickets: undefined,
     },
   });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
+
     // console.log('Form errors:', form.formState.errors);
-    console.log('onSubmit form data: ', data);
-    window.alert(JSON.stringify(data, undefined, 2));
+
+    try {
+      const bookedDateTime = combineDateTime(data.eventDate, data.eventTime);
+
+      const formattedFormData: Prisma.EventBookingCreateInput = {
+        event: {
+          // Prisma expects relation connection
+          connect: { id: eventId },
+        },
+        bookedDateTime,
+        attendeeFirstName: data.firstName,
+        attendeeLastName: data.lastName,
+        email: data.email,
+        phone: Boolean(data.phone) ? data.phone : null,
+        totalTickets: Number(data.totalTickets),
+      };
+
+      const bookingResponse: EventBookingWithEvent =
+        await createBooking(formattedFormData);
+
+      const formattedBookedDateTime = formatToFriendlyDate(
+        bookedDateTime.toISOString(),
+      );
+
+      // show success toast
+      toast.success(`Your booking was successful, ${data.firstName}!`, {
+        duration: 8000,
+        description: formattedBookedDateTime,
+      });
+
+      const emailResponse = await fetch('/api/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...bookingResponse,
+          bookedDateTime: formattedBookedDateTime,
+        }),
+      });
+
+      const emailResponseData: EventBookingFormResponseDataProps =
+        await emailResponse.json();
+
+      if (!emailResponseData.success)
+        throw new Error('Failed to send confirmation email');
+
+      toast.success(
+        `A confirmation email has been sent to you at ${data.email}. Check your inbox (or spam folder) for details.`,
+        {
+          duration: 8000,
+          position: 'bottom-right',
+          closeButton: true,
+        },
+      );
+
+      // reset form and close modal after successful submission
+      form.reset();
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error submitting booking: ', error);
+
+      toast.error(
+        'There was an error submitting your booking. Please try again later.',
+        {
+          duration: 8000,
+        },
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const {
     formState: { errors, isSubmitting },
   } = form;
 
-  console.log('errors: ', errors);
-
   return (
-    <Dialog>
+    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogOverlay className="fixed inset-0 bg-blackA6 data-[state=open]:animate-overlayShow" />
+      <DialogOverlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
 
       <DialogContent
         className={
-          'sm:max-w-[500px] fixed left-1/2 top-1/2 max-h-[96vh] w-[90vw] max-w-[482px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow gap-0 overflow-y-scroll sm:overflow-y-auto'
+          'bg-gray1 data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 max-h-[96vh] min-h-[calc(100dvh-8rem)] w-[90vw] max-w-120.5 -translate-x-1/2 -translate-y-1/2 gap-0 overflow-y-scroll rounded-md p-6.25 shadow-(--shadow-6) focus:outline-none sm:max-w-125 sm:overflow-y-auto'
         }
-        dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-4 top-[1.65rem]"
+        dialogCloseIconClassName="[&_svg:not([class*='size-'])]:size-5 top-[1.65rem] cursor-pointer hover:bg-gray-100 hover:shadow-sm"
       >
-        <DialogHeader className="gap-0 mb-9">
-          <DialogTitle className="m-0 text-2xl text-left md:text-[1.7rem] font-medium text-mauve12">
+        <DialogHeader className="mb-9 gap-0">
+          <DialogTitle className="text-mauve12 m-0 text-left text-2xl font-medium md:text-[1.7rem]">
             Book your tickets
           </DialogTitle>
           <DialogDescription></DialogDescription>
@@ -111,7 +202,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-8">
             <div className="flex flex-col gap-6 md:gap-8">
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col gap-6 sm:flex-row">
                 <TextFormField
                   form={form}
                   fieldId="first-name"
@@ -131,7 +222,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                 />
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col gap-6 sm:flex-row">
                 <TextFormField
                   form={form}
                   fieldId="email-address"
@@ -151,7 +242,7 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
                   maxLength={17}
                   fieldHasErrors={errors.phone}
                   fieldDescription={
-                    <span className="flex items-center text-xs text-mauve11">
+                    <span className="text-mauve11 flex items-center text-xs">
                       Include your country code for international numbers
                     </span>
                   }
@@ -163,10 +254,10 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
               <SelectEventTickets form={form} />
             </div>
 
-            <DialogFooter className="flex-row gap-3 justify-between">
+            <DialogFooter className="flex-row items-end justify-between gap-3">
               <DialogClose asChild>
                 <Button
-                  className="w-[100px] h-[35px] text-black border text-base border-slate-800 outline-none rounded hover:bg-gray-100 select-none"
+                  className="h-8.75 w-25 rounded border border-slate-800 bg-transparent text-base text-black outline-none select-none hover:bg-gray-100"
                   onClick={() => form.reset()}
                 >
                   Cancel
@@ -174,10 +265,23 @@ const GetTicketsModal = ({ children }: GetTicketsModalProps) => {
               </DialogClose>
               <Button
                 type="submit"
-                className="inline-flex w-[100px] h-[35px] items-center text-base justify-center rounded bg-black px-[15px] font-medium leading-none text-white outline-none outline-offset-1 hover:bg-black/[80%] focus-visible:outline-2 select-none"
-                disabled={isSubmitting}
+                className={cn(
+                  'inline-flex h-8.75 w-25 items-center justify-center rounded bg-black px-3 text-base leading-none font-medium text-white outline-offset-1 outline-none select-none hover:bg-black/80 focus-visible:outline-2',
+                  (isSubmitting || isLoading) && 'w-30',
+                )}
+                disabled={isSubmitting || isLoading}
               >
-                Submit
+                {isSubmitting || isLoading ? (
+                  <span className="flex items-center justify-center gap-4">
+                    Submit{' '}
+                    <LoaderCircle
+                      size={16}
+                      className="btn-spinner text-white"
+                    />
+                  </span>
+                ) : (
+                  <span>Submit</span>
+                )}
               </Button>
             </DialogFooter>
           </form>

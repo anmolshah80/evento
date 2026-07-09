@@ -19,10 +19,18 @@ const EventsList = async ({ city, currentPage = 1 }: EventsListProps) => {
       ? `/events/${city}?page=${currentPage + 1}`
       : '';
 
-  if (!events || events.length === 0) return null;
+  if (!events || events.length === 0) {
+    return (
+      <div className="text-center">
+        <p className="text-lg text-gray-400">
+          No events found for this city. Try a different city.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <section className="max-w-[1100px] flex flex-wrap gap-10 justify-center sm:px-[20px]">
+    <section className="flex max-w-275 flex-wrap justify-center gap-10 sm:px-5">
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}

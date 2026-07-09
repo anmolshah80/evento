@@ -5,32 +5,37 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Event {
-  id            Int            @id @default(autoincrement())
+  id            String                   @id @default(uuid(7)) @db.Uuid
   name          String
-  slug          String         @unique
+  slug          String                   @unique
   city          String
   location      String
-  startDateTime DateTime // First day of event and event's start time (e.g., 2025-07-10 10:30:00)
-  endDateTime   DateTime // Last day of event and event's end time (e.g., 2025-07-10 17:30:00)
+  startDateTime DateTime // First day of event and event's start time (e.g., 2026-07-10T15:00:00.000Z)
+  endDateTime   DateTime // Last day of event and event's end time (e.g., 2026-07-14T17:30:00.000Z)
   organizerName String
+  venueName     String
   imageUrl      String
   description   String
+  searchVector  Unsupported("tsvector")? // Full-text search vector for PostgreSQL
   bookings      EventBooking[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  updatedAt     DateTime                 @updatedAt
+
+  @@index([city])
+  @@index([startDateTime])
+  @@index([city, startDateTime])
 }
 
 model EventBooking {
-  id                Int           @id @default(autoincrement())
+  id                String        @id @default(uuid(7)) @db.Uuid
   attendeeFirstName String
   attendeeLastName  String
   email             String
@@ -38,9 +43,8 @@ model EventBooking {
   bookedDateTime    DateTime // When attendee plans to visit
   totalTickets      Int           @default(1)
   bookingStatus     BookingStatus @default(PENDING)
-  eventId           Int
+  eventId           String        @db.Uuid
   event             Event         @relation(fields: [eventId], references: [id])
-  createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 }
 

@@ -6,16 +6,16 @@ import {
 
 const NotFoundGraphicUI = () => {
   return (
-    <div className="flex flex-col justify-center items-center mx-auto">
+    <div className="mx-auto flex flex-col items-center justify-center">
       <div className="relative flex items-center">
         <FileTextIcon width={150} height={150} />
 
-        <div className="absolute -top-[18px] -right-[22px]">
+        <div className="absolute -top-4.5 -right-5.5">
           <MagnifyingGlassIcon width={60} height={60} className="relative" />
           <Cross2Icon
             width={30}
             height={30}
-            className="absolute top-[12px] left-[12px]"
+            className="absolute top-3 left-3"
           />
         </div>
       </div>

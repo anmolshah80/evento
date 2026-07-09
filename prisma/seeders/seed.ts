@@ -1,15 +1,13 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '../../src/lib/db';
 
 import { EVENTS } from './data.js';
-
-const prisma = new PrismaClient();
 
 const main = async () => {
   console.log('\nStart seeding records into database...\n');
 
   for (const event of EVENTS) {
     const result = await prisma.event.upsert({
-      where: { id: event.id },
+      where: { slug: event.slug },
       update: {},
       create: event,
     });
