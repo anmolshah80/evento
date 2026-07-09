@@ -16,7 +16,9 @@ const nextConfig: NextConfig = {
         hostname: 'images.pexels.com',
       },
     ],
+    qualities: [50, 75],
   },
+  cacheComponents: true,
 };
 
 export default nextConfig;

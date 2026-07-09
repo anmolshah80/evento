@@ -20,8 +20,8 @@ export default function Home() {
       <section className="mt-4 flex gap-x-4 text-sm text-white/50">
         <p>Popular:</p>
         <nav className="space-x-2 font-semibold">
-          <Link href={'/events/austin'}>Austin</Link>
-          <Link href={'/events/seattle'}>Seattle</Link>
+          <Link href={'/search?q=austin'}>Austin</Link>
+          <Link href={'/search?q=seattle'}>Seattle</Link>
         </nav>
       </section>
     </main>

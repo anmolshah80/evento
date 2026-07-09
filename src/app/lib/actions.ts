@@ -9,6 +9,12 @@ import prisma from '@/lib/db';
 import { EventBookingWithEvent } from '@/lib/types';
 import { searchEvents } from '@/lib/server-utils';
 
+interface SearchFilters {
+  query: string;
+  startDate?: Date;
+  endDate?: Date;
+}
+
 const createBooking = async (
   formData: Prisma.EventBookingCreateInput,
 ): Promise<EventBookingWithEvent> => {
@@ -25,12 +31,6 @@ const createBooking = async (
 
   return response;
 };
-
-interface SearchFilters {
-  query: string;
-  startDate?: Date;
-  endDate?: Date;
-}
 
 const performEventSearch = async (
   filters: SearchFilters,
