@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Suspense } from 'react';
+import { Suspense, use } from 'react';
 import { notFound } from 'next/navigation';
 
 import H1 from '@/components/h1';
@@ -8,6 +8,10 @@ import Loading from '@/app/events/[city]/loading';
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+type SearchContentProps = {
+  searchParamsPromise: Props['searchParams'];
 };
 
 export const generateMetadata = async ({
@@ -22,8 +26,9 @@ export const generateMetadata = async ({
   };
 };
 
-const SearchPage = async ({ searchParams }: Props) => {
-  const { q, page } = await searchParams;
+const SearchContent = ({ searchParamsPromise }: SearchContentProps) => {
+  const searchParams = use(searchParamsPromise);
+  const { q, page } = searchParams;
 
   const query = typeof q === 'string' ? q : '';
   const pageNumber = typeof page === 'string' ? parseInt(page, 10) : 1;
@@ -33,12 +38,17 @@ const SearchPage = async ({ searchParams }: Props) => {
   }
 
   return (
-    <Suspense key={query + pageNumber} fallback={<Loading />}>
-      <main className="flex min-h-[110vh] flex-col items-center px-5 py-24">
-        <H1 className="mb-28">Search Results for &quot;{query}&quot;</H1>
+    <main className="flex min-h-[110vh] flex-col items-center px-5 py-24">
+      <H1 className="mb-28">Search Results for &quot;{query}&quot;</H1>
+      <SearchResults query={query} currentPage={pageNumber} />
+    </main>
+  );
+};
 
-        <SearchResults query={query} currentPage={pageNumber} />
-      </main>
+const SearchPage = async ({ searchParams }: Props) => {
+  return (
+    <Suspense key="search-page" fallback={<Loading />}>
+      <SearchContent searchParamsPromise={searchParams} />
     </Suspense>
   );
 };
