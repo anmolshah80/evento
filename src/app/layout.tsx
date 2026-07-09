@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import localFont from 'next/font/local';
 
 import { Toaster } from '@/components/ui/sonner';
@@ -6,6 +7,7 @@ import { Toaster } from '@/components/ui/sonner';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import Container from '@/components/container';
+import HeaderSkeleton from '@/components/header-skeleton';
 
 import './globals.css';
 
@@ -41,7 +43,9 @@ export default function RootLayout({
       >
         <Toaster position="bottom-right" richColors />
         <Container>
-          <Header />
+          <Suspense fallback={<HeaderSkeleton />}>
+            <Header />
+          </Suspense>
           {children}
           <Footer />
         </Container>
