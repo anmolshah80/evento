@@ -1,7 +1,8 @@
+'use cache';
+
 // to only allow the server components to import and use the util functions declared here
 import 'server-only';
-
-import { unstable_cache } from 'next/cache';
+import { cacheLife } from 'next/cache';
 
 import { Prisma } from 'prisma/client';
 import prisma from '@/lib/db';
@@ -13,7 +14,9 @@ interface SearchFilters {
   endDate?: Date;
 }
 
-const getEvent = unstable_cache(async (slug: string) => {
+const getEvent = async (slug: string) => {
+  cacheLife('days'); // Event updated daily
+
   try {
     const eventData = await prisma.event.findUnique({
       where: {
@@ -29,9 +32,11 @@ const getEvent = unstable_cache(async (slug: string) => {
 
     return null;
   }
-});
+};
 
-const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
+const getEvents = async (city: string, currentPage = 1) => {
+  cacheLife('days'); // Events updated daily
+
   try {
     const events = await prisma.event.findMany({
       where: {
@@ -72,13 +77,14 @@ const getEvents = unstable_cache(async (city: string, currentPage = 1) => {
 
     return { events: [], totalRecordsCount: 0 };
   }
-});
+};
 
 const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
+  cacheLife('default');
+
   try {
     const { query, startDate, endDate } = filters;
-    const trimmedQuery = query.trim();
-    const sanitizedQuery = sanitizeSearchQuery(trimmedQuery);
+    const sanitizedQuery = sanitizeSearchQuery(query);
 
     if (!sanitizedQuery) {
       return { events: [], totalRecordsCount: 0 };
@@ -86,7 +92,7 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
 
     // Use PostgreSQL full-text search with weighted search vector
     // Exclude the unsupported "searchVector" column from the selected fields.
-    const events = (await prisma.$queryRaw`
+    const results = (await prisma.$queryRaw`
       SELECT
         "id",
         "name",
@@ -99,11 +105,12 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
         "venueName",
         "imageUrl",
         "description",
-        "updatedAt"
+        "updatedAt",
+        COUNT(*) OVER() AS total_count
       FROM "Event"
-      WHERE "searchVector" @@ plainto_tsquery('english', ${sanitizedQuery})
+      WHERE "searchVector" @@ websearch_to_tsquery('english', ${sanitizedQuery})
       ${startDate && endDate ? Prisma.sql`AND "startDateTime" >= ${startDate} AND "endDateTime" <= ${endDate}` : Prisma.empty}
-      ORDER BY ts_rank("searchVector", plainto_tsquery('english', ${sanitizedQuery})) DESC, "startDateTime" ASC
+      ORDER BY ts_rank("searchVector", websearch_to_tsquery('english', ${sanitizedQuery})) DESC, "startDateTime" ASC
       LIMIT 6
       OFFSET ${(currentPage - 1) * 6}
     `) as Array<{
@@ -119,26 +126,26 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
       imageUrl: string;
       description: string;
       updatedAt: Date;
+      total_count: bigint;
     }>;
 
-    if (!events || events.length === 0) {
+    if (!results || results.length === 0) {
       return { events: [], totalRecordsCount: 0 };
     }
 
-    // Get total count for pagination
-    const countResult = await prisma.$queryRaw<[{ count: bigint }]>`
-      SELECT COUNT(*) as count FROM "Event"
-      WHERE "searchVector" @@ plainto_tsquery('english', ${sanitizedQuery})
-      ${startDate && endDate ? Prisma.sql`AND "startDateTime" >= ${startDate} AND "endDateTime" <= ${endDate}` : Prisma.empty}
-    `;
+    // extract total count from first row
+    const totalRecordsCount = Number(results[0].total_count || 0);
 
-    const totalRecordsCount = Number(countResult[0]?.count || 0);
+    console.log('totalRecordsCount: ', totalRecordsCount);
+
+    // remove total_count from each row to match expected `Event` type
+    const events = results.map(({ total_count, ...rest }) => rest);
 
     return { events, totalRecordsCount };
   } catch (error) {
     console.warn('Unable to search events:', error);
 
-    // Fallback to basic contains search if full-text search fails
+    // fallback to basic contains search if full-text search fails
     return await searchEventsFallback(filters, currentPage);
   }
 };
@@ -148,6 +155,8 @@ const searchEventsFallback = async (
   filters: SearchFilters,
   currentPage = 1,
 ) => {
+  cacheLife('default');
+
   try {
     const { query, startDate, endDate } = filters;
     const sanitizedQuery = sanitizeSearchQuery(query);
@@ -208,7 +217,9 @@ const searchEventsFallback = async (
   }
 };
 
-const getEventBookings = unstable_cache(async (slug: string) => {
+const getEventBookings = async (slug: string) => {
+  cacheLife('hours'); // Bookings updated multiple times per day
+
   try {
     const bookings = await prisma.eventBooking.findMany({
       where: {
@@ -236,6 +247,6 @@ const getEventBookings = unstable_cache(async (slug: string) => {
       message: 'No bookings found for this event.',
     };
   }
-});
+};
 
 export { getEvent, getEvents, getEventBookings, searchEvents };
