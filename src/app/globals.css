@@ -254,9 +254,3 @@ img {
     @apply bg-background text-foreground;
   } */
 }
-
-.map-container {
-  /* margin: 4rem; */
-  width: 100%;
-  height: 500px;
-}
