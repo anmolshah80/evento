@@ -8,9 +8,11 @@ import Loading from '@/app/event/[slug]/loading';
 
 import H1 from '@/components/h1';
 import ModalButton from '@/components/modal-button';
+import MapView from '@/components/map-view';
 
 import { humanizeKebabCase } from '@/lib/utils';
 import { getEvent } from '@/lib/server-utils';
+import { getCoordinatesFromAddress } from '@/lib/map-utils';
 
 type DetailsSectionProps = {
   header: string;
@@ -65,6 +67,9 @@ const EventPage = async ({ params }: Props) => {
   const eventData: Event | null = await getEvent(slug);
 
   if (!eventData) return null;
+
+  // Geocode the location
+  const coords = await getCoordinatesFromAddress(eventData.location);
 
   const formattedDate = new Date(eventData.startDateTime).toLocaleDateString(
     'en-US',
@@ -126,6 +131,16 @@ const EventPage = async ({ params }: Props) => {
           />
 
           <DetailsSection header="Location" content={eventData.location} />
+
+          {coords ? (
+            <MapView
+              address={eventData.location}
+              lat={coords.lat}
+              lon={coords.lon}
+            />
+          ) : (
+            <p className="mt-4 text-white/50">Map unavailable</p>
+          )}
         </div>
       </main>
     </Suspense>

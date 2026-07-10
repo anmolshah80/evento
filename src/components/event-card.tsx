@@ -11,7 +11,7 @@ type EventCardProps = {
   event: Event;
 };
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 const EventCard = ({ event }: EventCardProps) => {
   const linkRef = useRef(null);

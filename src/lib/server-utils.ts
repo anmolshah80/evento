@@ -136,9 +136,8 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
     // extract total count from first row
     const totalRecordsCount = Number(results[0].total_count || 0);
 
-    console.log('totalRecordsCount: ', totalRecordsCount);
-
     // remove total_count from each row to match expected `Event` type
+    /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
     const events = results.map(({ total_count, ...rest }) => rest);
 
     return { events, totalRecordsCount };
