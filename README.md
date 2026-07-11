@@ -55,8 +55,10 @@
 - Create an `.env` file in the root directory inside `evento` folder with the following contents. Look for the detailed information on `DATABASE_URL` key contents below in the `PostgreSQL` section under `Notes` sub-heading
 
   ```properties
-  DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
+   DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
   ```
+
+  For hosted PostgreSQL, use `sslmode=verify-full` in the connection URL. Do not use `sslmode=require`, `prefer`, or `verify-ca`; current `pg` versions warn that these aliases will change behavior in a future major release.
 
   _Note: Please ensure you have [PostgreSQL](https://www.postgresql.org/download/) installed in your local machine_
 
