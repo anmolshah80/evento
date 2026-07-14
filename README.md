@@ -309,12 +309,21 @@
 
 - [Configuring ESLint Plugin in Next.js](https://nextjs.org/docs/app/api-reference/config/eslint)
 
-- OpenLayers Resources
-  - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
-- Maptiler Resources
-  - [Maptiler API keys](https://cloud.maptiler.com/account/keys/)
-  - [How to protect your map key](https://docs.maptiler.com/guides/maps-apis/maps-platform/how-to-protect-your-map-key/)
-  - [Maptiler API](https://docs.maptiler.com/cloud/api/)
-  - [Geocoding - API Client JS](https://docs.maptiler.com/client-js/geocoding/)
-  - [Coordinates - API Client JS](https://docs.maptiler.com/client-js/coordinates/)
-  - [https://epsg.io/](https://epsg.io/map#srs=4326&x=81.695151&y=16.762277&z=19&layer=streets)
+- Resources to configure static and dynamic maps
+  - [LocationIQ Maps (customizable static or dynamic maps for websites)](https://locationiq.com/maps)
+
+  - [US Census Geocoder](https://geocoding.geo.census.gov/geocoder/)
+
+  - OpenLayers Resources
+    - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
+
+  - Maptiler Resources
+    - [Maptiler API keys](https://cloud.maptiler.com/account/keys/)
+    - [How to protect your map key](https://docs.maptiler.com/guides/maps-apis/maps-platform/how-to-protect-your-map-key/)
+    - [Maptiler API](https://docs.maptiler.com/cloud/api/)
+    - [Geocoding - API Client JS](https://docs.maptiler.com/client-js/geocoding/)
+    - [Coordinates - API Client JS](https://docs.maptiler.com/client-js/coordinates/)
+    - [https://epsg.io/](https://epsg.io/map#srs=4326&x=81.695151&y=16.762277&z=19&layer=streets)
+
+- [Postgres Full Text Search is better than ... (Part 1)](https://admcpr.com/postgres-full-text-search-is-better-than-part1/)
+- [Postgres Full Text Search is better than ... (Part 2)](https://admcpr.com/postgres-full-text-search-is-better-than-part-2/)
