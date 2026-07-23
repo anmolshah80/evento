@@ -19,7 +19,9 @@ const SearchForm = () => {
 
     if (searchText.trim() === '') return;
 
-    router.push(`events/${searchText}`);
+    // Navigate to search results page with the search query
+    const encodedQuery = encodeURIComponent(searchText.trim());
+    router.push(`/search?q=${encodedQuery}`);
   };
 
   // focus search input field on hot key press
@@ -50,12 +52,12 @@ const SearchForm = () => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="w-full relative sm:w-[580px]">
+    <form onSubmit={handleSubmit} className="relative w-full sm:w-145">
       <TooltipUI
         sourceElement={
           <span
             className={clsx(
-              'absolute bg-gray-800 pt-[0.3rem] pb-[0.4rem] px-[0.6rem] text-white right-8 top-3 border-none rounded-[4px] text-xl',
+              'absolute top-3 right-8 rounded-sm border-none bg-gray-800 px-[0.6rem] pt-[0.3rem] pb-[0.4rem] text-xl text-white',
               {
                 hidden: slashKeyClassName === 'slash-key-hide',
               },
@@ -65,16 +67,16 @@ const SearchForm = () => {
           </span>
         }
         tooltipContent={<p>Type / to start searching</p>}
-        tooltipContentClassName="absolute left-[27.5rem] -top-[4rem] w-max"
+        tooltipContentClassName="absolute left-110 -top-16 w-max"
         hideTooltip={slashKeyClassName === 'slash-key-hide'}
       />
 
       <input
         id="searchText"
         type="text"
-        placeholder="Search events in any city..."
+        placeholder="Search events by name, city, venue..."
         spellCheck={false}
-        className="w-full h-16 rounded-lg bg-white/[7%] px-6 outline-none ring-accent-green/50 transition focus:ring-2 focus:bg-white/10"
+        className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none focus:bg-white/10 focus:ring-2"
         value={searchText}
         ref={searchInputRef}
         onChange={(event) => setSearchText(event.target.value)}

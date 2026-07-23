@@ -55,8 +55,10 @@
 - Create an `.env` file in the root directory inside `evento` folder with the following contents. Look for the detailed information on `DATABASE_URL` key contents below in the `PostgreSQL` section under `Notes` sub-heading
 
   ```properties
-  DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
+   DATABASE_URL="postgresql://<postgres_superuser_name>:<superuser_password>@localhost:<postgres_server_port>/<database_name>?schema=public"
   ```
+
+  For hosted PostgreSQL, use `sslmode=verify-full` in the connection URL. Do not use `sslmode=require`, `prefer`, or `verify-ca`; current `pg` versions warn that these aliases will change behavior in a future major release.
 
   _Note: Please ensure you have [PostgreSQL](https://www.postgresql.org/download/) installed in your local machine_
 
@@ -69,6 +71,33 @@
   _Note: Please go through this guide first to [choose between db push and prisma migrate](https://www.prisma.io/docs/orm/prisma-migrate/workflows/prototyping-your-schema#choosing-db-push-or-prisma-migrate)_
 
   _Note: Refer to `package.json` file for the script above_
+
+  > The issue with prisma trying to create a new migration, when you run `npx prisma migrate dev`, is that Prisma sees the GIN index that we've created with raw SQL as "unmanaged drift." Because it is not declared in `schema.prisma`, Prisma keeps trying to reconcile it and may generate a follow-up migration that drops it.
+
+  > What to do in practice:
+
+  > - For normal indexes, declare them in `schema.prisma`, for example:
+  >   - `@@index([city])`
+  >   - `@@index([city, startDateTime])`
+
+  > - For the PostgreSQL full-text GIN index on `searchVector`, treat it as a manual SQL migration concern.
+  >   - Keep it in one migration file.
+  >   - Do not rely on `prisma migrate dev` to keep it "clean" forever.
+
+  > Recommended workflow:
+
+  > 1. Development
+  >    - Use `npx prisma migrate dev` only when you are ready to create a permanent migration.
+  >    - If you are just iterating and Prisma keeps creating extra drop migrations, switch to: - `npx prisma db push`
+  >    - This is fine for local development, especially with custom SQL features.
+
+  > 2. Team/fresh machine setup
+  >    - Use `npx prisma migrate deploy` to only apply the committed migrations and not create new ones.
+
+  > So the short answer is:
+  >
+  > - In development, use `db push` for this kind of custom Postgres index work.
+  > - On another pc, use `migrate deploy`, not `migrate dev`.
 
 - Run your application
 
@@ -111,11 +140,11 @@
   - Rename those files manually in kebab case format (previously it was in pascal case)
 
 - Install and Configure Prisma ORM
-  - Install `prisma`, `ts-node` and `@prisma/client` npm packages
+  - Install `@prisma/adapter-pg`, `@prisma/client`, `tsx`, and `dotenv` npm packages
 
     ```bash
-    npm install prisma@5.22.0 ts-node@10.9.1 --save-dev
-    npm install @prisma/client@5.22.0
+    npm install prisma --save-dev
+    npm install @prisma/client @prisma/adapter-pg tsx dotenv
     ```
 
   ## `SQLite`
@@ -191,7 +220,7 @@
     npx prisma db push
     ```
 
-  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `seed.ts` file in your `prisma/seeders` folder)
+  - Once the tables are created, you can seed your data to your remote prisma postgres database via the following command (given that you have a `prisma/seeders/seed.ts` file)
 
     ```bash
     npx prisma db seed
@@ -274,12 +303,34 @@
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
 
 - [Server Actions in Next.js](https://nextjs.org/learn/dashboard-app/mutating-data)
+  - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 
-## To-dos
-
-- Configure husky to lint and format your files before committing
-- [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 - [Upgrade setup-node github actions](https://github.com/actions/setup-node)
+
+- [How to use Prisma ORM and Prisma Postgres with Next.js](https://www.prisma.io/docs/guides/nextjs)
+
+- [Updating React Email](https://react.email/docs/getting-started/updating-react-email)
+
+- [Configuring ESLint Plugin in Next.js](https://nextjs.org/docs/app/api-reference/config/eslint)
+
+- Resources to configure static and dynamic maps
+  - [LocationIQ Maps (customizable static or dynamic maps for websites)](https://locationiq.com/maps)
+
+  - [US Census Geocoder](https://geocoding.geo.census.gov/geocoder/)
+
+  - OpenLayers Resources
+    - [Getting started with Openlayers in React](https://dev.to/kofiadu/getting-started-with-openlayers-in-react-2onm)
+
+  - Maptiler Resources
+    - [Maptiler API keys](https://cloud.maptiler.com/account/keys/)
+    - [How to protect your map key](https://docs.maptiler.com/guides/maps-apis/maps-platform/how-to-protect-your-map-key/)
+    - [Maptiler API](https://docs.maptiler.com/cloud/api/)
+    - [Geocoding - API Client JS](https://docs.maptiler.com/client-js/geocoding/)
+    - [Coordinates - API Client JS](https://docs.maptiler.com/client-js/coordinates/)
+    - [https://epsg.io/](https://epsg.io/map#srs=4326&x=81.695151&y=16.762277&z=19&layer=streets)
+
+- [Postgres Full Text Search is better than ... (Part 1)](https://admcpr.com/postgres-full-text-search-is-better-than-part1/)
+- [Postgres Full Text Search is better than ... (Part 2)](https://admcpr.com/postgres-full-text-search-is-better-than-part-2/)
 
 ## Resources
 

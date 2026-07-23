@@ -65,12 +65,12 @@ function combineDateTime(dateString: string, timeString: string): Date {
 /**
  * formats an ISO date string to a more human-friendly format
  * @param isoDateString
- * @returns formatted date string like "Wednesday, January 28th at 10:30am"
+ * @returns formatted date string like "Wednesday, January 28th 2026 at 10:30 AM"
  *
  * @example
  * ```typescript
  * const isoString: string = '2026-01-28T10:30:00.000Z';
- * console.log(formatToFriendlyDate(isoString)); // "Wednesday, January 28th at 10:30am"
+ * console.log(formatToFriendlyDate(isoString)); // "Wednesday, January 28th 2026 at 10:30 AM"
  * ```
  */
 function formatToFriendlyDate(isoDateString: string): string {
@@ -86,6 +86,7 @@ function formatToFriendlyDate(isoDateString: string): string {
     timeZone: 'UTC', // keeps the time as per the original UTC string
     weekday: 'long', // e.g., "Wednesday"
     month: 'long', // e.g., "January"
+    year: 'numeric', // e.g., "2026"
     day: 'numeric', // e.g., "28"
     hour: 'numeric', // e.g., "10"
     minute: '2-digit', // e.g., "30"
@@ -104,6 +105,7 @@ function formatToFriendlyDate(isoDateString: string): string {
   let hour: string = '';
   let minute: string = '';
   let dayPeriod: string = '';
+  let year: string = '';
 
   for (const part of formattedParts) {
     switch (part.type) {
@@ -116,6 +118,9 @@ function formatToFriendlyDate(isoDateString: string): string {
       case 'day':
         day = part.value;
         break;
+      case 'year':
+        year = part.value;
+        break;
       case 'hour':
         hour = part.value;
         break;
@@ -124,7 +129,7 @@ function formatToFriendlyDate(isoDateString: string): string {
         break;
       case 'dayPeriod':
         dayPeriod = part.value;
-        break; // "am" or "pm"
+        break; // "AM" or "PM"
     }
   }
 
@@ -138,13 +143,36 @@ function formatToFriendlyDate(isoDateString: string): string {
   const dayWithSuffix: string = `${day}${getOrdinalSuffix(Number(day))}`;
 
   // assemble the final string
-  return `${weekday}, ${month} ${dayWithSuffix} at ${hour}:${minute}${dayPeriod}`;
+  return `${weekday}, ${month} ${dayWithSuffix} ${year} at ${hour}:${minute} ${dayPeriod}`;
 }
 
+const currentYear = new Date().getFullYear();
+
+/**
+ * Sanitizes a search query by trimming whitespace and collapsing multiple
+ * consecutive whitespace characters into a single space.
+ *
+ * @param {string} query - The raw search query string to sanitize.
+ * @returns {string} The sanitized query with trimmed edges and collapsed spaces.
+ *
+ * @example
+ * sanitizeSearchQuery('  DJ   practice  session  ')
+ * // => 'DJ practice session'
+ *
+ * @example
+ * sanitizeSearchQuery("  O'Reilly's  workshop  ")
+ * // => "O'Reilly's workshop"  // apostrophe is preserved
+ */
+const sanitizeSearchQuery = (query: string) => {
+  return query.trim().replace(/\s+/g, ' ');
+};
+
 export {
+  currentYear,
   capitalize,
   cn,
   humanizeKebabCase,
   combineDateTime,
   formatToFriendlyDate,
+  sanitizeSearchQuery,
 };

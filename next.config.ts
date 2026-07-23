@@ -15,8 +15,18 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.pexels.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'api.maptiler.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'maps.geoapify.com',
+      },
     ],
+    qualities: [50, 75],
   },
+  cacheComponents: true,
 };
 
 export default nextConfig;
