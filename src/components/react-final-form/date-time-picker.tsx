@@ -60,7 +60,7 @@ const DateTimePicker = () => {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="max-h-[320px] min-w-max overflow-y-scroll bg-black p-0 text-white"
+                  className="max-h-80 min-w-max overflow-y-scroll bg-black p-0 text-white"
                   align="start"
                 >
                   <Calendar
@@ -85,7 +85,7 @@ const DateTimePicker = () => {
 
                       setOpen(false);
                     }}
-                    disabled={(date) => date < new Date('1900-01-01')}
+                    disabled={(date) => date < new Date('2020-01-01')}
                     className="w-full border-white bg-white"
                   />
                 </PopoverContent>
@@ -112,7 +112,7 @@ const DateTimePicker = () => {
               ref={eventTimeRef}
             />
             <Clock8Icon
-              className="text-mauve11 absolute top-[34px] right-3 h-4 w-4 cursor-pointer"
+              className="text-mauve11 absolute top-8.5 right-3 h-4 w-4 cursor-pointer"
               onClick={() => eventTimeRef?.current?.focus()}
             />
 

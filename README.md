@@ -301,7 +301,11 @@
   ```
 
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
+
+- [Server Actions in Next.js](https://nextjs.org/learn/dashboard-app/mutating-data)
   - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
+
+- [Upgrade setup-node github actions](https://github.com/actions/setup-node)
 
 - [How to use Prisma ORM and Prisma Postgres with Next.js](https://www.prisma.io/docs/guides/nextjs)
 
@@ -327,3 +331,7 @@
 
 - [Postgres Full Text Search is better than ... (Part 1)](https://admcpr.com/postgres-full-text-search-is-better-than-part1/)
 - [Postgres Full Text Search is better than ... (Part 2)](https://admcpr.com/postgres-full-text-search-is-better-than-part-2/)
+
+## Resources
+
+- [Bookings UI](https://dribbble.com/shots/21370684-Bookings-list-view)

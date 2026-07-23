@@ -3,11 +3,26 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { LayoutDashboard, Calendar1, Calendars } from 'lucide-react';
 
 import Logo from '@/components/logo';
 
 import { HEADER_ROUTES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+
+type HeaderIconProps = {
+  pathname: string;
+};
+
+const HeaderIcon = ({ pathname }: HeaderIconProps) => {
+  if (pathname === '/') {
+    return <LayoutDashboard size={16} />;
+  } else if (pathname === '/events/all') {
+    return <Calendars size={16} />;
+  } else if (pathname === '/bookings') {
+    return <Calendar1 size={16} />;
+  }
+};
 
 const Header = () => {
   const activePathname = usePathname();
@@ -29,8 +44,10 @@ const Header = () => {
                 },
               )}
             >
-              <Link href={path}>{name}</Link>
-
+              <span className="flex items-center justify-center gap-1">
+                <HeaderIcon pathname={path} />
+                <Link href={path}>{name}</Link>
+              </span>
               {activePathname === path && (
                 <motion.div
                   layoutId="header-active-link"
