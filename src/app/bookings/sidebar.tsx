@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 import { Calendar } from '@/components/ui/calendar';
 import EventInfoCard from '@/components/event-info-card';
@@ -16,7 +16,7 @@ const BookingsSidebar = () => {
 
   return (
     <section className="px-4 md:px-6">
-      <p className="text-lg font-bold mb-4">
+      <p className="mb-4 text-lg font-bold">
         {selectedDate
           ? selectedDate.toLocaleDateString('en-US', {
               day: 'numeric',
@@ -44,11 +44,11 @@ const BookingsSidebar = () => {
           }
         }}
         disabled={(date) => date < new Date('2020-01-01')}
-        className="border-white w-[300px] max-h-[320px] p-0 bg-transparent text-white"
+        className="max-h-80 w-75 border-white bg-transparent p-0 text-white"
       />
 
-      <div className="flex flex-col justify-center gap-8 mt-12">
-        <p className="flex items-center justify-between w-full">
+      <div className="mt-12 flex flex-col justify-center gap-8">
+        <p className="flex w-full items-center justify-between">
           <span className="text-lg font-bold">All Events Today</span>{' '}
           <span className="flex items-center justify-center gap-2">
             Show <ChevronDown size={16} className="text-white" />
