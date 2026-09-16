@@ -301,9 +301,9 @@
   ```
 
 - [Upgrade to Prisma ORM 7](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
+  - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 
 - [Server Actions in Next.js](https://nextjs.org/learn/dashboard-app/mutating-data)
-  - [Define your Prisma Schema](https://www.prisma.io/docs/guides/clerk-nextjs#32-define-your-prisma-schema)
 
 - [Upgrade setup-node github actions](https://github.com/actions/setup-node)
 
