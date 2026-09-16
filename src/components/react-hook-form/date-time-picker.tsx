@@ -113,7 +113,7 @@ const DateTimePicker = ({ form }: DateTimePickerProps) => {
 
                       setOpen(false);
                     }}
-                    disabled={(date) => date < new Date('1900-01-01')}
+                    disabled={(date) => date < new Date('2020-01-01')}
                     className="w-full border-white bg-white"
                     additionalClassNames={{
                       button_next: 'px-5! text-white hover:text-white rounded',

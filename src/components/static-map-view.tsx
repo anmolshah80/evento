@@ -23,13 +23,13 @@ const StaticMapView = ({ address, lat, lon }: StaticMapViewProps) => {
           // fallback if the image fails to load
           e.currentTarget.style.display = 'none';
 
-          // optionally show a fallback message
-          const fallback = document.createElement('p');
+          // // optionally show a fallback message
+          // const fallback = document.createElement('p');
 
-          fallback.className = 'text-white/50 py-8';
-          fallback.textContent = 'Static map temporarily unavailable';
+          // fallback.className = 'text-white/50 py-8';
+          // fallback.textContent = 'Static map temporarily unavailable';
 
-          e.currentTarget.parentNode?.appendChild(fallback);
+          // e.currentTarget.parentNode?.appendChild(fallback);
         }}
       />
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-black/70 px-4 py-2 text-sm text-white hover:bg-black">

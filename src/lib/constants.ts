@@ -7,6 +7,10 @@ const HEADER_ROUTES = [
     name: 'All Events',
     path: '/events/all',
   },
+  {
+    name: 'Bookings',
+    path: '/bookings',
+  },
 ];
 
 const FOOTER_ROUTES = [
