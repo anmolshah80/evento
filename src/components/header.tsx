@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 
@@ -39,6 +40,25 @@ const Header = () => {
               )}
             </li>
           ))}
+
+          <li className="relative flex items-center">
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group text-white/70 transition-colors hover:text-white"
+              href="https://github.com/anmolshah80/evento"
+            >
+              <Image
+                src="https://cdn.simpleicons.org/github/white"
+                alt="GitHub Icon"
+                className="opacity-75 group-hover:opacity-100"
+                width={24}
+                height={24}
+                unoptimized
+              />
+              <span className="sr-only">GitHub</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

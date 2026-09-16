@@ -57,7 +57,7 @@ const SearchForm = () => {
         sourceElement={
           <span
             className={clsx(
-              'absolute top-3 right-8 rounded-sm border-none bg-gray-800 px-[0.6rem] pt-[0.3rem] pb-[0.4rem] text-xl text-white',
+              'absolute top-3 right-8 hidden rounded-sm border-none bg-gray-800 px-[0.6rem] pt-[0.3rem] pb-[0.4rem] text-xl text-white lg:flex',
               {
                 hidden: slashKeyClassName === 'slash-key-hide',
               },
@@ -76,7 +76,7 @@ const SearchForm = () => {
         type="text"
         placeholder="Search events by name, city, venue..."
         spellCheck={false}
-        className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none focus:bg-white/10 focus:ring-2"
+        className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none placeholder:text-sm focus:bg-white/10 focus:ring-2 sm:placeholder:text-base"
         value={searchText}
         ref={searchInputRef}
         onChange={(event) => setSearchText(event.target.value)}

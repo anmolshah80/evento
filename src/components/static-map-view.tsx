@@ -18,6 +18,9 @@ const StaticMapView = ({ address, lat, lon }: StaticMapViewProps) => {
         width={600}
         height={400}
         loading="eager"
+        fetchPriority="high"
+        placeholder="blur"
+        blurDataURL="/map-placeholder-dark.jpg"
         className="h-auto w-full rounded-lg shadow-md md:h-112.5 md:w-175"
         onError={(e) => {
           // fallback if the image fails to load
