@@ -8,6 +8,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import Container from '@/components/container';
 import HeaderSkeleton from '@/components/header-skeleton';
+import OfflineStatus from '@/components/offline-status';
 
 import './globals.css';
 
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} overflow-y-scroll bg-gray-950 text-white`}
       >
+        <OfflineStatus />
         <Toaster position="bottom-right" richColors />
         <Container>
           <Suspense fallback={<HeaderSkeleton />}>
