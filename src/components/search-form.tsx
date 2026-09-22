@@ -3,12 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
+import { toast } from 'sonner';
 
 import TooltipUI from '@/components/ui/tooltip-ui';
+import { useOfflineStatus } from '@/hooks/use-offline-status';
 
 const SearchForm = () => {
   const [searchText, setSearchText] = useState('');
   const [slashKeyClassName, setSlashKeyClassName] = useState('slash-key');
+  const isOffline = useOfflineStatus();
   const router = useRouter();
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -16,6 +19,11 @@ const SearchForm = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isOffline) {
+      toast.error('You are offline. Please reconnect to search for events.');
+      return;
+    }
 
     if (searchText.trim() === '') return;
 
@@ -74,9 +82,14 @@ const SearchForm = () => {
       <input
         id="searchText"
         type="text"
-        placeholder="Search events by name, city, venue..."
+        placeholder={
+          isOffline
+            ? 'Offline — reconnect to search'
+            : 'Search events by name, city, venue...'
+        }
         spellCheck={false}
-        className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none placeholder:text-sm focus:bg-white/10 focus:ring-2 sm:placeholder:text-base"
+        disabled={isOffline}
+        className="ring-accent-green/50 h-16 w-full rounded-lg bg-white/7 px-6 transition outline-none placeholder:text-sm focus:bg-white/10 focus:ring-2 disabled:cursor-not-allowed disabled:opacity-60 sm:placeholder:text-base"
         value={searchText}
         ref={searchInputRef}
         onChange={(event) => setSearchText(event.target.value)}
