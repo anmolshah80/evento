@@ -24,10 +24,21 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
+// `VERCEL_URL` is automatically set by Vercel during the build process. It contains the domain of your deployed application (e.g., `eventogo-git-main-yourteam.vercel.app`).
+const baseUrlFromEnv =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+
+const safeBaseUrl = (() => {
+  try {
+    return new URL(baseUrlFromEnv || 'http://localhost:3000');
+  } catch {
+    return new URL('http://localhost:3000');
+  }
+})();
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
-  ),
+  metadataBase: safeBaseUrl,
   title: 'Evento — Find events happening around you',
   description: 'Explore more than 10,000 events worldwide',
 };
