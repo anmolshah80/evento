@@ -31,22 +31,22 @@
   npm install
   ```
 
-- Ensure you have Node.js `v22.19.0` installed
+- Ensure you have Node.js `v24.13.6` installed
 
   ```bash
   node -v
   ```
 
-  - If you have [node version manager (nvm)](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) installed, you can install Node.js `v22.19.0` directly
+  - If you have [node version manager (nvm)](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) installed, you can install Node.js `v24.13.6` directly
 
     ```bash
-    nvm install 22.19.0
+    nvm install 24.13.6
 
     # to check the installed Node.js versions
     nvm list
 
     # to switch to use a specified Node.js version
-    nvm use 22.19.0
+    nvm use 24.13.6
 
     # if you need help with nvm's other usage options, type
     nvm --help
