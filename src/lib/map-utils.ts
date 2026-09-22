@@ -30,6 +30,10 @@ export async function getCoordinatesFromAddress(
 
     return null;
   } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      return null;
+    }
+
     if (isNetworkError(error)) {
       console.warn('Offline or network error while fetching map coordinates.');
 
