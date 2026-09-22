@@ -7,6 +7,7 @@ import { cacheLife } from 'next/cache';
 import { Prisma } from 'prisma/client';
 import prisma from '@/lib/db';
 import { capitalize, sanitizeSearchQuery } from '@/lib/utils';
+import { MAX_EVENTS_PER_PAGE } from '@/lib/constants';
 
 interface SearchFilters {
   query: string;
@@ -38,6 +39,12 @@ const getEvents = async (city: string, currentPage = 1) => {
   cacheLife('days'); // Events updated daily
 
   try {
+    const totalRecordsCount = await prisma.event.count({
+      where: {
+        city: city === 'all' ? undefined : capitalize(city),
+      },
+    });
+
     const events = await prisma.event.findMany({
       where: {
         city: city === 'all' ? undefined : capitalize(city),
@@ -45,31 +52,9 @@ const getEvents = async (city: string, currentPage = 1) => {
       orderBy: {
         startDateTime: 'asc',
       },
-      take: 6,
-      skip: (currentPage - 1) * 6,
+      take: MAX_EVENTS_PER_PAGE,
+      skip: (currentPage - 1) * MAX_EVENTS_PER_PAGE,
     });
-
-    if (!events || events.length === 0)
-      return { events: [], totalRecordsCount: 0 };
-
-    // Alternative way
-    // const totalRecordsCount = await prisma.event.count({
-    //   where: {
-    //     city: city === 'all' ? undefined : capitalize(city),
-    //   },
-    // });
-
-    let totalRecordsCount;
-
-    if (city === 'all') {
-      totalRecordsCount = await prisma.event.count();
-    } else {
-      totalRecordsCount = await prisma.event.count({
-        where: {
-          city: capitalize(city),
-        },
-      });
-    }
 
     return { events, totalRecordsCount };
   } catch (error) {
@@ -89,6 +74,15 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
     if (!sanitizedQuery) {
       return { events: [], totalRecordsCount: 0 };
     }
+
+    const [{ total_count: totalCount }] = (await prisma.$queryRaw`
+      SELECT COUNT(*) AS total_count
+      FROM "Event"
+      WHERE "searchVector" @@ websearch_to_tsquery('english', ${sanitizedQuery})
+      ${startDate && endDate ? Prisma.sql`AND "startDateTime" >= ${startDate} AND "endDateTime" <= ${endDate}` : Prisma.empty}
+    `) as Array<{ total_count: bigint }>;
+
+    const totalRecordsCount = Number(totalCount || 0);
 
     // Use PostgreSQL full-text search with weighted search vector
     // Exclude the unsupported "searchVector" column from the selected fields.
@@ -111,8 +105,8 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
       WHERE "searchVector" @@ websearch_to_tsquery('english', ${sanitizedQuery})
       ${startDate && endDate ? Prisma.sql`AND "startDateTime" >= ${startDate} AND "endDateTime" <= ${endDate}` : Prisma.empty}
       ORDER BY ts_rank("searchVector", websearch_to_tsquery('english', ${sanitizedQuery})) DESC, "startDateTime" ASC
-      LIMIT 6
-      OFFSET ${(currentPage - 1) * 6}
+      LIMIT ${MAX_EVENTS_PER_PAGE}
+      OFFSET ${(currentPage - 1) * MAX_EVENTS_PER_PAGE}
     `) as Array<{
       id: string;
       name: string;
@@ -130,11 +124,8 @@ const searchEvents = async (filters: SearchFilters, currentPage = 1) => {
     }>;
 
     if (!results || results.length === 0) {
-      return { events: [], totalRecordsCount: 0 };
+      return { events: [], totalRecordsCount };
     }
-
-    // extract total count from first row
-    const totalRecordsCount = Number(results[0].total_count || 0);
 
     // remove total_count from each row to match expected `Event` type
     /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
@@ -160,6 +151,26 @@ const searchEventsFallback = async (
     const { query, startDate, endDate } = filters;
     const sanitizedQuery = sanitizeSearchQuery(query);
 
+    const totalRecordsCount = await prisma.event.count({
+      where: {
+        OR: [
+          { name: { contains: sanitizedQuery, mode: 'insensitive' } },
+          { city: { contains: sanitizedQuery, mode: 'insensitive' } },
+          { location: { contains: sanitizedQuery, mode: 'insensitive' } },
+          { organizerName: { contains: sanitizedQuery, mode: 'insensitive' } },
+          { venueName: { contains: sanitizedQuery, mode: 'insensitive' } },
+          { description: { contains: sanitizedQuery, mode: 'insensitive' } },
+        ],
+        ...(startDate &&
+          endDate && {
+            AND: [
+              { startDateTime: { gte: startDate } },
+              { endDateTime: { lte: endDate } },
+            ],
+          }),
+      },
+    });
+
     const events = await prisma.event.findMany({
       where: {
         OR: [
@@ -181,37 +192,18 @@ const searchEventsFallback = async (
       orderBy: {
         startDateTime: 'asc',
       },
-      take: 6,
-      skip: (currentPage - 1) * 6,
+      take: MAX_EVENTS_PER_PAGE,
+      skip: (currentPage - 1) * MAX_EVENTS_PER_PAGE,
     });
 
     if (!events || events.length === 0) {
-      return { events: [], totalRecordsCount: 0 };
+      return { events: [], totalRecordsCount };
     }
-
-    const totalRecordsCount = await prisma.event.count({
-      where: {
-        OR: [
-          { name: { contains: sanitizedQuery, mode: 'insensitive' } },
-          { city: { contains: sanitizedQuery, mode: 'insensitive' } },
-          { location: { contains: sanitizedQuery, mode: 'insensitive' } },
-          { organizerName: { contains: sanitizedQuery, mode: 'insensitive' } },
-          { venueName: { contains: sanitizedQuery, mode: 'insensitive' } },
-          { description: { contains: sanitizedQuery, mode: 'insensitive' } },
-        ],
-        ...(startDate &&
-          endDate && {
-            AND: [
-              { startDateTime: { gte: startDate } },
-              { endDateTime: { lte: endDate } },
-            ],
-          }),
-      },
-    });
 
     return { events, totalRecordsCount };
   } catch (error) {
     console.warn('Unable to search events with fallback:', error);
+
     return { events: [], totalRecordsCount: 0 };
   }
 };
@@ -241,6 +233,7 @@ const getEventBookings = async (slug: string) => {
     return { bookings, totalRecordsCount: bookings.length };
   } catch (error) {
     console.warn('Unable to load booking data during build/runtime:', error);
+
     return {
       bookings: [],
       message: 'No bookings found for this event.',

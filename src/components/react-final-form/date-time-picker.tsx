@@ -60,7 +60,7 @@ const DateTimePicker = () => {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="max-h-[320px] min-w-max overflow-y-scroll bg-black p-0 text-white"
+                  className="max-h-80 min-w-max overflow-y-scroll bg-black p-0 text-white"
                   align="start"
                 >
                   <Calendar

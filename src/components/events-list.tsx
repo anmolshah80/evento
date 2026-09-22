@@ -1,7 +1,10 @@
+import { notFound } from 'next/navigation';
+
 import EventCard from '@/components/event-card';
 import PaginationControls from '@/components/pagination-controls';
 
 import { getEvents } from '@/lib/server-utils';
+import { MAX_EVENTS_PER_PAGE } from '@/lib/constants';
 
 type EventsListProps = {
   city: string;
@@ -15,11 +18,22 @@ const EventsList = async ({ city, currentPage = 1 }: EventsListProps) => {
     currentPage > 1 ? `/events/${city}?page=${currentPage - 1}` : '';
 
   const nextPagePath =
-    totalRecordsCount > 6 * currentPage
+    totalRecordsCount > MAX_EVENTS_PER_PAGE * currentPage
       ? `/events/${city}?page=${currentPage + 1}`
       : '';
 
   if (!events || events.length === 0) {
+    const firstAvailablePage = Math.ceil(
+      totalRecordsCount / MAX_EVENTS_PER_PAGE,
+    );
+
+    if (
+      currentPage > firstAvailablePage &&
+      (city === 'all' || currentPage > 1)
+    ) {
+      notFound();
+    }
+
     return (
       <div className="text-center">
         <p className="text-lg text-gray-400">
