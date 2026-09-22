@@ -29,6 +29,8 @@ import { Prisma } from 'prisma/client';
 import { createBooking } from '@/app/lib/actions';
 import { cn, combineDateTime, formatToFriendlyDate } from '@/lib/utils';
 import { PHONE_NUMBER_REGEX } from '@/lib/constants';
+import { isBrowserOffline, isNetworkError } from '@/lib/network';
+import { useOfflineStatus } from '@/hooks/use-offline-status';
 import {
   EventBookingFormResponseDataProps,
   EventBookingWithEvent,
@@ -86,6 +88,7 @@ const FormSchema = z.object({
 const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const isOffline = useOfflineStatus();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -103,7 +106,17 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
 
-    // console.log('Form errors:', form.formState.errors);
+    if (isBrowserOffline()) {
+      toast.error(
+        'You are offline. Please reconnect to complete your booking.',
+        {
+          duration: 8000,
+        },
+      );
+
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const bookedDateTime = combineDateTime(data.eventDate, data.eventTime);
@@ -166,12 +179,21 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
     } catch (error) {
       console.error('Error submitting booking: ', error);
 
-      toast.error(
-        'There was an error submitting your booking. Please try again later.',
-        {
-          duration: 8000,
-        },
-      );
+      if (isNetworkError(error)) {
+        toast.error(
+          'Your connection is unavailable. Please try again once you are back online.',
+          {
+            duration: 8000,
+          },
+        );
+      } else {
+        toast.error(
+          'There was an error submitting your booking. Please try again later.',
+          {
+            duration: 8000,
+          },
+        );
+      }
     } finally {
       setIsLoading(false);
     }
@@ -183,7 +205,20 @@ const GetTicketsModal = ({ eventId, children }: GetTicketsModalProps) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger
+        asChild
+        onClick={(event) => {
+          if (isOffline) {
+            event.preventDefault();
+
+            toast.error(
+              'You are offline. Please reconnect before booking tickets.',
+            );
+          }
+        }}
+      >
+        {children}
+      </DialogTrigger>
       <DialogOverlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
 
       <DialogContent
