@@ -47,7 +47,6 @@ export type FieldMetaProps = {
   validating?: boolean;
   visited?: boolean;
 };
-
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type EventBookingFormResponseDataProps = {
