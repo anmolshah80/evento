@@ -112,7 +112,7 @@ const DateTimePicker = () => {
               ref={eventTimeRef}
             />
             <Clock8Icon
-              className="text-mauve11 absolute top-[34px] right-3 h-4 w-4 cursor-pointer"
+              className="text-mauve11 absolute top-8.5 right-3 h-4 w-4 cursor-pointer"
               onClick={() => eventTimeRef?.current?.focus()}
             />
 

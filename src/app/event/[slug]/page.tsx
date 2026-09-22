@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 import { Event } from 'prisma/client';
@@ -66,7 +67,7 @@ const EventPage = async ({ params }: Props) => {
 
   const eventData: Event | null = await getEvent(slug);
 
-  if (!eventData) return null;
+  if (!eventData) notFound();
 
   // Geocode the location
   const coords = await getCoordinatesFromAddress(eventData.location);
