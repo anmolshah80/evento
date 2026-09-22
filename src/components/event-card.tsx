@@ -62,7 +62,7 @@ const EventCard = ({ event }: EventCardProps) => {
           alt={name}
           width={500}
           height={280}
-          className="h-[60%] object-cover"
+          className="h-[60%] w-full object-cover"
         />
 
         <div className="flex flex-1 flex-col items-center justify-center">
